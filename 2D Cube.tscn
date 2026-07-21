@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://bdwpx6k4n6th3"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_75xeh"]
+
+[sub_resource type="Gradient" id="Gradient_t66ku"]
+colors = PackedColorArray(0.7764706, 0, 0.4117647, 1, 0.55753225, 0.27942792, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_masvp"]
+gradient = SubResource("Gradient_t66ku")
+
+[node name="Node2D" type="Node2D" unique_id=1865737484]
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=936654685]
+position = Vector2(79.25, -69.75)
+scale = Vector2(140.5, 121.5)
+mesh = SubResource("QuadMesh_75xeh")
+texture = SubResource("GradientTexture1D_masvp")
