@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://bdwpx6k4n6th3"]
 
+[ext_resource type="Texture2D" uid="uid://dfieagfctxf6d" path="res://TestSprite/assets_Cat.png" id="1_33bf2"]
+
 [sub_resource type="QuadMesh" id="QuadMesh_75xeh"]
 
 [sub_resource type="Gradient" id="Gradient_t66ku"]
@@ -28,3 +30,7 @@ position = Vector2(413, -243)
 scale = Vector2(377.5, 108.5)
 mesh = SubResource("QuadMesh_xrvpr")
 texture = SubResource("GradientTexture1D_75xeh")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=969189829]
+position = Vector2(360, -85)
+texture = ExtResource("1_33bf2")
