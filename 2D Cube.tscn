@@ -8,6 +8,13 @@ colors = PackedColorArray(0.7764706, 0, 0.4117647, 1, 0.55753225, 0.27942792, 1,
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_masvp"]
 gradient = SubResource("Gradient_t66ku")
 
+[sub_resource type="QuadMesh" id="QuadMesh_xrvpr"]
+
+[sub_resource type="Gradient" id="Gradient_33bf2"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_75xeh"]
+gradient = SubResource("Gradient_33bf2")
+
 [node name="Node2D" type="Node2D" unique_id=1865737484]
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=936654685]
@@ -15,3 +22,9 @@ position = Vector2(79.25, -69.75)
 scale = Vector2(140.5, 121.5)
 mesh = SubResource("QuadMesh_75xeh")
 texture = SubResource("GradientTexture1D_masvp")
+
+[node name="MeshInstance2D2" type="MeshInstance2D" parent="." unique_id=377341954]
+position = Vector2(413, -243)
+scale = Vector2(377.5, 108.5)
+mesh = SubResource("QuadMesh_xrvpr")
+texture = SubResource("GradientTexture1D_75xeh")
