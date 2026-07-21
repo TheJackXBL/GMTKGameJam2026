@@ -1,3 +1,9 @@
 [gd_scene format=3 uid="uid://x2bkebu4copt"]
 
+[ext_resource type="Texture2D" uid="uid://c5k0r6rpfg0oh" path="res://Scenes/Arowyn/starling.png" id="1_2124r"]
+
 [node name="ArowynScene" type="Node2D" unique_id=912887626]
+
+[node name="Starling" type="Sprite2D" parent="." unique_id=1876978895]
+position = Vector2(264, 301)
+texture = ExtResource("1_2124r")
