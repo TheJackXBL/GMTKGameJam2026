@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://bdwpx6k4n6th3"]
+[gd_scene format=3 uid="uid://bg5vgdgsh3wyj"]
 
-[ext_resource type="Texture2D" uid="uid://dfieagfctxf6d" path="res://TestSprite/assets_Cat.png" id="1_33bf2"]
-[ext_resource type="Texture2D" uid="uid://dgs1xuqv501ml" path="res://TestSprite/dialogueBackground.png" id="2_34xsi"]
-[ext_resource type="Texture2D" uid="uid://b637parsnk4nh" path="res://TestSprite/assets_House.png" id="3_iyqyd"]
+[ext_resource type="Texture2D" uid="uid://dfieagfctxf6d" path="res://TestSprite/assets_Cat.png" id="1_1lph6"]
+[ext_resource type="Texture2D" uid="uid://dgs1xuqv501ml" path="res://TestSprite/dialogueBackground.png" id="2_k041u"]
+[ext_resource type="Texture2D" uid="uid://b637parsnk4nh" path="res://TestSprite/assets_House.png" id="3_4fyuh"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_75xeh"]
 
@@ -35,12 +35,12 @@ texture = SubResource("GradientTexture1D_75xeh")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=969189829]
 position = Vector2(360, -85)
-texture = ExtResource("1_33bf2")
+texture = ExtResource("1_1lph6")
 
 [node name="DialogueBackground" type="Sprite2D" parent="." unique_id=1582181169]
 position = Vector2(383, 150)
-texture = ExtResource("2_34xsi")
+texture = ExtResource("2_k041u")
 
 [node name="AssetsHouse" type="Sprite2D" parent="." unique_id=29702328]
 position = Vector2(-342, -376)
-texture = ExtResource("3_iyqyd")
+texture = ExtResource("3_4fyuh")
