@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dux1dltmmc5a"]
+
+[ext_resource type="PackedScene" uid="uid://wvhc5gxfenq5" path="res://Raindrops/raindrop.tscn" id="1_vp2v7"]
+
+[node name="MainTest" type="Node2D" unique_id=1583966608]
+
+[node name="Raindrop" parent="." unique_id=518618439 instance=ExtResource("1_vp2v7")]
+position = Vector2(190, -334)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
