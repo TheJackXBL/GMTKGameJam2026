@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://dbvi7vyqnm47h"]
+
+[ext_resource type="Script" uid="uid://by5k02ir86jqg" path="res://Raindrops/raindrop_manager.gd" id="1_5172b"]
+[ext_resource type="PackedScene" uid="uid://wvhc5gxfenq5" path="res://Raindrops/raindrop.tscn" id="1_bdwqm"]
+
+[node name="MainTest" type="Node2D" unique_id=1583966608]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
+
+[node name="Raindrop Manager" type="Node2D" parent="." unique_id=1857144100]
+script = ExtResource("1_5172b")
+raindrop_object = ExtResource("1_bdwqm")
+spawn_y = -350.0
+raindrop_count = 5
+
+[node name="Raindrop" parent="Raindrop Manager" unique_id=518618439 instance=ExtResource("1_bdwqm")]
+visible = false
+position = Vector2(-418, -334)
+
+[node name="Raindrop2" parent="Raindrop Manager" unique_id=1385779041 instance=ExtResource("1_bdwqm")]
+visible = false
+position = Vector2(-215, -334)
+
+[node name="Raindrop3" parent="Raindrop Manager" unique_id=1305280586 instance=ExtResource("1_bdwqm")]
+visible = false
+position = Vector2(-4, -334)
+
+[node name="Raindrop4" parent="Raindrop Manager" unique_id=49812849 instance=ExtResource("1_bdwqm")]
+visible = false
+position = Vector2(190, -334)
+
+[node name="Raindrop5" parent="Raindrop Manager" unique_id=627618044 instance=ExtResource("1_bdwqm")]
+visible = false
+position = Vector2(370, -337)
+
+[node name="UI" type="Control" parent="." unique_id=1585819867]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="UI" unique_id=682246299]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 26.45
+anchor_top = -1.775
+anchor_right = 26.45
+anchor_bottom = -1.775
+offset_left = -574.0
+offset_top = 332.0
+offset_right = -526.0
+offset_bottom = 363.0
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "RACE"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="UI/Button" to="Raindrop Manager" method="_on_button_pressed"]
