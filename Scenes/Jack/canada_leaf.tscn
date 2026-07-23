@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://be8r8i3nm5b7i"]
+
+[ext_resource type="Texture2D" uid="uid://8opfpgy5u5rv" path="res://Scenes/Jack/canada leaf.png" id="1_sqijp"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rdmgo"]
+friction = 0.1
+bounce = 0.15
+
+[node name="CanadaLeaf" type="Sprite2D" unique_id=89227851]
+scale = Vector2(0.2000007, 0.2000007)
+texture = ExtResource("1_sqijp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=413162864]
+physics_material_override = SubResource("PhysicsMaterial_rdmgo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1643303553]
+scale = Vector2(0.9999999, 0.9999999)
+polygon = PackedVector2Array(-354.7715, -148.27722, -320.38672, -25.527222, -365.81387, 2.0654297, -184.5289, 155.55927, -200.64227, 218.72833, -24.573898, 198.73566, -10.658432, 206.24286, -12.949043, 393.6449, 11.67775, 397.948, 9.043007, 209.6853, 21.475578, 196.6305, 194.72379, 221.82666, 179.56375, 163.34467, 369.87866, 3.720642, 319.14215, -25.44757, 350.50827, -146.86029, 241.05142, -130.45575, 220.1054, -184.87305, 116.580124, -86.220215, 142.01465, -289.8812, 72.82127, -271.51703, -1.8270187, -396.22665, -75.177864, -266.9227, -145.61578, -299.5334, -109.36414, -100.321106, -121.7967, -87.266235, -221.31012, -185.86615, -236.56287, -127.62244)

@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var raindrop_scene: PackedScene
+@export var raindrop_ui_scene: PackedScene
+
 @export var maximum_speed: int = 10
 
 @export_range(0.0, 100000.0, 1.0) var spawn_length: float = 1000.0
@@ -11,26 +13,85 @@ extends Node2D
 
 var rng := RandomNumberGenerator.new()
 
+var raindrop_spawn_data: Array[Dictionary] = []
+var spawned_raindrops: Array[Node2D] = []
+
+var selected_raindrop: Node2D
+
 
 func _ready() -> void:
 	rng.randomize()
 
-func spawn_raindrops(raindrop_object: PackedScene, amount: int) -> void:
+	if spawn_on_ready:
+		prepare_and_spawn_raindrops()
+
+
+func determine_raindrop_spawnpoints(amount: int) -> void:
+	raindrop_spawn_data.clear()
 
 	var half_length: float = spawn_length / 2.0
 
 	for i in range(amount):
-		var raindrop_instance := raindrop_object.instantiate()
+		var spawn_data := {
+			"position": Vector2(rng.randf_range(-half_length, half_length),spawn_y),
+			"speed": rng.randi_range(0, maximum_speed),
+			"angle": rng.randf_range(-20.0, 20.0)
+		}
 
-		var random_x := rng.randf_range(-half_length, half_length)
-		var random_speed := rng.randi_range(0, maximum_speed)
-		var random_angle := rng.randf_range(-20.0, 20.0)
+		raindrop_spawn_data.append(spawn_data)
 
-		
-		raindrop_instance.global_position = to_global(Vector2(random_x, spawn_y))
+
+func spawn_raindrops() -> void:
+	spawned_raindrops.clear()
+
+	for spawn_data in raindrop_spawn_data:
+		var raindrop_instance := raindrop_scene.instantiate()
+
+		raindrop_instance.position = spawn_data["position"]
+#		raindrop_instance.setup_race_data(spawn_data["speed"], spawn_data["angle"])
+
 		add_child(raindrop_instance)
+
+		create_raindrop_ui(raindrop_instance, spawn_data)
+
+		spawned_raindrops.append(raindrop_instance)
+
+
+func create_raindrop_ui(
+	raindrop: Node2D,
+	spawn_data: Dictionary
+) -> void:
+	if raindrop_ui_scene == null:
+		return
+
+	var ui_instance := raindrop_ui_scene.instantiate()
+
+	raindrop.add_child(ui_instance)
+
+	ui_instance.setup(raindrop, spawn_data)
+	ui_instance.choose_requested.connect(_on_raindrop_choose_requested)
+
+
+func prepare_and_spawn_raindrops() -> void:
+	determine_raindrop_spawnpoints(raindrop_count)
+	spawn_raindrops()
+
+
+func select_raindrop(raindrop: Node2D) -> void:
+	if selected_raindrop != null:
+		selected_raindrop.isSelected = false
+
+	selected_raindrop = raindrop
+	selected_raindrop.isSelected = true
+
+	for spawned_raindrop in spawned_raindrops:
+		if spawned_raindrop.has_method("update_selection_display"):
+			spawned_raindrop.update_selection_display()
+
+
+func _on_raindrop_choose_requested(raindrop: Node2D) -> void:
+	select_raindrop(raindrop)
 
 
 func _on_button_pressed() -> void:
-	if spawn_on_ready:
-		spawn_raindrops(raindrop_scene, raindrop_count)
+	prepare_and_spawn_raindrops()

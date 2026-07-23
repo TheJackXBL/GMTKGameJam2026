@@ -10,7 +10,7 @@ point_count = 3
 [sub_resource type="CircleShape2D" id="CircleShape2D_3foiw"]
 radius = 4.472136
 
-[node name="Raindrop" type="RigidBody2D" unique_id=1385779041]
+[node name="Raindrop" type="RigidBody2D" unique_id=1385779041 groups=["raindrops"]]
 gravity_scale = 0.0
 lock_rotation = true
 contact_monitor = true
@@ -20,12 +20,11 @@ radius = 2.0
 starting_radius = 2.0
 drag_strength = 1.2
 adhesion_force = 20.0
-sideways_force = 200.0
+sideways_force = 400.0
 direction_change_speed = 10.0
 maximum_stretch = 0.5
 width_curve = SubResource("Curve_6si7m")
 streak_width_multiplier = 2.0
-wet_adhesion_reduction = 0.85
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1355783299]
 position = Vector2(0, -5)

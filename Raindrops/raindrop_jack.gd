@@ -1,6 +1,8 @@
 class_name Raindrop
 extends RigidBody2D
 
+@export var isSelected: bool = false
+
 @onready var streak_container: Node2D = get_parent().get_node("StreakContainer")
 @onready var raindrop_sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
