@@ -64,8 +64,7 @@ text = "Speed:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SpeedValue" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/SpeedAngleRow/SpeedText" unique_id=734834510]
-unique_name_in_owner = true
+[node name="WeightValue" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/SpeedAngleRow/SpeedText" unique_id=734834510]
 layout_mode = 2
 text = "7mm/s"
 horizontal_alignment = 1

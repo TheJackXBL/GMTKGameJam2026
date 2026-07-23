@@ -6,6 +6,7 @@ extends RigidBody2D
 @onready var streak_container: Node2D = get_parent().get_node("StreakContainer")
 @onready var raindrop_sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var raindrop_ui: Control = $RaindropInfoUI
 
 #Drop size
 @export var radius := 3.0
@@ -48,11 +49,15 @@ var original_sprite_scale: Vector2 # Starting size of sprite
 var movement_noise := FastNoiseLite.new() # Found cool noise generator!
 var noise_offset := 0.0 # Keeps noise varied
 
-
+var initial_speed: int = 3
+var initial_angle: float = 0.0
+var race_active: bool = false
 
 func _ready() -> void:
 	
 	body_entered.connect(_on_body_entered)
+	
+	raindrop_ui.hide()
 	
 	original_sprite_scale = raindrop_sprite.scale
 	last_streak_position = global_position
@@ -76,8 +81,35 @@ func _ready() -> void:
 	else:
 		stop_sliding()
 
+func setup_race_data(new_speed: float, new_angle: float) -> void:
+	initial_speed = new_speed
+	initial_angle = new_angle
+
+	#rotation_degrees = travel_angle
+
+func prepare_for_race() -> void:
+	race_active = false
+
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0.0
+
+	freeze = true
+	sleeping = true
+
+func begin_racing() -> void:
+	race_active = true
+
+	freeze = false
+	sleeping = false
+
+	var direction := Vector2.DOWN.rotated(deg_to_rad(initial_angle))
+	linear_velocity = direction * initial_speed
 
 func _physics_process(delta: float) -> void:
+	
+	if not race_active:
+		return
+	
 	update_drop_shape(delta)
 	
 	if not is_sliding:
@@ -97,6 +129,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	
+	if not race_active:
+		return
+	
 	if not is_sliding:
 		return
 	
@@ -269,3 +305,20 @@ func absorb_drop(other_drop: Raindrop) -> void:
 
 func remove_drop() -> void:
 	queue_free()
+
+
+func _on_mouse_entered() -> void:
+	pass # Replace with function body.
+
+
+
+func _on_mouse_exited() -> void:
+	pass # Replace with function body.
+
+
+func _on_area_2d_mouse_entered() -> void:
+	raindrop_ui.show()
+
+
+func _on_area_2d_mouse_exited() -> void:
+	raindrop_ui.hide()

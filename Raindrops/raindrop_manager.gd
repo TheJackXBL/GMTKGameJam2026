@@ -17,7 +17,7 @@ var raindrop_spawn_data: Array[Dictionary] = []
 var spawned_raindrops: Array[Node2D] = []
 
 var selected_raindrop: Node2D
-
+var race_started: bool = false
 
 func _ready() -> void:
 	rng.randomize()
@@ -33,43 +33,68 @@ func determine_raindrop_spawnpoints(amount: int) -> void:
 
 	for i in range(amount):
 		var spawn_data := {
-			"position": Vector2(rng.randf_range(-half_length, half_length),spawn_y),
-			"speed": rng.randi_range(0, maximum_speed),
-			"angle": rng.randf_range(-20.0, 20.0)
+			"position": Vector2(
+				rng.randf_range(-half_length, half_length),
+				spawn_y
+			),
+			"speed": rng.randf_range(1.0, maximum_speed),
+			"angle": rng.randf_range(-20.0, 20.0),
+			"weight": rng.randi_range(1, 10),
+			"friendliness": rng.randi_range(1, 10),
+			"slipperiness": rng.randi_range(1, 10)
 		}
 
 		raindrop_spawn_data.append(spawn_data)
 
 
 func spawn_raindrops() -> void:
-	spawned_raindrops.clear()
+	#spawned_raindrops.clear()
+	
+	race_started = false
 
 	for spawn_data in raindrop_spawn_data:
 		var raindrop_instance := raindrop_scene.instantiate()
 
 		raindrop_instance.position = spawn_data["position"]
-#		raindrop_instance.setup_race_data(spawn_data["speed"], spawn_data["angle"])
+		raindrop_instance.setup_race_data(spawn_data["speed"], spawn_data["angle"])
 
 		add_child(raindrop_instance)
+		
+		raindrop_instance.prepare_for_race()
 
-		create_raindrop_ui(raindrop_instance, spawn_data)
+		#create_raindrop_ui(raindrop_instance, spawn_data)
 
 		spawned_raindrops.append(raindrop_instance)
 
+func begin_race() -> void:
+	if race_started:
+		return
+		
+	race_started = true
+	
+	for raindrop in spawned_raindrops:
+		if is_instance_valid(raindrop):
+			raindrop.begin_racing()
 
-func create_raindrop_ui(
-	raindrop: Node2D,
-	spawn_data: Dictionary
-) -> void:
+func clear_spawned_raindrops() -> void:
+	for raindrop in spawned_raindrops:
+		if is_instance_valid(raindrop):
+			raindrop.queue_free()
+		
+	spawned_raindrops.clear()
+	selected_raindrop = null
+
+
+func create_raindrop_ui(raindrop: Node2D, spawn_data: Dictionary) -> void:
 	if raindrop_ui_scene == null:
 		return
 
-	var ui_instance := raindrop_ui_scene.instantiate()
+	#var ui_instance := raindrop_ui_scene.instantiate()
 
-	raindrop.add_child(ui_instance)
+	#raindrop.add_child(ui_instance)
 
-	ui_instance.setup(raindrop, spawn_data)
-	ui_instance.choose_requested.connect(_on_raindrop_choose_requested)
+	#ui_instance.setup(raindrop, spawn_data)
+	#ui_instance.choose_requested.connect(_on_raindrop_choose_requested)
 
 
 func prepare_and_spawn_raindrops() -> void:
@@ -93,5 +118,9 @@ func _on_raindrop_choose_requested(raindrop: Node2D) -> void:
 	select_raindrop(raindrop)
 
 
-func _on_button_pressed() -> void:
+func _on_spawn_raindrops_button_pressed() -> void:
 	prepare_and_spawn_raindrops()
+
+
+func _on_start_race_button_pressed() -> void:
+	begin_race()

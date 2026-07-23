@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1cfjd65xb61x" path="res://Raindrops/raindrop_jack.gd" id="1_6si7m"]
 [ext_resource type="Texture2D" uid="uid://dgcfy1mx5gpff" path="res://Scenes/Arowyn/test drop.png" id="2_6si7m"]
+[ext_resource type="PackedScene" uid="uid://dpg22rb8qer8p" path="res://Scenes/Jack/raindrop_info_ui.tscn" id="3_wamoy"]
 
 [sub_resource type="Curve" id="Curve_6si7m"]
 _data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.51, 0.64044946), 0.83616424, 0.83616424, 0, 0, Vector2(0.995, 1), 0.6609383, 0.0, 0, 0]
@@ -10,7 +11,10 @@ point_count = 3
 [sub_resource type="CircleShape2D" id="CircleShape2D_3foiw"]
 radius = 4.472136
 
-[node name="Raindrop" type="RigidBody2D" unique_id=1385779041 groups=["raindrops"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_75xeh"]
+
+[node name="Raindrop" type="RigidBody2D" unique_id=1385779041]
+input_pickable = true
 gravity_scale = 0.0
 lock_rotation = true
 contact_monitor = true
@@ -33,3 +37,22 @@ texture = ExtResource("2_6si7m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1068706512]
 shape = SubResource("CircleShape2D_3foiw")
+
+[node name="RaindropInfoUI" parent="." unique_id=414824300 instance=ExtResource("3_wamoy")]
+offset_left = 13.000002
+offset_top = -18.000002
+offset_right = 533.0
+offset_bottom = 316.895
+scale = Vector2(0.29, 0.29)
+mouse_filter = 2
+
+[node name="Area2D" type="Area2D" parent="." unique_id=953187832]
+priority = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=419405440]
+shape = SubResource("CircleShape2D_75xeh")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

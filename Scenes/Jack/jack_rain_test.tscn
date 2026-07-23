@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="2_iincw"]
 [ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/Car/glass.gdshader" id="3_iincw"]
 [ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="4_4nfk4"]
+[ext_resource type="PackedScene" uid="uid://dpg22rb8qer8p" path="res://Scenes/Jack/raindrop_info_ui.tscn" id="4_7irk2"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="6_35n6r"]
 [ext_resource type="PackedScene" uid="uid://be8r8i3nm5b7i" path="res://Scenes/Jack/canada_leaf.tscn" id="7_7irk2"]
 
@@ -34,7 +35,8 @@ zoom_out_duration = 0.5
 [node name="RaindropManager" type="Node2D" parent="." unique_id=157260114]
 script = ExtResource("1_5172b")
 raindrop_scene = ExtResource("2_iincw")
-spawn_y = -350.0
+raindrop_ui_scene = ExtResource("4_7irk2")
+spawn_y = -300.0
 
 [node name="Window" type="ColorRect" parent="RaindropManager" unique_id=972784941]
 material = SubResource("ShaderMaterial_gi6rw")
@@ -54,10 +56,10 @@ offset_bottom = 40.0
 [node name="Start Race Button" type="Button" parent="UI" unique_id=682246299]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 26.45
-anchor_top = -1.775
-anchor_right = 26.45
-anchor_bottom = -1.775
+anchor_left = 26.5
+anchor_top = -2.675
+anchor_right = 26.5
+anchor_bottom = -2.675
 offset_left = -574.0
 offset_top = 332.0
 offset_right = -526.0
@@ -66,6 +68,14 @@ size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "RACE"
 metadata/_edit_use_anchors_ = true
+
+[node name="Spawn Raindrops Button" type="Button" parent="UI" unique_id=678645608]
+layout_mode = 0
+offset_left = 371.0
+offset_top = 263.0
+offset_right = 532.0
+offset_bottom = 294.0
+text = "SPAWN RAINDROPS"
 
 [node name="FinishLine" type="Area2D" parent="." unique_id=1546395377 node_paths=PackedStringArray("race_camera")]
 position = Vector2(0, 318)
@@ -94,7 +104,8 @@ rotation = -0.43633232
 position = Vector2(209, -89)
 rotation = 2.1293018
 
-[connection signal="pressed" from="UI/Start Race Button" to="RaindropManager" method="_on_button_pressed"]
+[connection signal="pressed" from="UI/Start Race Button" to="RaindropManager" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="UI/Start Race Button" to="FinishLine" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="UI/Start Race Button" to="RaceManager" method="_on_start_race_button_pressed"]
+[connection signal="pressed" from="UI/Spawn Raindrops Button" to="RaindropManager" method="_on_spawn_raindrops_button_pressed"]
 [connection signal="body_entered" from="FinishLine" to="FinishLine" method="_on_body_entered"]
