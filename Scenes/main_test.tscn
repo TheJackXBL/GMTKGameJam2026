@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://dux1dltmmc5a"]
 
 [ext_resource type="PackedScene" uid="uid://wvhc5gxfenq5" path="res://Raindrops/raindrop.tscn" id="1_vp2v7"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_menus_template/base/nodes/utilities/pause_menu_controller.gd" id="2_nb675"]
+[ext_resource type="PackedScene" uid="uid://cpys1g6iajixl" path="res://Scenes/Menus/scenes/windows/pause_menu_layer.tscn" id="3_18lj0"]
 
 [node name="MainTest" type="Node2D" unique_id=1583966608]
 
@@ -8,3 +10,7 @@
 position = Vector2(190, -334)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
+
+[node name="PauseMenuController" type="Node" parent="." unique_id=741474694]
+script = ExtResource("2_nb675")
+pause_menu_packed = ExtResource("3_18lj0")
