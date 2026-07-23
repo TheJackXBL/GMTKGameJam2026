@@ -1,13 +1,7 @@
 [gd_scene format=3 uid="uid://dux1dltmmc5a"]
 
 [ext_resource type="Texture2D" uid="uid://dwk0ry16a5w7j" path="res://TestSprite/backgroundwip.jpg" id="1_nb675"]
-[ext_resource type="PackedScene" uid="uid://wvhc5gxfenq5" path="res://Raindrops/raindrop.tscn" id="1_vp2v7"]
-[ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/glass.gdshader" id="2_g4g7g"]
-[ext_resource type="Script" uid="uid://ecnp2gc4gf3o" path="res://Raindrops/trail_root.gd" id="3_26jq3"]
-[ext_resource type="Texture2D" uid="uid://5ffqetjkgtll" path="res://TestSprite/WhiteDot.png" id="4_087m6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3foiw"]
-shader = ExtResource("2_g4g7g")
+[ext_resource type="PackedScene" uid="uid://co4r11rmr7i5b" path="res://Scenes/Car/window.tscn" id="2_g4g7g"]
 
 [node name="MainTest" type="Node2D" unique_id=1583966608]
 
@@ -18,24 +12,6 @@ offset_right = 908.0
 offset_bottom = 557.0
 texture = ExtResource("1_nb675")
 
-[node name="RaindropLayer" type="Node2D" parent="." unique_id=1627042235]
-
-[node name="Raindrop" parent="RaindropLayer" unique_id=518618439 instance=ExtResource("1_vp2v7")]
-position = Vector2(190, -334)
-
-[node name="TrailViewpoint" type="SubViewport" parent="." unique_id=71990749]
-
-[node name="TrailRoot" type="Node2D" parent="TrailViewpoint" unique_id=1257986348]
-script = ExtResource("3_26jq3")
-
-[node name="WhiteDot" type="Sprite2D" parent="TrailViewpoint/TrailRoot" unique_id=1494026210]
-texture = ExtResource("4_087m6")
-
-[node name="Glass" type="ColorRect" parent="." unique_id=54080826]
-material = SubResource("ShaderMaterial_3foiw")
-offset_left = -604.0
-offset_top = -366.0
-offset_right = 609.0
-offset_bottom = 359.0
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
+
+[node name="Window" parent="." unique_id=157260114 instance=ExtResource("2_g4g7g")]
