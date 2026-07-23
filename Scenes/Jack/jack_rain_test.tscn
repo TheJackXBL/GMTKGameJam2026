@@ -7,7 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("3_iincw")
 
-[node name="MainTest" type="Node2D" unique_id=1583966608]
+[node name="JackRainTest" type="Node2D" unique_id=1583966608]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
 
