@@ -2,7 +2,7 @@ class_name Raindrop
 extends RigidBody2D
 
 @onready var streak_container: Node2D = get_parent().get_node("StreakContainer")
-@onready var drop_sprite: Sprite2D = $Sprite2D
+@onready var raindrop_sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 
 #Drop size
@@ -52,7 +52,7 @@ func _ready() -> void:
 	
 	body_entered.connect(_on_body_entered)
 	
-	original_sprite_scale = drop_sprite.scale
+	original_sprite_scale = raindrop_sprite.scale
 	last_streak_position = global_position
 	
 	#adhesion_multiplier = STAT OF RAINDROP
@@ -204,7 +204,7 @@ func update_drop_shape(delta: float) -> void:
 	var target_scale := original_sprite_scale * size_scale * stretch_scale
 	var interpolation := 1.0 - exp(-stretch_speed * delta)
 	
-	drop_sprite.scale = drop_sprite.scale.lerp(target_scale,interpolation)
+	raindrop_sprite.scale = raindrop_sprite.scale.lerp(target_scale,interpolation)
 
 # calculates mass of raindrop based on size
 func update_drop_size() -> void:
