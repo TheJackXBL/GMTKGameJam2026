@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var raindrop_object: PackedScene
+@export var raindrop_scene: PackedScene
 @export var maximum_speed: int = 10
 
 @export_range(0.0, 100000.0, 1.0) var spawn_length: float = 1000.0
@@ -21,7 +21,6 @@ func spawn_raindrops(raindrop_object: PackedScene, amount: int) -> void:
 
 	for i in range(amount):
 		var raindrop_instance := raindrop_object.instantiate()
-		add_child(raindrop_instance)
 
 		var random_x := rng.randf_range(-half_length, half_length)
 		var random_speed := rng.randi_range(0, maximum_speed)
@@ -29,8 +28,9 @@ func spawn_raindrops(raindrop_object: PackedScene, amount: int) -> void:
 
 		
 		raindrop_instance.global_position = to_global(Vector2(random_x, spawn_y))
+		add_child(raindrop_instance)
 
 
 func _on_button_pressed() -> void:
 	if spawn_on_ready:
-		spawn_raindrops(raindrop_object, raindrop_count)
+		spawn_raindrops(raindrop_scene, raindrop_count)

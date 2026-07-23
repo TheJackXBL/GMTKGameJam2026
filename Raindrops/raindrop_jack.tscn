@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dlvjb8j4ss4nj"]
+
+[ext_resource type="Script" uid="uid://b1cfjd65xb61x" path="res://Raindrops/raindrop_jack.gd" id="1_6si7m"]
+[ext_resource type="Texture2D" uid="uid://dgcfy1mx5gpff" path="res://Scenes/Arowyn/test drop.png" id="2_6si7m"]
+
+[sub_resource type="Curve" id="Curve_6si7m"]
+_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.51, 0.64044946), 0.83616424, 0.83616424, 0, 0, Vector2(0.995, 1), 0.6609383, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3foiw"]
+radius = 4.472136
+
+[node name="Raindrop" type="RigidBody2D" unique_id=1385779041]
+gravity_scale = 0.0
+lock_rotation = true
+contact_monitor = true
+max_contacts_reported = 8
+script = ExtResource("1_6si7m")
+radius = 2.0
+starting_radius = 2.0
+drag_strength = 1.2
+adhesion_force = 20.0
+sideways_force = 200.0
+direction_change_speed = 10.0
+maximum_stretch = 0.5
+width_curve = SubResource("Curve_6si7m")
+streak_width_multiplier = 2.0
+wet_adhesion_reduction = 0.85
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1355783299]
+position = Vector2(0, -5)
+scale = Vector2(0.3, 0.212)
+texture = ExtResource("2_6si7m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1068706512]
+shape = SubResource("CircleShape2D_3foiw")

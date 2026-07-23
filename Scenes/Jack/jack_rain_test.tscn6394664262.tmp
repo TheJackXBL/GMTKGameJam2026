@@ -14,7 +14,8 @@ shader = ExtResource("3_iincw")
 [node name="Window" type="Node2D" parent="." unique_id=157260114]
 script = ExtResource("1_5172b")
 raindrop_scene = ExtResource("2_iincw")
-spawn_y = -350.0
+spawn_y = -100.0
+raindrop_count = 5
 
 [node name="Glass" type="ColorRect" parent="Window" unique_id=972784941]
 material = SubResource("ShaderMaterial_gi6rw")
