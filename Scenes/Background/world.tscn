@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://dx05kji413l8i"]
+
+[ext_resource type="Texture2D" uid="uid://bf13ne3ns8lbp" path="res://Sprite/Field/Sky.png" id="1_qkitm"]
+[ext_resource type="Texture2D" uid="uid://dv3nlbvx68g7h" path="res://Sprite/Field/Background.png" id="2_5m85p"]
+[ext_resource type="Texture2D" uid="uid://db3yy74mh7caf" path="res://Sprite/Field/Foreground.png" id="4_xj7vc"]
+
+[node name="World" type="Node2D" unique_id=823103243]
+
+[node name="Parallax2D" type="Parallax2D" parent="." unique_id=1567656438]
+repeat_size = Vector2(3840, 0)
+autoscroll = Vector2(-200, 0)
+
+[node name="Sky" type="Sprite2D" parent="Parallax2D" unique_id=1703519765]
+texture = ExtResource("1_qkitm")
+
+[node name="Parallax2D2" type="Parallax2D" parent="." unique_id=1298322669]
+repeat_size = Vector2(3840, 0)
+autoscroll = Vector2(-400, 0)
+
+[node name="Background" type="Sprite2D" parent="Parallax2D2" unique_id=414575409]
+texture = ExtResource("2_5m85p")
+
+[node name="Parallax2D3" type="Parallax2D" parent="." unique_id=1901476499]
+repeat_size = Vector2(3840, 0)
+autoscroll = Vector2(-800, 0)
+
+[node name="Foreground" type="Sprite2D" parent="Parallax2D3" unique_id=1728678458]
+texture = ExtResource("4_xj7vc")
