@@ -3,8 +3,8 @@ shader_type canvas_item;
 uniform sampler2D screen_texture : hint_screen_texture;
 
 uniform float frostAmount = 1.0;
-uniform float distortion = 0.01;
-uniform float blur = 0.006;
+uniform float distortion = 0.03;
+uniform float blur = 0.01;
 
 float rand(vec2 p)
 {

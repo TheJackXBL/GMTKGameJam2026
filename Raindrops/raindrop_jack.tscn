@@ -25,7 +25,6 @@ direction_change_speed = 10.0
 maximum_stretch = 0.5
 width_curve = SubResource("Curve_6si7m")
 streak_width_multiplier = 2.0
-wet_adhesion_reduction = 0.85
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1355783299]
 position = Vector2(0, -5)

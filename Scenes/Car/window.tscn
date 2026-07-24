@@ -1,12 +1,18 @@
 [gd_scene format=3 uid="uid://co4r11rmr7i5b"]
 
+[ext_resource type="Script" uid="uid://by5k02ir86jqg" path="res://Raindrops/raindrop_manager.gd" id="1_c0wx4"]
+[ext_resource type="Script" uid="uid://dejsowogmp6xh" path="res://Scenes/Car/window.gd" id="1_llgww"]
 [ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/Car/glass.gdshader" id="1_nmxxc"]
 [ext_resource type="PackedScene" uid="uid://wvhc5gxfenq5" path="res://Raindrops/raindrop.tscn" id="2_gi6rw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("1_nmxxc")
+shader_parameter/frostAmount = 1.0
+shader_parameter/distortion = 0.003
+shader_parameter/blur = 0.002
 
 [node name="Window" type="Node2D" unique_id=157260114]
+script = ExtResource("1_llgww")
 
 [node name="Glass" type="ColorRect" parent="." unique_id=972784941]
 material = SubResource("ShaderMaterial_gi6rw")
@@ -15,7 +21,11 @@ offset_top = -366.0
 offset_right = 609.0
 offset_bottom = 359.0
 
-[node name="StreakContainer" type="Node2D" parent="." unique_id=1921861915]
+[node name="RaindropManager" type="Node2D" parent="." unique_id=1434854034]
+script = ExtResource("1_c0wx4")
+raindropScene = ExtResource("2_gi6rw")
 
-[node name="Raindrop" parent="." unique_id=1385779041 instance=ExtResource("2_gi6rw")]
+[node name="StreakContainer" type="Node2D" parent="RaindropManager" unique_id=1921861915]
+
+[node name="Raindrop" parent="RaindropManager" unique_id=1385779041 instance=ExtResource("2_gi6rw")]
 position = Vector2(360, 106)
