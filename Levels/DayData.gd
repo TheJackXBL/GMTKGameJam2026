@@ -25,4 +25,4 @@ class_name DayData
 var obstacle_chance := 25
 
 func get_texture(type: String) -> Texture2D:
-	return load("res://Sprite/%s/%s_%s" % [BG_tag, BG_tag, type])
+	return load("res://Sprite/%s/%s_%s.png" % [BG_tag, BG_tag, type])

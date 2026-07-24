@@ -1,19 +1,37 @@
 [gd_scene format=3 uid="uid://dux1dltmmc5a"]
 
 [ext_resource type="PackedScene" uid="uid://dx05kji413l8i" path="res://Scenes/Background/world.tscn" id="1_26jq3"]
+[ext_resource type="Script" uid="uid://dbfiaagkajqqp" path="res://Scenes/game.gd" id="1_087m6"]
 [ext_resource type="PackedScene" uid="uid://co4r11rmr7i5b" path="res://Scenes/Car/window.tscn" id="2_g4g7g"]
 [ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_menus_template/base/nodes/utilities/pause_menu_controller.gd" id="2_nb675"]
 [ext_resource type="PackedScene" uid="uid://cpys1g6iajixl" path="res://Scenes/Menus/scenes/windows/pause_menu_layer.tscn" id="3_18lj0"]
+[ext_resource type="PackedScene" uid="uid://ctignvopkp1dv" path="res://Levels/day_manager.tscn" id="5_26jq3"]
 
 [node name="MainTest" type="Node2D" unique_id=1583966608]
+script = ExtResource("1_087m6")
 
-[node name="World" parent="." unique_id=823103243 instance=ExtResource("1_26jq3")]
-scale = Vector2(0.6, 0.6)
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
+[node name="DayManager" parent="." unique_id=560427950 instance=ExtResource("5_26jq3")]
 
 [node name="PauseMenuController" type="Node" parent="." unique_id=741474694]
 script = ExtResource("2_nb675")
 pause_menu_packed = ExtResource("3_18lj0")
 
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
+
+[node name="World" parent="." unique_id=823103243 instance=ExtResource("1_26jq3")]
+scale = Vector2(0.6, 0.6)
+
 [node name="Window" parent="." unique_id=157260114 instance=ExtResource("2_g4g7g")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=192067224]
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=682605767]
+offset_right = 202.0
+offset_bottom = 64.0
+text = "Day Timer: "
+
+[node name="DayTimer" type="Timer" parent="CanvasLayer" unique_id=1220033835]
+wait_time = 10.0
+one_shot = true
+
+[connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]

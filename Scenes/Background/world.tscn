@@ -7,6 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://db3yy74mh7caf" path="res://Sprite/Field/Field_FG.png" id="4_xj7vc"]
 [ext_resource type="Texture2D" uid="uid://0pheyfbgevf1" path="res://Sprite/Field/Field_Sky_Sun.png" id="5_7h8tx"]
 
+[sub_resource type="Gradient" id="Gradient_c3a1u"]
+offsets = PackedFloat32Array(0, 0.56559765)
+colors = PackedColorArray(0.27387273, 0.27387273, 0.27387273, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_3foiw"]
+gradient = SubResource("Gradient_c3a1u")
+
 [node name="World" type="Node2D" unique_id=823103243]
 script = ExtResource("1_c3a1u")
 
@@ -36,3 +43,13 @@ autoscroll = Vector2(-800, 0)
 
 [node name="Foreground" type="Sprite2D" parent="Parallax2D3" unique_id=1728678458]
 texture = ExtResource("4_xj7vc")
+
+[node name="FogLayer" type="TextureRect" parent="." unique_id=476917981]
+offset_left = 5882.091
+offset_top = -655.99963
+offset_right = 7485.6675
+offset_bottom = 8566.091
+rotation = 1.5707964
+texture = SubResource("GradientTexture1D_3foiw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=281591950]
