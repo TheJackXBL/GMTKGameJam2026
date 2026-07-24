@@ -1,4 +1,4 @@
-class_name Raindrop
+#class_name Raindrop
 extends RigidBody2D
 
 @onready var streak_container: Node2D = get_parent().get_node("StreakContainer")

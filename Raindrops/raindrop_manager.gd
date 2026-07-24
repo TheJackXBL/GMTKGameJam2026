@@ -1,56 +1,56 @@
 extends Node2D
 
-@export var raindropScene : PackedScene
-
-@export var maximumSpeed : int = 10
+@export var raindrop_scene: PackedScene
 
 @export_range(0.0, 100000.0, 1.0)
-var spawnLength : float = 1000.0
+var spawn_length: float = 1000.0
 
-@export var spawnY : float = 0.0
+@export var spawn_y: float = 0.0
 
 @export_range(0, 10000, 1)
-var raindropCount : int = 10
+var raindrop_count: int = 10
 
-@export var spawnOnReady : bool = true
+@export var spawn_on_ready := true
+
 
 var rng := RandomNumberGenerator.new()
+
+
+@onready var streak_container: Node2D = $"../StreakContainer"
 
 
 func _ready() -> void:
 	rng.randomize()
 
-	if spawnOnReady:
-		spawn_raindrops(raindropScene, raindropCount)
+	if spawn_on_ready:
+		spawn_raindrops(raindrop_count)
 
 
-func spawn_raindrops(scene : PackedScene, amount : int) -> void:
 
-	var halfLength := spawnLength / 2.0
+func spawn_raindrops(amount: int) -> void:
+
+	var half_length := spawn_length / 2.0
 
 	for i in amount:
 
-		var raindrop := scene.instantiate()
+		var drop := raindrop_scene.instantiate()
 
-		var randomX := rng.randf_range(-halfLength, halfLength)
+		drop.streak_container = streak_container
 
-		raindrop.global_position = to_global(
-			Vector2(randomX, spawnY)
+		var x := rng.randf_range(
+			-half_length,
+			half_length
 		)
 
-		add_child(raindrop)
+		drop.global_position = global_position + Vector2(
+			x,
+			spawn_y
+		)
+
+		add_child(drop)
+
 
 
 func clear_raindrops() -> void:
-
-	for child in get_children():
-
-		child.queue_free()
-
-
-func set_spawn_count(amount : int) -> void:
-	raindropCount = amount
-
-
-func set_spawn_width(width : float) -> void:
-	spawnLength = width
+	for drop in get_children():
+		drop.queue_free()

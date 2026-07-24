@@ -11,6 +11,10 @@ shader_parameter/frostAmount = 1.0
 shader_parameter/distortion = 0.003
 shader_parameter/blur = 0.002
 
+[sub_resource type="Curve" id="Curve_yohqq"]
+_data = [Vector2(0.45888594, 0.106666684), 0.0, 0.0, 0, 0, Vector2(0.7931034, 0.91999996), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Window" type="Node2D" unique_id=157260114]
 script = ExtResource("1_llgww")
 
@@ -21,11 +25,12 @@ offset_top = -366.0
 offset_right = 609.0
 offset_bottom = 359.0
 
+[node name="StreakContainer" type="Node2D" parent="." unique_id=1921861915]
+
 [node name="RaindropManager" type="Node2D" parent="." unique_id=1434854034]
 script = ExtResource("1_c0wx4")
-raindropScene = ExtResource("2_gi6rw")
-
-[node name="StreakContainer" type="Node2D" parent="RaindropManager" unique_id=1921861915]
+raindrop_scene = ExtResource("2_gi6rw")
 
 [node name="Raindrop" parent="RaindropManager" unique_id=1385779041 instance=ExtResource("2_gi6rw")]
 position = Vector2(360, 106)
+width_curve = SubResource("Curve_yohqq")
