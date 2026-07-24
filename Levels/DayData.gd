@@ -24,11 +24,5 @@ class_name DayData
 @export_range(0,100)
 var obstacle_chance := 25
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func get_texture(type: String) -> Texture2D:
+	return load("res://Sprite/%s/%s_%s" % [BG_tag, BG_tag, type])

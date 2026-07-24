@@ -15,6 +15,9 @@ var rng := RandomNumberGenerator.new()
 func _ready() -> void:
 	rng.randomize()
 
+#TODO: Hookup raindrop stats from DayData
+#
+
 func spawn_raindrops(raindrop_object: PackedScene, amount: int) -> void:
 
 	var half_length: float = spawn_length / 2.0
