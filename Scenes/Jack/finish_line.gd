@@ -1,6 +1,8 @@
 extends Area2D
 
-@export var race_camera: Camera2D
+signal winner_determined(raindrop: Node2D)
+
+@onready var race_manager: Node2D = %RaceManager
 
 var winning_raindrop: RigidBody2D
 var race_finished := false
@@ -23,14 +25,7 @@ func _on_body_entered(body: Node2D) -> void:
 	race_finished = true
 	winning_raindrop = body
 	
-	var winner_is_selected: bool = winning_raindrop.get("isSelected")
-	
-	if winner_is_selected:
-		print("The selected raindrop won!")
-	else:
-		print("The selected raindrop did not win.")
-	
-	await race_camera.show_winner(winning_raindrop)
+	winner_determined.emit(winning_raindrop)
 
 
 func _on_start_race_button_pressed() -> void:

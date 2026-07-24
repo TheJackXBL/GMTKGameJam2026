@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="2_iincw"]
 [ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/Car/glass.gdshader" id="3_iincw"]
 [ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="4_4nfk4"]
-[ext_resource type="PackedScene" uid="uid://dpg22rb8qer8p" path="res://Scenes/Jack/raindrop_info_ui.tscn" id="4_7irk2"]
+[ext_resource type="PackedScene" uid="uid://clbs2nlm5bap8" path="res://Scenes/Jack/raindrop_info_ui.tscn" id="4_7irk2"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="6_35n6r"]
-[ext_resource type="PackedScene" uid="uid://be8r8i3nm5b7i" path="res://Scenes/Jack/canada_leaf.tscn" id="7_7irk2"]
+[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Scenes/Jack/canada_leaf.tscn" id="7_7irk2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("3_iincw")
@@ -23,6 +23,18 @@ colors = PackedColorArray(0.7176471, 0.13725491, 0.25490198, 1, 0.7176471, 0.137
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_xrvpr"]
 gradient = SubResource("Gradient_iincw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7irk2"]
+size = Vector2(1500, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_vcm44"]
+size = Vector2(1500, 20)
+
+[sub_resource type="Gradient" id="Gradient_7irk2"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vcm44"]
+gradient = SubResource("Gradient_7irk2")
 
 [node name="JackRainTest" type="Node2D" unique_id=1583966608]
 
@@ -78,10 +90,11 @@ offset_right = 532.0
 offset_bottom = 294.0
 text = "SPAWN RAINDROPS"
 
-[node name="FinishLine" type="Area2D" parent="." unique_id=1546395377 node_paths=PackedStringArray("race_camera")]
+[node name="FinishLine" type="Area2D" parent="." unique_id=1546395377]
 position = Vector2(0, 318)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("4_4nfk4")
-race_camera = NodePath("../Camera2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine" unique_id=2015687811]
 shape = SubResource("RectangleShape2D_75xeh")
@@ -90,8 +103,22 @@ shape = SubResource("RectangleShape2D_75xeh")
 mesh = SubResource("QuadMesh_75xeh")
 texture = SubResource("GradientTexture1D_xrvpr")
 
-[node name="RaceManager" type="Node2D" parent="." unique_id=1517018577]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=34138283 groups=["death_zone"]]
+position = Vector2(0, 416)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=277104317]
+shape = SubResource("RectangleShape2D_7irk2")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D" unique_id=1120671170]
+mesh = SubResource("QuadMesh_vcm44")
+texture = SubResource("GradientTexture1D_vcm44")
+
+[node name="RaceManager" type="Node2D" parent="." unique_id=1517018577 node_paths=PackedStringArray("RaindropManager", "race_camera")]
 script = ExtResource("6_35n6r")
+RaindropManager = NodePath("../RaindropManager")
+race_camera = NodePath("../Camera2D")
 
 [node name="CanadaLeaf" parent="." unique_id=89227851 instance=ExtResource("7_7irk2")]
 position = Vector2(-154, 7)
@@ -110,3 +137,4 @@ rotation = 2.1293018
 [connection signal="pressed" from="UI/Start Race Button" to="RaceManager" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="UI/Spawn Raindrops Button" to="RaindropManager" method="_on_spawn_raindrops_button_pressed"]
 [connection signal="body_entered" from="FinishLine" to="FinishLine" method="_on_body_entered"]
+[connection signal="winner_determined" from="FinishLine" to="RaceManager" method="_on_finish_line_winner_determined"]

@@ -15,7 +15,6 @@ signal choose_requested(raindrop: Node2D)
 @onready var choose_button: Button = %ChooseButton
 
 var raindrop: Node2D
-var stats: Dictionary
 
 
 func _ready() -> void:
@@ -24,27 +23,15 @@ func _ready() -> void:
 	#choose_button.pressed.connect(_on_choose_button_pressed)
 
 
-func setup(new_raindrop: Node2D, new_stats: Dictionary) -> void:
-	raindrop = new_raindrop
-	stats = new_stats
+func update_display(speed: int, angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
 
-	if is_node_ready():
-		update_display()
-	else:
-		ready.connect(update_display, CONNECT_ONE_SHOT)
-
-
-func update_display() -> void:
-	var speed: int = stats.get("speed", 0.0)
-	var weight: int = stats.get("weight", 0)
-	var friendliness: int = stats.get("friendliness", 0)
-	var slipperiness: int = stats.get("slipperiness", 0)
-
-	speed_value.text = str(speed)
-
+	speed_value.text = str(speed) + "mm/s"
+	
 	weight_value.text = str(weight)
 	friendliness_value.text = str(friendliness)
 	slipperiness_value.text = str(slipperiness)
+	
+	#TODO - Adjust bars to match stats
 
 	#create_stat_bar(weight_bar, weight)
 	#create_stat_bar(friendliness_bar, friendliness)
@@ -97,3 +84,7 @@ func create_stat_bar(container: HBoxContainer, value: int) -> void:
 	#choose_requested.emit(raindrop)
 	#dropdown_panel.visible = false
 	#dropdown_button.text = dropdown_button.text.replace("▲", "▼")
+
+
+func _on_raindrop_raindrop_stats_generated(speed: int, angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
+	update_display(speed, angle, weight, friendliness, slipperiness)

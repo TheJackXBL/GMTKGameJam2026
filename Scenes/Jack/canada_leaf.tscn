@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://be8r8i3nm5b7i"]
+[gd_scene format=3 uid="uid://drppqr0ebn2vu"]
 
 [ext_resource type="Texture2D" uid="uid://8opfpgy5u5rv" path="res://Scenes/Jack/canada leaf.png" id="1_sqijp"]
 
@@ -11,6 +11,8 @@ scale = Vector2(0.2000007, 0.2000007)
 texture = ExtResource("1_sqijp")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=413162864]
+collision_layer = 2
+collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_rdmgo")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1643303553]

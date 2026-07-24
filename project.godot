@@ -29,10 +29,16 @@ ProjectUISoundController="*uid://cc37235kj4384"
 [display]
 
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/maaacks_menus_template/plugin.cfg")
+
+[global_group]
+
+raindrops=""
+death_zone=""
 
 [internationalization]
 
