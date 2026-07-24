@@ -1,3 +1,30 @@
 [gd_scene format=3 uid="uid://ct8ufqk1eci4d"]
 
+[ext_resource type="Texture2D" uid="uid://bf13ne3ns8lbp" path="res://Sprite/Field/Sky.png" id="1_wdctf"]
+[ext_resource type="Texture2D" uid="uid://0pheyfbgevf1" path="res://Sprite/Field/SkySun.png" id="2_7d2x5"]
+[ext_resource type="Texture2D" uid="uid://dv3nlbvx68g7h" path="res://Sprite/Field/Background.png" id="2_07osd"]
+[ext_resource type="Texture2D" uid="uid://db3yy74mh7caf" path="res://Sprite/Field/Foreground.png" id="3_7d2x5"]
+[ext_resource type="Texture2D" uid="uid://pvhkfmhpc2h2" path="res://Sprite/Field/BackgroundSun.png" id="4_nggje"]
+
 [node name="BoscoScene" type="Node2D" unique_id=1142302697]
+
+[node name="Sky" type="Sprite2D" parent="." unique_id=2051925895]
+texture = ExtResource("1_wdctf")
+
+[node name="SkySun" type="Sprite2D" parent="." unique_id=456354384]
+visible = false
+texture = ExtResource("2_7d2x5")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=1933165338]
+texture = ExtResource("2_07osd")
+
+[node name="BackgroundSun" type="Sprite2D" parent="." unique_id=626229489]
+visible = false
+texture = ExtResource("4_nggje")
+
+[node name="Foreground" type="Sprite2D" parent="." unique_id=217876444]
+texture = ExtResource("3_7d2x5")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1109670731]
+position = Vector2(-960, 0)
+zoom = Vector2(0.6, 0.6)
