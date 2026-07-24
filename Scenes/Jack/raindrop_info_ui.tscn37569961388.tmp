@@ -1,0 +1,217 @@
+[gd_scene format=3 uid="uid://dpg22rb8qer8p"]
+
+[ext_resource type="Script" uid="uid://fpveu3n25ntr" path="res://Scenes/Jack/raindrop_info_ui.gd" id="1_a5bkx"]
+[ext_resource type="Texture2D" uid="uid://b4fc5u77jc3wj" path="res://Scenes/Jack/ArowynCloud.png" id="2_u0lbt"]
+[ext_resource type="Texture2D" uid="uid://b25ir73vd6igo" path="res://Scenes/Jack/Arrow.png" id="2_wkumo"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_75xeh"]
+texture = ExtResource("2_u0lbt")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xrvpr"]
+bg_color = Color(0.26666668, 0.30588236, 0.8156863, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ntwiu"]
+bg_color = Color(1, 0.7921569, 0.039215688, 1)
+border_width_right = 1
+border_color = Color(0, 0, 0, 1)
+
+[node name="RaindropInfoUI" type="Control" unique_id=414824300]
+custom_minimum_size = Vector2(520, 334.895)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_a5bkx")
+
+[node name="StatsPanel" type="PanelContainer" parent="." unique_id=530586315]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 0
+offset_right = 163.0
+offset_bottom = 270.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_75xeh")
+
+[node name="MarginContainer" type="MarginContainer" parent="StatsPanel" unique_id=91114691]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel/MarginContainer" unique_id=1853940861]
+layout_mode = 2
+
+[node name="SpeedAngleRow" type="HBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer" unique_id=1362801412]
+layout_mode = 2
+
+[node name="SpeedText" type="HBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer/SpeedAngleRow" unique_id=995946754]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpeedLabel" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/SpeedAngleRow/SpeedText" unique_id=1000139211]
+layout_mode = 2
+text = "Speed:"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeightValue" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/SpeedAngleRow/SpeedText" unique_id=734834510]
+layout_mode = 2
+text = "7mm/s"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="StatsPanel/MarginContainer/VBoxContainer/SpeedAngleRow/SpeedText" unique_id=1993641626]
+layout_mode = 2
+offset_transform_enabled = true
+texture = ExtResource("2_wkumo")
+expand_mode = 2
+
+[node name="HSeparator3" type="HSeparator" parent="StatsPanel/MarginContainer/VBoxContainer" unique_id=1015378370]
+custom_maximum_size = Vector2(130, 10)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(7.5, 0)
+
+[node name="WeightRow" type="HBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer" unique_id=947842757]
+layout_mode = 2
+
+[node name="WeightText" type="VBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer/WeightRow" unique_id=1724805249]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/WeightRow/WeightText" unique_id=1130448883]
+layout_mode = 2
+text = "Weight"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WeightValue" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/WeightRow/WeightText" unique_id=1020991175]
+unique_name_in_owner = true
+layout_mode = 2
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer/WeightRow" unique_id=766648612]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="StatsPanel/MarginContainer/VBoxContainer/WeightRow/VBoxContainer" unique_id=618498991]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="StatsPanel/MarginContainer/VBoxContainer/WeightRow/VBoxContainer" unique_id=1705159139]
+custom_minimum_size = Vector2(80, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xrvpr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ntwiu")
+max_value = 10.0
+step = 1.0
+value = 5.0
+show_percentage = false
+
+[node name="HSeparator" type="HSeparator" parent="StatsPanel/MarginContainer/VBoxContainer" unique_id=685390950]
+custom_maximum_size = Vector2(130, 10)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(7.5, 0)
+
+[node name="FriendlinessRow" type="HBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer" unique_id=857401707]
+layout_mode = 2
+
+[node name="FriendlinessText" type="VBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer/FriendlinessRow" unique_id=1851562950]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/FriendlinessRow/FriendlinessText" unique_id=1121639733]
+layout_mode = 2
+text = "Friendliness"
+vertical_alignment = 1
+
+[node name="FriendlinessValue" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/FriendlinessRow/FriendlinessText" unique_id=1050311191]
+unique_name_in_owner = true
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer/FriendlinessRow" unique_id=147440710]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="StatsPanel/MarginContainer/VBoxContainer/FriendlinessRow/VBoxContainer" unique_id=1811941735]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="StatsPanel/MarginContainer/VBoxContainer/FriendlinessRow/VBoxContainer" unique_id=1107042385]
+custom_minimum_size = Vector2(80, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xrvpr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ntwiu")
+max_value = 10.0
+step = 1.0
+value = 3.0
+show_percentage = false
+
+[node name="HSeparator2" type="HSeparator" parent="StatsPanel/MarginContainer/VBoxContainer" unique_id=1849560038]
+custom_maximum_size = Vector2(130, 10)
+layout_mode = 2
+offset_transform_enabled = true
+offset_transform_position = Vector2(7.5, 0)
+
+[node name="SlipperinessRow" type="HBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer" unique_id=1558760407]
+layout_mode = 2
+
+[node name="SlipperinessText" type="VBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer/SlipperinessRow" unique_id=1848776958]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+
+[node name="Name" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/SlipperinessRow/SlipperinessText" unique_id=918338733]
+layout_mode = 2
+text = "Slipperyness"
+vertical_alignment = 1
+
+[node name="SlipperinessValue" type="Label" parent="StatsPanel/MarginContainer/VBoxContainer/SlipperinessRow/SlipperinessText" unique_id=533610848]
+unique_name_in_owner = true
+layout_mode = 2
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer/SlipperinessRow" unique_id=787530206]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="StatsPanel/MarginContainer/VBoxContainer/SlipperinessRow/VBoxContainer" unique_id=1788995900]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="StatsPanel/MarginContainer/VBoxContainer/SlipperinessRow/VBoxContainer" unique_id=240487257]
+custom_minimum_size = Vector2(80, 10)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_xrvpr")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ntwiu")
+max_value = 10.0
+step = 1.0
+value = 2.0
+show_percentage = false
+
+[node name="ChooseButtonContainer" type="HBoxContainer" parent="StatsPanel/MarginContainer/VBoxContainer" unique_id=1854177335]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="Spacer" type="Control" parent="StatsPanel/MarginContainer/VBoxContainer/ChooseButtonContainer" unique_id=1045935042]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ChooseButton" type="Button" parent="StatsPanel/MarginContainer/VBoxContainer/ChooseButtonContainer" unique_id=1553434154]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Choose"

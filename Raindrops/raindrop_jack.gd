@@ -1,9 +1,19 @@
 class_name Raindrop
 extends RigidBody2D
 
+signal raindropSelected(raindrop: Node2D)
+signal raindropStatsGenerated(speed: int, angle: float, weight: int, friendliness: int, slipperiness: int)
+
+@export var isSelected: bool = false
+@export var raindropName: String = "Dave"
+@export var weightStat: int
+@export var friendlinessStat: int
+@export var slipperinessStat: int
+
 @onready var streak_container: Node2D = get_parent().get_node("StreakContainer")
 @onready var raindrop_sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
+@onready var raindrop_ui: Control = $Node2D/RaindropInfoUI
 
 #Drop size
 @export var radius := 3.0
@@ -46,11 +56,15 @@ var original_sprite_scale: Vector2 # Starting size of sprite
 var movement_noise := FastNoiseLite.new() # Found cool noise generator!
 var noise_offset := 0.0 # Keeps noise varied
 
-
+var initial_speed: int = 3
+var initial_angle: float = 0.0
+var race_active: bool = false
 
 func _ready() -> void:
 	
 	body_entered.connect(_on_body_entered)
+	
+	raindrop_ui.hide()
 	
 	original_sprite_scale = raindrop_sprite.scale
 	last_streak_position = global_position
@@ -74,8 +88,42 @@ func _ready() -> void:
 	else:
 		stop_sliding()
 
+func setup_race_data(new_speed: int, new_angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
+	
+	initial_speed = new_speed
+	initial_angle = new_angle
+	weightStat = weight
+	friendlinessStat = friendliness
+	slipperinessStat = slipperiness
+	
+	raindropStatsGenerated.emit(initial_speed, initial_angle, weightStat, friendlinessStat, slipperinessStat)
+
+	#rotation_degrees = travel_angle
+
+# Freezes raindrops in place
+func prepare_for_race() -> void:
+	race_active = false
+
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0.0
+
+	freeze = true
+	sleeping = true
+
+func begin_racing() -> void:
+	race_active = true
+
+	freeze = false
+	sleeping = false
+
+	var direction := Vector2.DOWN.rotated(deg_to_rad(initial_angle))
+	linear_velocity = direction * initial_speed
 
 func _physics_process(delta: float) -> void:
+	
+	if not race_active:
+		return
+	
 	update_drop_shape(delta)
 	
 	if not is_sliding:
@@ -95,6 +143,10 @@ func _physics_process(delta: float) -> void:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	
+	if not race_active:
+		return
+	
 	if not is_sliding:
 		return
 	
@@ -118,7 +170,10 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	# Hard caps raindrops just in case
 	if state.linear_velocity.length() > maximum_speed:
 		state.linear_velocity = state.linear_velocity.normalized() * maximum_speed
-
+	
+	if state.linear_velocity.length_squared() > 0.1:
+		var target_rotation := state.linear_velocity.angle() - PI / 2.0
+		raindrop_sprite.rotation = lerp_angle(raindrop_sprite.rotation, target_rotation, 0.075)
 
 func create_streak() -> void:
 	streak = Line2D.new()
@@ -219,6 +274,10 @@ func update_drop_size() -> void:
 		streak.width = radius * streak_width_multiplier
 
 func _on_body_entered(body: Node) -> void:
+	
+	if body.is_in_group("death_zone"):
+		remove_drop()
+	
 	if body is not Raindrop:
 		return
 	
@@ -261,9 +320,40 @@ func absorb_drop(other_drop: Raindrop) -> void:
 	update_drop_size()
 	
 	start_sliding()
-
+	
+	if other_drop.isSelected:
+		isSelected = true
+	
+	raindropName = raindropName + " + " + other_drop.raindropName
+	
 	other_drop.queue_free() #TODO - Add raindrop selection and have it so if your selection merges, the resulting raindrop is the new selection
 
 
+func fade_drop() -> void:
+	var tween := create_tween()
+	
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	
+	tween.tween_property(raindrop_sprite, "modulate:a", 0, 1.0)
+	
+	await tween.finished
+	remove_drop()
+
 func remove_drop() -> void:
 	queue_free()
+
+
+func _on_area_2d_mouse_entered() -> void:
+	if not race_active:
+		raindrop_ui.show()
+
+
+func _on_area_2d_mouse_exited() -> void:
+	raindrop_ui.hide()
+
+
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+			raindropSelected.emit(self)
