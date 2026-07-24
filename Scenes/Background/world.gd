@@ -20,7 +20,7 @@ func set_Day(day : DayData) -> void:
 	#.spawn_chance = day.obstacle_chance
 
 func set_dayProgress(progress : float):
-	print(progress)
+	#print(progress)
 	sky_sun.modulate.a = progress
 	background_sun.modulate.a = progress
 	fog.modulate.a = 1.0 - progress
