@@ -5,6 +5,7 @@ extends Node2D
 @onready var background = $Parallax2D2/Background
 @onready var background_sun = $Parallax2D2/SunBG
 @onready var foreground = $Parallax2D3/Foreground
+@onready var fog = $FogLayer
 
 func set_Day(day : DayData) -> void:
 	sky.texture = day.get_texture("Sky")
@@ -17,6 +18,12 @@ func set_Day(day : DayData) -> void:
 	#.min_speed = day.min_wind_speed
 	#.max_speed = day.max_wind_speed
 	#.spawn_chance = day.obstacle_chance
+
+func set_dayProgress(progress : float):
+	print(progress)
+	sky_sun.modulate.a = progress
+	background_sun.modulate.a = progress
+	fog.modulate.a = 1.0 - progress
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var dayLength := 10.0
+
 @onready var world = $World
 @onready var dayManager = $DayManager
 @onready var timer = $CanvasLayer/DayTimer
@@ -8,11 +10,14 @@ extends Node2D
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	world.set_Day(dayManager.get_day())
-	timer.start()
+	timer.start(dayLength)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var timerProgress = 1.0 - (timer.time_left / dayLength)
+	world.set_dayProgress(timerProgress)
+	
 	timerLabel.text = "Day Timer: " + str(ceil(timer.time_left))
 
 

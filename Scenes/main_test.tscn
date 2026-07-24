@@ -31,7 +31,7 @@ offset_bottom = 64.0
 text = "Day Timer: "
 
 [node name="DayTimer" type="Timer" parent="CanvasLayer" unique_id=1220033835]
-wait_time = 10.0
+wait_time = 26.251
 one_shot = true
 
 [connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
