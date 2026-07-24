@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://ctignvopkp1dv"]
+
+[ext_resource type="Script" uid="uid://bwg25c0ppldwu" path="res://Levels/day_manager.gd" id="1_n56vv"]
+[ext_resource type="Script" uid="uid://dh0b2it0wdtmy" path="res://Levels/DayData.gd" id="2_72bkj"]
+[ext_resource type="Resource" uid="uid://byvl11670qcyv" path="res://Levels/Day1.tres" id="3_q65yb"]
+[ext_resource type="Resource" uid="uid://cot6p080yx5k5" path="res://Levels/Day2.tres" id="4_gb801"]
+[ext_resource type="Resource" uid="uid://dopya41gf8ckl" path="res://Levels/Day3.tres" id="5_bc52d"]
+
+[node name="DayManager" type="Node" unique_id=560427950]
+script = ExtResource("1_n56vv")
+days = Array[ExtResource("2_72bkj")]([ExtResource("3_q65yb"), ExtResource("4_gb801"), ExtResource("5_bc52d")])

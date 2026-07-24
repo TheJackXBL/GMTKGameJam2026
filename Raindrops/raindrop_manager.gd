@@ -29,6 +29,8 @@ func _ready() -> void:
 func determine_raindrop_spawnpoints(amount: int) -> void:
 	raindrop_spawn_data.clear()
 
+	#TODO: Hookup raindrop stats from DayData
+
 	var half_length: float = spawn_length / 2.0
 
 	for i in range(amount):

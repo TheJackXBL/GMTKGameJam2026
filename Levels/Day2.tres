@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DayData" format=3 uid="uid://cot6p080yx5k5"]
+
+[ext_resource type="Script" uid="uid://dh0b2it0wdtmy" path="res://Levels/DayData.gd" id="1_s4ph1"]
+
+[resource]
+script = ExtResource("1_s4ph1")
+dayNum = 2
+BG_tag = "Sea"
+metadata/_custom_type_script = "uid://dh0b2it0wdtmy"

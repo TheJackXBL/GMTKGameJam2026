@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yt3qincfrnbc"
-path="res://.godot/imported/Foreground .png-e14680b42128c0f9641a7eee87e39547.ctex"
+uid="uid://dv3nlbvx68g7h"
+path="res://.godot/imported/Field_BG.png-00235759a369bbf0fa02afe9c228007b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/Sea/Foreground .png"
-dest_files=["res://.godot/imported/Foreground .png-e14680b42128c0f9641a7eee87e39547.ctex"]
+source_file="res://Sprite/Field/Field_BG.png"
+dest_files=["res://.godot/imported/Field_BG.png-00235759a369bbf0fa02afe9c228007b.ctex"]
 
 [params]
 
