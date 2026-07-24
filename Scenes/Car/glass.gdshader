@@ -5,6 +5,7 @@ uniform sampler2D screen_texture : hint_screen_texture;
 uniform float frostAmount = 1.0;
 uniform float distortion = 0.03;
 uniform float blur = 0.01;
+uniform float whiteTint = 0.25;
 
 float rand(vec2 p)
 {
@@ -31,5 +32,11 @@ float blurDistort = blur * frostAmount;
     col += texture(screen_texture, uv + offset + vec2(0.0, blurDistort));
     col += texture(screen_texture, uv + offset + vec2(0.0,-blurDistort));
 
-    COLOR = col / 5.0;
+    col = col / 5.0;
+	
+	float tintStrength = whiteTint * frostAmount;
+	col.rgb = mix(col.rgb, vec3(1.0), tintStrength);
+	
+	COLOR = col;
+	
 }

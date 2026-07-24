@@ -2,14 +2,21 @@
 
 [ext_resource type="Script" uid="uid://b1cfjd65xb61x" path="res://Raindrops/raindrop_jack.gd" id="1_6si7m"]
 [ext_resource type="Texture2D" uid="uid://dgcfy1mx5gpff" path="res://Scenes/Arowyn/test drop.png" id="2_6si7m"]
+[ext_resource type="Shader" uid="uid://dwk7s8teg8urc" path="res://Raindrops/selected_raindrop.gdshader" id="2_req8h"]
 [ext_resource type="PackedScene" uid="uid://clbs2nlm5bap8" path="res://Scenes/Jack/raindrop_info_ui.tscn" id="3_wamoy"]
 
 [sub_resource type="Curve" id="Curve_6si7m"]
 _data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.51, 0.64044946), 0.83616424, 0.83616424, 0, 0, Vector2(0.995, 1), 0.6609383, 0.0, 0, 0]
 point_count = 3
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wamoy"]
+shader = ExtResource("2_req8h")
+shader_parameter/allow_out_of_bounds = true
+shader_parameter/outline_thickness = 3.0
+shader_parameter/outline_color = Color(0, 0.76972795, 0.666325, 1)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_3foiw"]
-radius = 4.472136
+radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75xeh"]
 
@@ -33,6 +40,8 @@ width_curve = SubResource("Curve_6si7m")
 streak_width_multiplier = 2.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1355783299]
+z_index = 3
+material = SubResource("ShaderMaterial_wamoy")
 position = Vector2(0, -4.7683716e-07)
 scale = Vector2(0.3, 0.212)
 texture = ExtResource("2_6si7m")

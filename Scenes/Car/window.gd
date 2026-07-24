@@ -14,9 +14,13 @@ func _ready() -> void:
 
 
 func set_dayProgress(progress : float) -> void:
+	
+	var adjustedProgress := pow(clampf(progress, 0.0, 1.0), 2.0)
+
+	
 	glassMat.set_shader_parameter(
 		"frostAmount",
-		maxFrost - (progress * maxFrost)
+		maxFrost * (1.0 - adjustedProgress)
 	)
 
 

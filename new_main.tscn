@@ -1,0 +1,204 @@
+[gd_scene format=3 uid="uid://26c2xl41ut5j"]
+
+[ext_resource type="Script" uid="uid://dbfiaagkajqqp" path="res://Scenes/game.gd" id="1_qcw2d"]
+[ext_resource type="PackedScene" uid="uid://ctignvopkp1dv" path="res://Levels/day_manager.tscn" id="2_7qgpo"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_menus_template/base/nodes/utilities/pause_menu_controller.gd" id="3_ksskx"]
+[ext_resource type="PackedScene" uid="uid://cpys1g6iajixl" path="res://Scenes/Menus/scenes/windows/pause_menu_layer.tscn" id="4_w2kc5"]
+[ext_resource type="PackedScene" uid="uid://dx05kji413l8i" path="res://Scenes/Background/world.tscn" id="5_7cuaw"]
+[ext_resource type="Script" uid="uid://dejsowogmp6xh" path="res://Scenes/Car/window.gd" id="6_aeylb"]
+[ext_resource type="Script" uid="uid://dgpqbj8xfd8c" path="res://Scenes/Jack/race_camera.gd" id="7_7cuaw"]
+[ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/Car/glass.gdshader" id="7_886ha"]
+[ext_resource type="Script" uid="uid://by5k02ir86jqg" path="res://Raindrops/raindrop_manager.gd" id="8_1fxgr"]
+[ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="8_g7d0j"]
+[ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="9_rc6o0"]
+[ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="9_xyy1j"]
+[ext_resource type="PackedScene" uid="uid://wvhc5gxfenq5" path="res://Raindrops/raindrop.tscn" id="10_1qswb"]
+[ext_resource type="Shader" uid="uid://durapdec5wo2h" path="res://Raindrops/raindrop_streak.gdshader" id="10_886ha"]
+[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Scenes/Jack/leaf.tscn" id="10_ta2aw"]
+[ext_resource type="Texture2D" uid="uid://b7en70r4hrcm2" path="res://Scenes/Arowyn/windowpngblue.png" id="16_1fxgr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
+shader = ExtResource("7_886ha")
+shader_parameter/frostAmount = 1.0
+shader_parameter/distortion = 0.003
+shader_parameter/blur = 0.002
+shader_parameter/whiteTint = 0.25
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_75xeh"]
+shader = ExtResource("10_886ha")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aeylb"]
+size = Vector2(1200, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_886ha"]
+size = Vector2(1200, 20)
+
+[sub_resource type="Gradient" id="Gradient_iincw"]
+colors = PackedColorArray(0.7176471, 0.13725491, 0.25490198, 1, 0.7176471, 0.13725491, 0.25490198, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1fxgr"]
+gradient = SubResource("Gradient_iincw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rc6o0"]
+size = Vector2(1500, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1qswb"]
+size = Vector2(1500, 20)
+
+[sub_resource type="Gradient" id="Gradient_7irk2"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ljb83"]
+gradient = SubResource("Gradient_7irk2")
+
+[node name="NewMain" type="Node2D" unique_id=872055236]
+script = ExtResource("1_qcw2d")
+dayLength = 60.0
+
+[node name="DayManager" parent="." unique_id=560427950 instance=ExtResource("2_7qgpo")]
+
+[node name="PauseMenuController" type="Node" parent="." unique_id=440375164]
+script = ExtResource("3_ksskx")
+pause_menu_packed = ExtResource("4_w2kc5")
+
+[node name="World" parent="." unique_id=823103243 instance=ExtResource("5_7cuaw")]
+scale = Vector2(0.6, 0.6)
+
+[node name="Window" type="Node2D" parent="." unique_id=157260114]
+script = ExtResource("6_aeylb")
+maxFrost = 1.0
+
+[node name="Glass" type="ColorRect" parent="Window" unique_id=972784941]
+material = SubResource("ShaderMaterial_gi6rw")
+offset_left = -604.0
+offset_top = -366.0
+offset_right = 609.0
+offset_bottom = 359.0
+mouse_filter = 2
+
+[node name="RaindropManager" type="Node2D" parent="Window" unique_id=1434854034]
+script = ExtResource("8_1fxgr")
+raindrop_scene = ExtResource("9_rc6o0")
+min_spawn_x = -200.0
+max_spawn_x = 400.0
+spawn_y = -245.0
+
+[node name="StreakContainer" type="Node2D" parent="Window/RaindropManager" unique_id=1921861915]
+
+[node name="Line2D" type="Line2D" parent="Window/RaindropManager/StreakContainer" unique_id=753611803]
+z_index = 2
+material = SubResource("ShaderMaterial_75xeh")
+points = PackedVector2Array(0, 0, -400, 200)
+antialiased = true
+
+[node name="Raindrop" parent="Window/RaindropManager" unique_id=1385779041 instance=ExtResource("10_1qswb")]
+position = Vector2(360, 106)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=747220960]
+limit_left = -576
+limit_top = -324
+limit_right = 576
+limit_bottom = 324
+script = ExtResource("7_7cuaw")
+winner_zoom = Vector2(2, 2)
+focus_duration = 0.75
+zoom_out_duration = 0.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448734060]
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=2122965579]
+offset_right = 202.0
+offset_bottom = 64.0
+text = "Day Timer: "
+metadata/_edit_use_anchors_ = true
+
+[node name="DayTimer" type="Timer" parent="CanvasLayer" unique_id=346766057]
+wait_time = 26.251
+one_shot = true
+
+[node name="UI" type="Control" parent="CanvasLayer" unique_id=1783523636]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Start Race Button" type="Button" parent="CanvasLayer/UI" unique_id=634951704]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.65
+anchor_top = -1.125
+anchor_right = 0.55
+anchor_bottom = -0.35
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "RACE"
+metadata/_edit_use_anchors_ = true
+
+[node name="Spawn Raindrops Button" type="Button" parent="CanvasLayer/UI" unique_id=1985699318]
+layout_mode = 0
+offset_left = -138.0
+offset_right = 23.0
+offset_bottom = 31.0
+text = "SPAWN RAINDROPS"
+
+[node name="FinishLine" type="Area2D" parent="." unique_id=127231439]
+position = Vector2(0, 289)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("8_g7d0j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine" unique_id=1312411475]
+shape = SubResource("RectangleShape2D_aeylb")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="FinishLine" unique_id=148505732]
+visible = false
+z_index = 5
+mesh = SubResource("QuadMesh_886ha")
+texture = SubResource("GradientTexture1D_1fxgr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1383709578 groups=["death_zone"]]
+position = Vector2(0, 416)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=376249509]
+shape = SubResource("RectangleShape2D_rc6o0")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D" unique_id=2130684215]
+mesh = SubResource("QuadMesh_1qswb")
+texture = SubResource("GradientTexture1D_ljb83")
+
+[node name="RaceManager" type="Node2D" parent="." unique_id=189466672 node_paths=PackedStringArray("RaindropManager", "race_camera")]
+script = ExtResource("9_xyy1j")
+RaindropManager = NodePath("../Window/RaindropManager")
+race_camera = NodePath("../Camera2D")
+
+[node name="CanadaLeaf" parent="." unique_id=89227851 instance=ExtResource("10_ta2aw")]
+position = Vector2(-154, 7)
+rotation = -1.8622663
+
+[node name="CanadaLeaf2" parent="." unique_id=460690787 instance=ExtResource("10_ta2aw")]
+position = Vector2(233, 127)
+rotation = -0.43633232
+
+[node name="CanadaLeaf3" parent="." unique_id=442531293 instance=ExtResource("10_ta2aw")]
+position = Vector2(209, -89)
+rotation = 2.1293018
+
+[node name="Windowpngblue" type="Sprite2D" parent="." unique_id=952002940]
+z_index = 5
+scale = Vector2(0.447, 0.45)
+texture = ExtResource("16_1fxgr")
+
+[connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="FinishLine" method="_on_start_race_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="RaceManager" method="_on_start_race_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Spawn Raindrops Button" to="Window/RaindropManager" method="_on_spawn_raindrops_button_pressed"]
+[connection signal="body_entered" from="FinishLine" to="FinishLine" method="_on_body_entered"]
+[connection signal="winner_determined" from="FinishLine" to="RaceManager" method="_on_finish_line_winner_determined"]

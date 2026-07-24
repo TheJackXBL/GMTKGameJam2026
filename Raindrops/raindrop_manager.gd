@@ -5,7 +5,8 @@ extends Node2D
 
 @export var maximum_speed: int = 10
 
-@export_range(0.0, 100000.0, 1.0) var spawn_length: float = 1000.0
+@export var min_spawn_x: float = 0.0
+@export var max_spawn_x: float = 0.0
 @export var spawn_y: float = 0.0
 
 @export_range(0, 10000, 1) var raindrop_count: int = 10
@@ -15,6 +16,22 @@ var rng := RandomNumberGenerator.new()
 
 var raindrop_spawn_data: Array[Dictionary] = []
 var spawned_raindrops: Array[Node2D] = []
+
+var raindrop_names: Array[String] = [
+	"Jonathan",
+	"Dewey",
+	"Walter",
+	"Todd",
+	"Bloop",
+	"Percy",
+	"Pip",
+	"Droop",
+	"Big Dewd",
+	"Drippy"
+]
+
+var current_names: Array[String]
+
 
 var selected_raindrop: Node2D
 var race_started: bool = false
@@ -30,13 +47,23 @@ func determine_raindrop_spawnpoints(amount: int) -> void:
 	raindrop_spawn_data.clear()
 
 	#TODO: Hookup raindrop stats from DayData
-
-	var half_length: float = spawn_length / 2.0
-
+	
+	var section_width: float = (max_spawn_x - min_spawn_x) / amount
+	
+	current_names = raindrop_names.duplicate()
+	
 	for i in range(amount):
+		
+		var section_start: float = min_spawn_x + (i * section_width)
+		var section_end: float = section_start + section_width
+		
+		var random_name = current_names.pick_random()
+		current_names.erase(random_name)
+		
 		var spawn_data := {
+			"name": random_name,
 			"position": Vector2(
-				rng.randf_range(-half_length, half_length),
+				rng.randf_range(section_start, section_end),
 				spawn_y
 			),
 			"speed": rng.randf_range(1.0, maximum_speed), 
@@ -62,6 +89,7 @@ func spawn_raindrops() -> void:
 		add_child(raindrop_instance)
 		
 		raindrop_instance.setup_race_data(
+			spawn_data["name"],
 			spawn_data["speed"], 
 			spawn_data["angle"], 
 			spawn_data["weight"], 
@@ -109,6 +137,7 @@ func prepare_and_spawn_raindrops() -> void:
 func select_raindrop(raindrop: Node2D) -> void:
 	if selected_raindrop != null:
 		selected_raindrop.isSelected = false
+		selected_raindrop.remove_selection_effect()
 
 	selected_raindrop = raindrop
 	selected_raindrop.isSelected = true
