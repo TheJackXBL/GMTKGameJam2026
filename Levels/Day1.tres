@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DayData" format=3 uid="uid://byvl11670qcyv"]
+
+[ext_resource type="Script" uid="uid://dh0b2it0wdtmy" path="res://Levels/DayData.gd" id="1_vwcpm"]
+
+[resource]
+script = ExtResource("1_vwcpm")
+metadata/_custom_type_script = "uid://dh0b2it0wdtmy"

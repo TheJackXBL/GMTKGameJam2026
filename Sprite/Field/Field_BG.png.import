@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pvhkfmhpc2h2"
-path="res://.godot/imported/BackgroundSun.png-3543adfc4941e5669abec5578ed1a7b3.ctex"
+uid="uid://dv3nlbvx68g7h"
+path="res://.godot/imported/Field_BG.png-00235759a369bbf0fa02afe9c228007b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Sprite/Field/BackgroundSun.png"
-dest_files=["res://.godot/imported/BackgroundSun.png-3543adfc4941e5669abec5578ed1a7b3.ctex"]
+source_file="res://Sprite/Field/Field_BG.png"
+dest_files=["res://.godot/imported/Field_BG.png-00235759a369bbf0fa02afe9c228007b.ctex"]
 
 [params]
 
