@@ -19,6 +19,7 @@ shader_parameter/outline_color = Color(0, 0.76972795, 0.666325, 1)
 radius = 7.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75xeh"]
+radius = 7.0
 
 [node name="Raindrop" type="RigidBody2D" unique_id=1385779041 groups=["raindrops"]]
 collision_layer = 2

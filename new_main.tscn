@@ -13,19 +13,15 @@
 [ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="9_rc6o0"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="9_xyy1j"]
 [ext_resource type="PackedScene" uid="uid://wvhc5gxfenq5" path="res://Raindrops/raindrop.tscn" id="10_1qswb"]
-[ext_resource type="Shader" uid="uid://durapdec5wo2h" path="res://Raindrops/raindrop_streak.gdshader" id="10_886ha"]
 [ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Scenes/Jack/leaf.tscn" id="10_ta2aw"]
-[ext_resource type="Texture2D" uid="uid://b7en70r4hrcm2" path="res://Scenes/Arowyn/windowpngblue.png" id="16_1fxgr"]
+[ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("7_886ha")
 shader_parameter/frostAmount = 1.0
-shader_parameter/distortion = 0.003
+shader_parameter/distortion = 0.01
 shader_parameter/blur = 0.002
 shader_parameter/whiteTint = 0.25
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_75xeh"]
-shader = ExtResource("10_886ha")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aeylb"]
 size = Vector2(1200, 20)
@@ -85,13 +81,8 @@ spawn_y = -245.0
 
 [node name="StreakContainer" type="Node2D" parent="Window/RaindropManager" unique_id=1921861915]
 
-[node name="Line2D" type="Line2D" parent="Window/RaindropManager/StreakContainer" unique_id=753611803]
-z_index = 2
-material = SubResource("ShaderMaterial_75xeh")
-points = PackedVector2Array(0, 0, -400, 200)
-antialiased = true
-
 [node name="Raindrop" parent="Window/RaindropManager" unique_id=1385779041 instance=ExtResource("10_1qswb")]
+visible = false
 position = Vector2(360, 106)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=747220960]
@@ -194,8 +185,9 @@ rotation = 2.1293018
 [node name="Windowpngblue" type="Sprite2D" parent="." unique_id=952002940]
 z_index = 5
 scale = Vector2(0.447, 0.45)
-texture = ExtResource("16_1fxgr")
+texture = ExtResource("15_886ha")
 
+[connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="FinishLine" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="RaceManager" method="_on_start_race_button_pressed"]
