@@ -1,6 +1,8 @@
 extends Node2D
 
 @export var raindrop_scene: PackedScene
+@export var raindrop_ui_scene: PackedScene
+
 @export var maximum_speed: int = 10
 
 @export_range(0.0, 100000.0, 1.0) var spawn_length: float = 1000.0
@@ -11,29 +13,113 @@ extends Node2D
 
 var rng := RandomNumberGenerator.new()
 
+var raindrop_spawn_data: Array[Dictionary] = []
+var spawned_raindrops: Array[Node2D] = []
+
+var selected_raindrop: Node2D
+var race_started: bool = false
 
 func _ready() -> void:
 	rng.randomize()
 
-#TODO: Hookup raindrop stats from DayData
-#
+	if spawn_on_ready:
+		prepare_and_spawn_raindrops()
 
-func spawn_raindrops(raindrop_object: PackedScene, amount: int) -> void:
+
+func determine_raindrop_spawnpoints(amount: int) -> void:
+	raindrop_spawn_data.clear()
+
+	#TODO: Hookup raindrop stats from DayData
 
 	var half_length: float = spawn_length / 2.0
 
 	for i in range(amount):
-		var raindrop_instance := raindrop_object.instantiate()
+		var spawn_data := {
+			"position": Vector2(
+				rng.randf_range(-half_length, half_length),
+				spawn_y
+			),
+			"speed": rng.randf_range(1.0, maximum_speed), 
+			"angle": rng.randf_range(-20.0, 20.0),
+			"weight": rng.randi_range(1, 10), # TEMP STAT GENERATION
+			"friendliness": rng.randi_range(1, 10),
+			"slipperiness": rng.randi_range(1, 10)
+		}
 
-		var random_x := rng.randf_range(-half_length, half_length)
-		var random_speed := rng.randi_range(0, maximum_speed)
-		var random_angle := rng.randf_range(-20.0, 20.0)
+		raindrop_spawn_data.append(spawn_data)
 
+
+func spawn_raindrops() -> void:
+	#spawned_raindrops.clear()
+	
+	race_started = false
+
+	for spawn_data in raindrop_spawn_data:
+		var raindrop_instance := raindrop_scene.instantiate()
+
+		raindrop_instance.position = spawn_data["position"]
 		
-		raindrop_instance.global_position = to_global(Vector2(random_x, spawn_y))
 		add_child(raindrop_instance)
+		
+		raindrop_instance.setup_race_data(
+			spawn_data["speed"], 
+			spawn_data["angle"], 
+			spawn_data["weight"], 
+			spawn_data["friendliness"], 
+			spawn_data["slipperiness"]
+		)
+		
+		raindrop_instance.prepare_for_race() #Freezes raindrops in place
+
+		#create_raindrop_ui(raindrop_instance, spawn_data)
+
+		spawned_raindrops.append(raindrop_instance)
+		
+		raindrop_instance.raindropSelected.connect(select_raindrop)
+
+func begin_race() -> void:
+	if race_started:
+		return
+		
+	race_started = true
+	
+	for raindrop in spawned_raindrops:
+		if is_instance_valid(raindrop):
+			raindrop.begin_racing()
+
+func fade_remaining_raindrops() -> void:
+	for raindrop in spawned_raindrops:
+		if is_instance_valid(raindrop):
+			raindrop.fade_drop()
+
+func clear_spawned_raindrops() -> void:
+	for raindrop in spawned_raindrops:
+		if is_instance_valid(raindrop):
+			raindrop.queue_free()
+		
+	spawned_raindrops.clear()
+	selected_raindrop = null
 
 
-func _on_button_pressed() -> void:
-	if spawn_on_ready:
-		spawn_raindrops(raindrop_scene, raindrop_count)
+func prepare_and_spawn_raindrops() -> void:
+	determine_raindrop_spawnpoints(raindrop_count)
+	spawn_raindrops()
+
+
+func select_raindrop(raindrop: Node2D) -> void:
+	if selected_raindrop != null:
+		selected_raindrop.isSelected = false
+
+	selected_raindrop = raindrop
+	selected_raindrop.isSelected = true
+
+	print("Selected: ", raindrop.raindropName)
+
+
+
+func _on_spawn_raindrops_button_pressed() -> void:
+	prepare_and_spawn_raindrops()
+
+
+func _on_start_race_button_pressed() -> void:
+	begin_race()

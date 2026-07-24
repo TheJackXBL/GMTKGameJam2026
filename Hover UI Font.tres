@@ -1,0 +1,9 @@
+[gd_resource type="LabelSettings" format=3 uid="uid://6efxa5jhumx7"]
+
+[ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="1_rcxou"]
+
+[resource]
+font = ExtResource("1_rcxou")
+font_size = 37
+shadow_size = 6
+shadow_color = Color(0.24313726, 0.5372549, 0.627451, 0.6392157)
