@@ -7,7 +7,7 @@ friction = 0.1
 bounce = 0.25
 
 [node name="Leaf" type="Sprite2D" unique_id=89227851]
-z_index = -1
+z_index = 1
 scale = Vector2(0.2000007, 0.2000007)
 texture = ExtResource("1_bifob")
 
