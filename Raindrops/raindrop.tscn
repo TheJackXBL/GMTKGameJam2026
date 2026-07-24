@@ -1,16 +1,18 @@
 [gd_scene format=3 uid="uid://wvhc5gxfenq5"]
 
-[ext_resource type="Texture2D" uid="uid://bo7jop332xjnt" path="res://icon.svg" id="1_qv7dj"]
 [ext_resource type="Script" uid="uid://dj8dbncah0sx3" path="res://Raindrops/raindrop.gd" id="1_yohqq"]
+[ext_resource type="Texture2D" uid="uid://dgcfy1mx5gpff" path="res://Scenes/Arowyn/test drop.png" id="2_yohqq"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_3foiw"]
-radius = 66.94
+[sub_resource type="CircleShape2D" id="CircleShape2D_kaslp"]
+radius = 4.472136
 
 [node name="Raindrop" type="RigidBody2D" unique_id=1385779041]
 script = ExtResource("1_yohqq")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1355783299]
-texture = ExtResource("1_qv7dj")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1096009002]
+position = Vector2(0, -5)
+scale = Vector2(0.3, 0.212)
+texture = ExtResource("2_yohqq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1068706512]
-shape = SubResource("CircleShape2D_3foiw")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=915545210]
+shape = SubResource("CircleShape2D_kaslp")

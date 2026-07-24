@@ -7,10 +7,14 @@
 [ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="4_4nfk4"]
 [ext_resource type="PackedScene" uid="uid://clbs2nlm5bap8" path="res://Scenes/Jack/raindrop_info_ui.tscn" id="4_7irk2"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="6_35n6r"]
-[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Scenes/Jack/canada_leaf.tscn" id="7_7irk2"]
+[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Scenes/Jack/leaf.tscn" id="7_7irk2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("3_iincw")
+shader_parameter/frostAmount = 1.0
+shader_parameter/distortion = 0.03
+shader_parameter/blur = 0.01
+shader_parameter/whiteTint = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_75xeh"]
 size = Vector2(1200, 20)
@@ -18,11 +22,11 @@ size = Vector2(1200, 20)
 [sub_resource type="QuadMesh" id="QuadMesh_75xeh"]
 size = Vector2(1200, 20)
 
-[sub_resource type="Gradient" id="Gradient_iincw"]
+[sub_resource type="Gradient" id="Gradient_7irk2"]
 colors = PackedColorArray(0.7176471, 0.13725491, 0.25490198, 1, 0.7176471, 0.13725491, 0.25490198, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_xrvpr"]
-gradient = SubResource("Gradient_iincw")
+gradient = SubResource("Gradient_7irk2")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7irk2"]
 size = Vector2(1500, 20)
@@ -30,11 +34,11 @@ size = Vector2(1500, 20)
 [sub_resource type="QuadMesh" id="QuadMesh_vcm44"]
 size = Vector2(1500, 20)
 
-[sub_resource type="Gradient" id="Gradient_7irk2"]
+[sub_resource type="Gradient" id="Gradient_vcm44"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_vcm44"]
-gradient = SubResource("Gradient_7irk2")
+gradient = SubResource("Gradient_vcm44")
 
 [node name="JackRainTest" type="Node2D" unique_id=1583966608]
 
@@ -80,7 +84,6 @@ offset_bottom = 363.0
 size_flags_horizontal = 8
 size_flags_vertical = 8
 text = "RACE"
-metadata/_edit_use_anchors_ = true
 
 [node name="Spawn Raindrops Button" type="Button" parent="UI" unique_id=678645608]
 layout_mode = 0

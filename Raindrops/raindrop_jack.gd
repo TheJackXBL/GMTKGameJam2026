@@ -14,6 +14,8 @@ signal raindropStatsGenerated(speed: int, angle: float, weight: int, friendlines
 @onready var raindrop_sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var raindrop_ui: Control = $Node2D/RaindropInfoUI
+const STREAK_SHADER := preload("res://Raindrops/raindrop_streak.gdshader")
+
 
 #Drop size
 @export var radius := 3.0
@@ -88,15 +90,16 @@ func _ready() -> void:
 	else:
 		stop_sliding()
 
-func setup_race_data(new_speed: int, new_angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
+func setup_race_data(new_name: String, new_speed: int, new_angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
 	
+	raindropName = new_name
 	initial_speed = new_speed
 	initial_angle = new_angle
 	weightStat = weight
 	friendlinessStat = friendliness
 	slipperinessStat = slipperiness
 	
-	raindropStatsGenerated.emit(initial_speed, initial_angle, weightStat, friendlinessStat, slipperinessStat)
+	raindropStatsGenerated.emit(raindropName, initial_speed, initial_angle, weightStat, friendlinessStat, slipperinessStat)
 
 	#rotation_degrees = travel_angle
 
@@ -186,16 +189,21 @@ func create_streak() -> void:
 	streak.joint_mode = Line2D.LINE_JOINT_ROUND
 	
 	streak.default_color = Color.WHITE
+	
+	
+	
 	#TODO: Replace above line with texture below
 #	streak.texture = preload("res://Textures/waterStreak.png")
 #	streak.texture_mode = Line2D.LINE_TEXTURE_TILE
 
-	streak.modulate.a = 0.2
+	streak.modulate.a = 1
 	
 	#Streak shader
-	var shader := load("res://Scenes/Car/waterStreak.gdshader") as Shader
-	streak.material = ShaderMaterial.new()
-	streak.material.shader = shader
+	var streak_material := ShaderMaterial.new()
+	streak_material.shader = STREAK_SHADER
+	streak.material = streak_material
+	
+	streak.z_index = 2
 	
 	streak_container.add_child(streak)
 
@@ -357,3 +365,12 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			raindropSelected.emit(self)
+			set_selected(true)
+
+func set_selected(value: bool) -> void:
+	isSelected = value
+	raindrop_sprite.set_instance_shader_parameter("selected", value)
+
+
+func remove_selection_effect() -> void:
+	set_selected(false)

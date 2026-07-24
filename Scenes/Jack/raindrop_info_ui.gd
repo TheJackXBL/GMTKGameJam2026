@@ -6,6 +6,7 @@ signal choose_requested(raindrop: Node2D)
 @export var empty_colour := Color("#444ed0")
 @export var segment_count: int = 10
 
+@onready var name_label: Label = %NameLabel
 @onready var speed_value: Label = %SpeedValue
 
 @onready var weight_value: Label = %WeightValue
@@ -23,8 +24,9 @@ func _ready() -> void:
 	#choose_button.pressed.connect(_on_choose_button_pressed)
 
 
-func update_display(speed: int, angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
+func update_display(drop_name: String, speed: int, angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
 
+	name_label.text = "Name: " + str(drop_name)
 	speed_value.text = str(speed) + "mm/s"
 	
 	weight_value.text = str(weight)
@@ -86,5 +88,5 @@ func create_stat_bar(container: HBoxContainer, value: int) -> void:
 	#dropdown_button.text = dropdown_button.text.replace("▲", "▼")
 
 
-func _on_raindrop_raindrop_stats_generated(speed: int, angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
-	update_display(speed, angle, weight, friendliness, slipperiness)
+func _on_raindrop_raindrop_stats_generated(drop_name: String, speed: int, angle: float, weight: int, friendliness: int, slipperiness: int) -> void:
+	update_display(drop_name, speed, angle, weight, friendliness, slipperiness)

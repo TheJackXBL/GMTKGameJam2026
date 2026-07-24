@@ -16,12 +16,12 @@ script = ExtResource("1_087m6")
 script = ExtResource("2_nb675")
 pause_menu_packed = ExtResource("3_18lj0")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
-
 [node name="World" parent="." unique_id=823103243 instance=ExtResource("1_26jq3")]
 scale = Vector2(0.6, 0.6)
 
 [node name="Window" parent="." unique_id=157260114 instance=ExtResource("2_g4g7g")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1752207750]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=192067224]
 
