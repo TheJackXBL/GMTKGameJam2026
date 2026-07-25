@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://pvhkfmhpc2h2" path="res://Sprite/Field/Field_BG_Sun.png" id="3_xj7vc"]
 [ext_resource type="Texture2D" uid="uid://db3yy74mh7caf" path="res://Sprite/Field/Field_FG.png" id="4_xj7vc"]
 [ext_resource type="Texture2D" uid="uid://0pheyfbgevf1" path="res://Sprite/Field/Field_Sky_Sun.png" id="5_7h8tx"]
+[ext_resource type="Texture2D" uid="uid://b7en70r4hrcm2" path="res://Scenes/Arowyn/windowpngblue.png" id="7_dov5x"]
+[ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="8_q6oi7"]
 
 [sub_resource type="Gradient" id="Gradient_c3a1u"]
 offsets = PackedFloat32Array(0, 0.56559765)
@@ -54,3 +56,16 @@ rotation = 1.5707964
 texture = SubResource("GradientTexture1D_3foiw")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=281591950]
+
+[node name="WindowParent" type="Node2D" parent="." unique_id=246167716]
+z_index = 5
+
+[node name="Windowpngblue" type="Sprite2D" parent="WindowParent" unique_id=1303341061]
+z_index = 5
+scale = Vector2(0.744, 0.748)
+texture = ExtResource("7_dov5x")
+
+[node name="Windowpngyellow" type="Sprite2D" parent="WindowParent" unique_id=353782287]
+z_index = 5
+scale = Vector2(0.744, 0.748)
+texture = ExtResource("8_q6oi7")

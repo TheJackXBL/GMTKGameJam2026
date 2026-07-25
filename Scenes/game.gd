@@ -7,7 +7,7 @@ extends Node2D
 @onready var timer = $CanvasLayer/DayTimer
 @onready var timerLabel = $CanvasLayer/TimerLabel
 @onready var canvas = $CanvasLayer
-@onready var window =$Window
+@onready var window = $Window
 
 var dayStarted := false
 var dayFinished := false
