@@ -27,6 +27,7 @@ func _process(delta: float) -> void:
 
 	world.set_dayProgress(timerProgress)
 	window.set_dayProgress(timerProgress)
+	obstacleManager.set_dayProgress(timerProgress)
 	
 	timerLabel.text = "Day Timer: " + str(ceil(timer.time_left))
 

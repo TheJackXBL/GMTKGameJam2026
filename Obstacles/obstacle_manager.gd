@@ -60,6 +60,10 @@ func get_spawn_position() -> Vector2:
 		randf_range(-half_size.y, half_size.y)
 	)
 
+func set_dayProgress(progress: float) -> void:
+	for obstacle in obstacle_container.get_children():
+		obstacle.set_dayProgress(progress)
+
 func spawn_day_obstacles() -> void:
 	var day = day_manager.get_day()
 	var failures := 0
