@@ -33,10 +33,11 @@ script = ExtResource("1_6si7m")
 radius = 2.0
 starting_radius = 2.0
 drag_strength = 1.2
+maximum_speed = 60.0
 adhesion_force = 20.0
-sideways_force = 400.0
+sideways_force = 250.0
 direction_change_speed = 10.0
-maximum_stretch = 0.5
+maximum_stretch = 0.1
 width_curve = SubResource("Curve_6si7m")
 streak_width_multiplier = 2.0
 
@@ -56,6 +57,7 @@ position = Vector2(10, 30)
 scale = Vector2(1.3, 1.3)
 
 [node name="RaindropInfoUI" parent="Node2D" unique_id=414824300 instance=ExtResource("3_wamoy")]
+z_index = 10
 offset_right = 0.0
 offset_bottom = 0.0
 scale = Vector2(0.29, 0.29)

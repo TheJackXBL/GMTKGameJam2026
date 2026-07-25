@@ -25,6 +25,7 @@ const STREAK_SHADER := preload("res://Raindrops/raindrop_streak.gdshader")
 @export var gravity_force := 100.0 # The downwards force being applied to the raindrop
 @export var drag_strength := 1.8 # The resisting force to prevent the raindrop from accelerating too quickly, increase to slow acceleration
 @export var maximum_speed := 400.0 # Hard cap on speed so we can incorporate it into stats
+@export var acceleration_ramp_time := 3.0 # New variable to adjust the acceleration to make the stat more prominent
 
 #Surface tension (icl hard to test this without obstacles or something that will decelerate the raindrop)
 @export var adhesion_force := 100.0 # How sticky raindrops are in general
@@ -61,6 +62,7 @@ var noise_offset := 0.0 # Keeps noise varied
 var initial_speed: int = 3
 var initial_angle: float = 0.0
 var race_active: bool = false
+var racing_time:= 0.0 #duration of race so far
 
 func _ready() -> void:
 	
@@ -115,6 +117,7 @@ func prepare_for_race() -> void:
 
 func begin_racing() -> void:
 	race_active = true
+	racing_time = acceleration_ramp_time / 2
 
 	freeze = false
 	sleeping = false
@@ -153,30 +156,59 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if not is_sliding:
 		return
 	
+	racing_time += state.step
+	
 	noise_offset += state.step * direction_change_speed # step is the Rigidbody's version of delta
 	
 	var size_factor := clampf(radius / starting_radius, 0.4, 2.5) # bigger raindrops move faster by a significant factor, buffs merged raindrops
 	var sideways_direction := movement_noise.get_noise_1d(noise_offset) # -1 is left, 1 is right
 	
+	var acceleration_multiplier := get_acceleration_multiplier()
+	var acceleration_ramp := clampf(racing_time / acceleration_ramp_time, 0.0, 1.0)
+	
 	# Pulls the raindrop down the window
-	var downward_force := Vector2.DOWN * gravity_force * mass * (size_factor / 1.5)
+	var downward_force := Vector2.DOWN * gravity_force * mass * (size_factor / 1.5) * acceleration_multiplier * acceleration_ramp
 	
 	# Makes the drop gradually wander from side to side for randomness
 	var horizontal_force := Vector2.RIGHT * sideways_direction * sideways_force * mass
 	
 	#Applying drag prevents the drop from accelerating forever, applies in the opposite direction of travel
-	var drag_force := -state.linear_velocity * drag_strength * mass
+	var drag_force := -state.linear_velocity * drag_strength * mass * acceleration_multiplier
 	
 	#Applies total of forces to raindrop
 	state.apply_central_force(downward_force + horizontal_force + drag_force)
 	
-	# Hard caps raindrops just in case
-	if state.linear_velocity.length() > maximum_speed:
-		state.linear_velocity = state.linear_velocity.normalized() * maximum_speed
+	# Raindrop weight stat affects max speed
+	var effective_maximum_speed := get_effective_maximum_speed()
+	
+	var current_speed = state.linear_velocity.length()
+	
+	if current_speed > effective_maximum_speed:
+		state.linear_velocity = state.linear_velocity.normalized() * effective_maximum_speed
 	
 	if state.linear_velocity.length_squared() > 0.1:
 		var target_rotation := state.linear_velocity.angle() - PI / 2.0
 		raindrop_sprite.rotation = lerp_angle(raindrop_sprite.rotation, target_rotation, 0.075)
+
+func get_effective_maximum_speed() -> float:
+	var weight_multiplier := remap(
+		clampf(weightStat, 1, 10),
+		1.0,
+		10.0,
+		0.8,
+		1.7
+	)
+
+	return maximum_speed * weight_multiplier
+
+func get_acceleration_multiplier() -> float:
+	return remap(
+		clampf(slipperinessStat, 1, 10),
+		1.0,
+		10.0,
+		0.8,
+		1.7
+	)
 
 func create_streak() -> void:
 	streak = Line2D.new()
@@ -257,7 +289,7 @@ func try_sticking() -> void:
 func update_drop_shape(delta: float) -> void:
 	
 	var size_scale := radius / starting_radius
-	var speed_ratio := clampf(linear_velocity.length() / maximum_speed, 0.0, 1.0) # 0 = stationary, 1 = max speed
+	var speed_ratio := clampf(linear_velocity.length() / get_effective_maximum_speed(), 0.0, 1.0) # 0 = stationary, 1 = max speed
 	
 	# Stretching faster drops downwards
 	var stretch_amount := speed_ratio * maximum_stretch
@@ -319,6 +351,11 @@ func absorb_drop(other_drop: Raindrop) -> void:
 	var other_mass := other_drop.mass
 	var combined_mass := original_mass + other_mass
 	
+	# Combine the stats of the raindrops
+	weightStat = combine_stat(weightStat, other_drop.weightStat)
+	friendlinessStat = combine_stat(friendlinessStat, other_drop.friendlinessStat)
+	slipperinessStat = combine_stat(slipperinessStat, other_drop.slipperinessStat)
+	
 	# Preserving the visible area of both drops
 	radius = sqrt(radius * radius + other_drop.radius * other_drop.radius)
 	
@@ -330,12 +367,14 @@ func absorb_drop(other_drop: Raindrop) -> void:
 	start_sliding()
 	
 	if other_drop.isSelected:
-		isSelected = true
+		set_selected(true)
 	
 	raindropName = raindropName + " + " + other_drop.raindropName
 	
-	other_drop.queue_free() #TODO - Add raindrop selection and have it so if your selection merges, the resulting raindrop is the new selection
+	other_drop.queue_free()
 
+func combine_stat(stat_a: int, stat_b: int) -> int:
+	return max(stat_a, stat_b) + roundi(min(stat_a, stat_b) * 0.5)
 
 func fade_drop() -> void:
 	var tween := create_tween()
