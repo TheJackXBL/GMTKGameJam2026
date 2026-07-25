@@ -31,12 +31,12 @@ func set_dayProgress(progress : float):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	reset_car_sprite()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if timer.wait_time <= 0.0:
+	if timer.time_left <= 0.0:
 		return
 	
 	var progress: float = 1.0 - (timer.time_left / timer.wait_time)
@@ -44,3 +44,7 @@ func _process(delta: float) -> void:
 
 func reset_car_sprite():
 	yellow_car_sprite.modulate.a = 0
+
+
+func _on_new_main_day_changing() -> void:
+	reset_car_sprite()

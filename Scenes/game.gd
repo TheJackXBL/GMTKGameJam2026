@@ -1,5 +1,7 @@
 extends Node2D
 
+signal dayChanging
+
 @export var dayLength := 10.0
 
 @onready var world = $World
@@ -35,6 +37,8 @@ func change_day():
 	
 	dayManager.set_tomorrow()
 	start_day(dayManager.get_day())
+	
+	dayChanging.emit()
 	
 	await get_tree().create_timer(0.2).timeout
 	
