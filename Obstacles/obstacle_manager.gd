@@ -20,7 +20,7 @@ func get_obstacle_scene() -> PackedScene:
 			return leaf_scene
 		
 		"Sea":
-			return bird_poop_scenes.pick_random()
+			return get_random_bird_poop()
 		
 		_:
 			push_warning(
@@ -28,6 +28,12 @@ func get_obstacle_scene() -> PackedScene:
 			)
 			return null
 
+func get_random_bird_poop() -> PackedScene:
+	if bird_poop_scenes.is_empty():
+		push_warning("No bird poop scenes assigned!")
+		return null
+
+	return bird_poop_scenes[randi() % bird_poop_scenes.size()]
 
 func spawn_obstacle() -> void:
 	var scene := get_obstacle_scene()
@@ -72,6 +78,10 @@ func spawn_day_obstacles() -> void:
 		
 		if not spawned:
 			continue
+
+func clear_obstacles() -> void:
+	for obstacle in obstacle_container.get_children():
+		obstacle.clear()
 
 func roll_obstacle_chance(chance: int) -> bool:
 	return randi_range(1, 100) <= chance
