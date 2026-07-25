@@ -6,6 +6,7 @@ extends Node2D
 @onready var dayManager = $DayManager
 @onready var timer = $CanvasLayer/DayTimer
 @onready var timerLabel = $CanvasLayer/TimerLabel
+@onready var canvas = $CanvasLayer
 @onready var window =$Window
 
 var dayStarted := false
@@ -25,6 +26,19 @@ func _process(delta: float) -> void:
 	window.set_dayProgress(timerProgress)
 	
 	timerLabel.text = "Day Timer: " + str(ceil(timer.time_left))
+
+func change_day():
+	print("Changing day...")
+	
+	await canvas.fadeIn()
+	print("Fade complete")
+	
+	dayManager.set_tomorrow()
+	start_day(dayManager.get_day())
+	
+	await get_tree().create_timer(0.2).timeout
+	
+	await canvas.fadeOut()
 
 func set_timerProgress() -> float:
 	if dayFinished:
@@ -55,8 +69,7 @@ func end_day():
 		print("Game Complete!")
 		return
 	
-	dayManager.set_tomorrow()
-	start_day(dayManager.get_day())
+	change_day()
 
 func play_cutscene(day: int, tag: String):
 	var dialogue_path = "res://Dialogue/Dialog_Day%d.dialogue" % day
