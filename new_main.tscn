@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="9_rc6o0"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="9_xyy1j"]
 [ext_resource type="PackedScene" uid="uid://6i116tt3dbjy" path="res://Raindrops/raindrop_jack_2.tscn" id="10_ljb83"]
-[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Obstacles/leaf.tscn" id="10_ta2aw"]
+[ext_resource type="PackedScene" uid="uid://davoenfv0d3oy" path="res://Obstacles/leaf.tscn" id="10_ta2aw"]
 [ext_resource type="PackedScene" uid="uid://cnjtuhwi045yg" path="res://Raindrops/raindrop_jack_3.tscn" id="11_j57gt"]
 [ext_resource type="Script" uid="uid://q8vvl4mnc617" path="res://UI/canvas_layer.gd" id="12_1fxgr"]
 [ext_resource type="Texture2D" uid="uid://btwiyw5ro2rim" path="res://Scenes/Arowyn/gobutton2.png" id="12_1qswb"]

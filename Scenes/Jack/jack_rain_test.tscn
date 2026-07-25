@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="4_4nfk4"]
 [ext_resource type="PackedScene" uid="uid://clbs2nlm5bap8" path="res://Scenes/Jack/raindrop_info_ui.tscn" id="4_7irk2"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="6_35n6r"]
-[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Obstacles/leaf.tscn" id="7_7irk2"]
+[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Obstacles/leaf_ref.tscn" id="7_7irk2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("3_iincw")
