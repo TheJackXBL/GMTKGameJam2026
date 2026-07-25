@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var raindrop_scene: PackedScene
+@export var raindrop_scenes: Array[PackedScene]
 @export var raindrop_ui_scene: PackedScene
 
 @export var maximum_speed: int = 10
@@ -42,6 +42,17 @@ func _ready() -> void:
 	if spawn_on_ready:
 		prepare_and_spawn_raindrops()
 
+func generate_stats() -> Array[int]:
+	
+	var stats: Array[int] = [1, 1, 1]
+	var point_pool: int = 7
+	
+	for i in range(point_pool):
+		var random_stat: int = randi_range(0, stats.size() - 1)
+		stats[random_stat] += 1
+	
+	return stats
+
 
 func determine_raindrop_spawnpoints(amount: int) -> void:
 	raindrop_spawn_data.clear()
@@ -60,6 +71,8 @@ func determine_raindrop_spawnpoints(amount: int) -> void:
 		var random_name = current_names.pick_random()
 		current_names.erase(random_name)
 		
+		var generated_stats: Array[int] = generate_stats()
+		
 		var spawn_data := {
 			"name": random_name,
 			"position": Vector2(
@@ -68,9 +81,9 @@ func determine_raindrop_spawnpoints(amount: int) -> void:
 			),
 			"speed": rng.randf_range(1.0, maximum_speed), 
 			"angle": rng.randf_range(-20.0, 20.0),
-			"weight": rng.randi_range(1, 10), # TEMP STAT GENERATION
-			"friendliness": rng.randi_range(1, 10),
-			"slipperiness": rng.randi_range(1, 10)
+			"weight": generated_stats[0], 
+			"friendliness": generated_stats[1],
+			"slipperiness": generated_stats[2]
 		}
 
 		raindrop_spawn_data.append(spawn_data)
@@ -82,7 +95,10 @@ func spawn_raindrops() -> void:
 	race_started = false
 
 	for spawn_data in raindrop_spawn_data:
-		var raindrop_instance := raindrop_scene.instantiate()
+		
+		var raindrop_type := raindrop_scenes[randi_range(0, raindrop_scenes.size() - 1)]
+		
+		var raindrop_instance := raindrop_type.instantiate()
 
 		raindrop_instance.position = spawn_data["position"]
 		
@@ -151,4 +167,5 @@ func _on_spawn_raindrops_button_pressed() -> void:
 
 
 func _on_start_race_button_pressed() -> void:
-	begin_race()
+	if selected_raindrop != null:
+		begin_race()

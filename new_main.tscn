@@ -12,9 +12,13 @@
 [ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="8_g7d0j"]
 [ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="9_rc6o0"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="9_xyy1j"]
-[ext_resource type="PackedScene" uid="uid://wvhc5gxfenq5" path="res://Raindrops/raindrop.tscn" id="10_1qswb"]
+[ext_resource type="PackedScene" uid="uid://6i116tt3dbjy" path="res://Raindrops/raindrop_jack_2.tscn" id="10_ljb83"]
 [ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Scenes/Jack/leaf.tscn" id="10_ta2aw"]
+[ext_resource type="PackedScene" uid="uid://cnjtuhwi045yg" path="res://Raindrops/raindrop_jack_3.tscn" id="11_j57gt"]
 [ext_resource type="Script" uid="uid://q8vvl4mnc617" path="res://UI/canvas_layer.gd" id="12_1fxgr"]
+[ext_resource type="Texture2D" uid="uid://btwiyw5ro2rim" path="res://Scenes/Arowyn/gobutton2.png" id="12_1qswb"]
+[ext_resource type="Texture2D" uid="uid://bwlg8ejuv6nj0" path="res://Scenes/Arowyn/gobutton1.png" id="12_rc6o0"]
+[ext_resource type="Texture2D" uid="uid://bmsji34huvcer" path="res://Scenes/Arowyn/gobuttonhover.png" id="13_1qswb"]
 [ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
@@ -23,6 +27,13 @@ shader_parameter/frostAmount = 1.0
 shader_parameter/distortion = 0.01
 shader_parameter/blur = 0.002
 shader_parameter/whiteTint = 0.25
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_1fxgr"]
+frames = 2
+frame_0/texture = ExtResource("12_rc6o0")
+frame_0/duration = 0.3
+frame_1/texture = ExtResource("12_1qswb")
+frame_1/duration = 0.3
 
 [sub_resource type="Animation" id="Animation_1fxgr"]
 resource_name = "FadeIn"
@@ -102,6 +113,7 @@ gradient = SubResource("Gradient_7irk2")
 
 [node name="NewMain" type="Node2D" unique_id=872055236]
 script = ExtResource("1_qcw2d")
+dayLength = 60.0
 
 [node name="DayManager" parent="." unique_id=560427950 instance=ExtResource("2_7qgpo")]
 
@@ -126,16 +138,13 @@ mouse_filter = 2
 
 [node name="RaindropManager" type="Node2D" parent="Window" unique_id=1434854034]
 script = ExtResource("8_1fxgr")
-raindrop_scene = ExtResource("9_rc6o0")
+raindrop_scenes = Array[PackedScene]([ExtResource("9_rc6o0"), ExtResource("10_ljb83"), ExtResource("11_j57gt")])
 min_spawn_x = -200.0
 max_spawn_x = 400.0
 spawn_y = -245.0
+raindrop_count = 6
 
 [node name="StreakContainer" type="Node2D" parent="Window/RaindropManager" unique_id=1921861915]
-
-[node name="Raindrop" parent="Window/RaindropManager" unique_id=1385779041 instance=ExtResource("10_1qswb")]
-visible = false
-position = Vector2(360, 106)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=747220960]
 limit_left = -576
@@ -148,6 +157,9 @@ focus_duration = 0.75
 zoom_out_duration = 0.5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448734060]
+offset = Vector2(-576, -324)
+transform = Transform2D(1, 0, 0, 1, -576, -324)
+follow_viewport_enabled = true
 script = ExtResource("12_1fxgr")
 
 [node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=2122965579]
@@ -157,10 +169,12 @@ text = "Day Timer: "
 metadata/_edit_use_anchors_ = true
 
 [node name="DayTimer" type="Timer" parent="CanvasLayer" unique_id=346766057]
+unique_name_in_owner = true
 wait_time = 26.251
 one_shot = true
 
 [node name="UI" type="Control" parent="CanvasLayer" unique_id=1783523636]
+z_index = 5
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -173,6 +187,7 @@ grow_horizontal = 0
 grow_vertical = 0
 
 [node name="Start Race Button" type="Button" parent="CanvasLayer/UI" unique_id=634951704]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.65
@@ -187,9 +202,27 @@ metadata/_edit_use_anchors_ = true
 [node name="Spawn Raindrops Button" type="Button" parent="CanvasLayer/UI" unique_id=1985699318]
 layout_mode = 0
 offset_left = -138.0
+offset_top = -207.0
 offset_right = 23.0
-offset_bottom = 31.0
+offset_bottom = -176.0
 text = "SPAWN RAINDROPS"
+
+[node name="Start Race Button2" type="TextureButton" parent="CanvasLayer/UI" unique_id=221550615]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -263.0
+offset_top = -177.0
+offset_right = 438.0
+offset_bottom = 242.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.28000003, 0.28000003)
+texture_normal = SubResource("AnimatedTexture_1fxgr")
+texture_hover = ExtResource("13_1qswb")
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer" unique_id=1480607471]
 anchors_preset = 15
@@ -235,6 +268,7 @@ mesh = SubResource("QuadMesh_1qswb")
 texture = SubResource("GradientTexture1D_ljb83")
 
 [node name="RaceManager" type="Node2D" parent="." unique_id=189466672 node_paths=PackedStringArray("RaindropManager", "race_camera")]
+unique_name_in_owner = true
 script = ExtResource("9_xyy1j")
 RaindropManager = NodePath("../Window/RaindropManager")
 race_camera = NodePath("../Camera2D")
@@ -257,10 +291,13 @@ z_index = 5
 scale = Vector2(0.447, 0.45)
 texture = ExtResource("15_886ha")
 
+[connection signal="dayChanging" from="." to="World" method="_on_new_main_day_changing"]
 [connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="FinishLine" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="RaceManager" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Spawn Raindrops Button" to="Window/RaindropManager" method="_on_spawn_raindrops_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Start Race Button2" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/UI/Start Race Button2" to="FinishLine" method="_on_start_race_button_pressed"]
 [connection signal="body_entered" from="FinishLine" to="FinishLine" method="_on_body_entered"]
 [connection signal="winner_determined" from="FinishLine" to="RaceManager" method="_on_finish_line_winner_determined"]

@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://cnjtuhwi045yg"]
+
+[ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="1_qyyuk"]
+[ext_resource type="Texture2D" uid="uid://cmhcsnpuurpev" path="res://Scenes/Arowyn/drop 3.png" id="2_3o86t"]
+
+[node name="Raindrop" unique_id=1385779041 instance=ExtResource("1_qyyuk")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1355783299]
+texture = ExtResource("2_3o86t")
