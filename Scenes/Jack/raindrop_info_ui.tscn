@@ -2,9 +2,17 @@
 
 [ext_resource type="Script" uid="uid://fpveu3n25ntr" path="res://Scenes/Jack/raindrop_info_ui.gd" id="1_a5bkx"]
 [ext_resource type="Texture2D" uid="uid://b1wjpkb71jqun" path="res://Scenes/Arowyn/statcloud1.png" id="2_1lmln"]
+[ext_resource type="Texture2D" uid="uid://xy26er1ekrra" path="res://Scenes/Arowyn/statcloud2.png" id="3_5me1m"]
 [ext_resource type="LabelSettings" uid="uid://6efxa5jhumx7" path="res://Hover UI Font.tres" id="3_lsnk3"]
 [ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="4_lsnk3"]
 [ext_resource type="Texture2D" uid="uid://xyc3dc7wm824" path="res://Scenes/Jack/ArrowCroppedWhite.png" id="5_lsnk3"]
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_rc6o0"]
+frames = 2
+frame_0/texture = ExtResource("2_1lmln")
+frame_0/duration = 0.4
+frame_1/texture = ExtResource("3_5me1m")
+frame_1/duration = 0.4
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_75xeh"]
 
@@ -48,7 +56,7 @@ layout_mode = 0
 offset_right = 500.0
 offset_bottom = 528.0
 mouse_filter = 2
-texture = ExtResource("2_1lmln")
+texture = SubResource("AnimatedTexture_rc6o0")
 expand_mode = 1
 stretch_mode = 5
 

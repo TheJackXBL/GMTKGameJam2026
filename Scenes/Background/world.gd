@@ -7,6 +7,10 @@ extends Node2D
 @onready var foreground = $Parallax2D3/Foreground
 @onready var fog = $FogLayer
 
+@onready var blue_car_sprite: Sprite2D = $WindowParent/Windowpngblue
+@onready var yellow_car_sprite: Sprite2D = $WindowParent/Windowpngyellow
+@onready var timer = %DayTimer
+
 func set_Day(day : DayData) -> void:
 	sky.texture = day.get_texture("Sky")
 	sky_sun.texture = day.get_texture("Sky_Sun")
@@ -27,9 +31,20 @@ func set_dayProgress(progress : float):
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	reset_car_sprite()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if timer.time_left <= 0.0:
+		return
+	
+	var progress: float = 1.0 - (timer.time_left / timer.wait_time)
+	yellow_car_sprite.modulate.a = progress
+
+func reset_car_sprite():
+	yellow_car_sprite.modulate.a = 0
+
+
+func _on_new_main_day_changing() -> void:
+	reset_car_sprite()
