@@ -71,9 +71,6 @@ priority = 10
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=419405440]
 shape = SubResource("CircleShape2D_75xeh")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=5949953]
-bus = &"SFX"
-
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="raindropStatsGenerated" from="." to="Node2D/RaindropInfoUI" method="_on_raindrop_raindrop_stats_generated"]

@@ -11,6 +11,8 @@ extends Node2D
 @onready var yellow_car_sprite: Sprite2D = $WindowParent/Windowpngyellow
 @onready var timer = %DayTimer
 
+@onready var rain_noises: AudioStreamPlayer = $WorldBGNoises
+
 func set_Day(day : DayData) -> void:
 	sky.texture = day.get_texture("Sky")
 	sky_sun.texture = day.get_texture("Sky_Sun")
@@ -32,6 +34,7 @@ func set_dayProgress(progress : float):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	reset_car_sprite()
+	fade_in_rain_audio()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -45,6 +48,13 @@ func _process(delta: float) -> void:
 func reset_car_sprite():
 	yellow_car_sprite.modulate.a = 0
 
+func fade_in_rain_audio():
+	rain_noises.volume_db = -40.0
+	rain_noises.play()
+	
+	var tween := create_tween()
+	tween.tween_property(rain_noises, "volume_db", -22.5, 1.25)
+	
 
 func _on_new_main_day_changing() -> void:
 	reset_car_sprite()

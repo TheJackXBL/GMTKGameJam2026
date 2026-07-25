@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func set_dayProgress(progress : float) -> void:
 	
-	var adjustedProgress := pow(clampf(progress, 0.0, 1.0), 2.0)
+	var adjustedProgress := pow(clampf(progress, 0.0, 1.0), 3.0)
 
 	
 	glassMat.set_shader_parameter(

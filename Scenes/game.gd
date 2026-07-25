@@ -10,6 +10,7 @@ signal dayChanging
 @onready var timerLabel = $CanvasLayer/TimerLabel
 @onready var canvas = $CanvasLayer
 @onready var window = $Window
+@onready var music_player = $MusicPlayer
 
 var dayStarted := false
 var dayFinished := false
@@ -66,6 +67,7 @@ func start_day(day: DayData) -> void:
 func begin_game() -> void:
 	dayStarted = true
 	timer.start(dayLength)
+	music_player.play()
 
 
 func end_day():

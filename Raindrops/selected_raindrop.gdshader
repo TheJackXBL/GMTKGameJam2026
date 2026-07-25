@@ -1,5 +1,7 @@
 shader_type canvas_item;
 
+varying vec4 canvas_modulate;
+
 instance uniform bool selected = false;
 
 uniform bool allow_out_of_bounds = true;
@@ -20,6 +22,8 @@ vec4 blend(vec4 bottom, vec4 top) {
 
 void vertex() {
 	if (allow_out_of_bounds) VERTEX += (UV * 2.0 - 1.0) * outline_thickness;
+	
+	canvas_modulate = COLOR;
 }
 
 void fragment() {
@@ -27,7 +31,7 @@ void fragment() {
 	
 	if (!selected)
 	{
-		COLOR = texture_color;
+		COLOR = texture_color * canvas_modulate;
 	}
 	else
 	{
@@ -79,6 +83,7 @@ void fragment() {
 			}
 
 			COLOR = blend(vec4(outline_color.rgb, alpha * outline_color.a), texture_color);
+			
 		}
 	}
 }

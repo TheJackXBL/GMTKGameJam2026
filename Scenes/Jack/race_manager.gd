@@ -1,8 +1,12 @@
 extends Node2D
 
+signal startCountdown
+
 @export var RaindropManager: Node2D
 
 @export var race_camera: Camera2D
+
+@export var canvas: CanvasLayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -14,7 +18,8 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_start_race_button_pressed() -> void:
-	pass # Replace with function body.
+	if RaindropManager.selected_raindrop != null:
+		startCountdown.emit()
 
 
 func _on_finish_line_winner_determined(winning_raindrop: Node2D) -> void:
@@ -40,3 +45,11 @@ func _on_finish_line_winner_determined(winning_raindrop: Node2D) -> void:
 	RaindropManager.fade_remaining_raindrops()
 	
 	RaindropManager.prepare_and_spawn_raindrops()
+
+
+func _on_canvas_layer_countdown_finished() -> void:
+	print("GO appeared")
+	start_race()
+
+func start_race() -> void:
+	RaindropManager.start_race()

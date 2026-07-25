@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://dox0hbbak5fjo"]
+
+[ext_resource type="Texture2D" uid="uid://c8utmun3tctm5" path="res://Scenes/Jack/star.png" id="1_eiydp"]
+[ext_resource type="Script" uid="uid://ddhpdp72fvklj" path="res://particles_cleanup.gd" id="2_kgnhf"]
+
+[sub_resource type="Gradient" id="Gradient_kgnhf"]
+offsets = PackedFloat32Array(0.75409836, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kgnhf"]
+gradient = SubResource("Gradient_kgnhf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_75xeh"]
+particle_flag_align_y = true
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+flatness = 1.0
+initial_velocity_min = 80.0
+initial_velocity_max = 160.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.01
+scale_max = 0.01
+color_ramp = SubResource("GradientTexture1D_kgnhf")
+
+[node name="FinishParticles" type="GPUParticles2D" unique_id=365037118]
+process_mode = 3
+z_index = 5
+emitting = false
+amount = 4
+texture = ExtResource("1_eiydp")
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_75xeh")
+script = ExtResource("2_kgnhf")

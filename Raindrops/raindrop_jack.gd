@@ -45,6 +45,30 @@ const STREAK_SHADER := preload("res://Raindrops/raindrop_streak.gdshader")
 @export var streak_width_multiplier := 0.7 # Larger raindrops produce wider trails
 @export var streak_minDistance := 3.0 #Minimum distance between points on the trail, to prevent poor performance
 
+@export_category("Streak Riding")
+@export var streak_ride_speed := 250.0
+@export var streak_detection_distance := 8.0
+@export var streak_detection_interval := 0.05
+
+@export var escape_attempt_interval := 0.5
+@export_range(0.0, 1.0) var initial_escape_chance := 0.05
+@export_range(0.0, 1.0) var escape_chance_increase := 0.08
+@export_range(0.0, 1.0) var maximum_escape_chance := 0.8
+@export var escape_push_strength := 100.0
+@export var streak_reentry_cooldown := 0.4
+
+var is_riding_streak := false
+var ridden_streak: Line2D
+var last_ridden_streak: Line2D
+
+var ridden_segment_index := 0
+var ridden_segment_distance := 0.0
+
+var current_escape_chance := 0.0
+var escape_attempt_timer := 0.0
+var streak_detection_timer := 0.0
+var reentry_cooldown_timer := 0.0
+
 var streak: Line2D
 var last_streak_position: Vector2
 
@@ -65,6 +89,8 @@ var race_active: bool = false
 var racing_time:= 0.0 #duration of race so far
 
 func _ready() -> void:
+	
+	fade_in_drop()
 	
 	body_entered.connect(_on_body_entered)
 	
@@ -130,6 +156,24 @@ func _physics_process(delta: float) -> void:
 	if not race_active:
 		return
 	
+	if reentry_cooldown_timer > 0.0:
+		reentry_cooldown_timer -= delta
+
+	if is_riding_streak:
+		update_streak_riding(delta)
+		update_drop_shape(delta)
+
+		if global_position.distance_to(last_streak_position) >= streak_minDistance:
+			add_streak_point()
+
+		return
+
+	streak_detection_timer -= delta
+
+	if streak_detection_timer <= 0.0:
+		streak_detection_timer = streak_detection_interval
+		try_find_streak()
+	
 	update_drop_shape(delta)
 	
 	if not is_sliding:
@@ -151,6 +195,11 @@ func _physics_process(delta: float) -> void:
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	
 	if not race_active:
+		return
+	
+	if is_riding_streak:
+		state.linear_velocity = Vector2.ZERO
+		state.angular_velocity = 0.0
 		return
 	
 	if not is_sliding:
@@ -179,7 +228,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	state.apply_central_force(downward_force + horizontal_force + drag_force)
 	
 	# Raindrop weight stat affects max speed
-	var effective_maximum_speed := get_effective_maximum_speed()
+	var effective_maximum_speed := maximum_speed * get_weight_multiplier()
 	
 	var current_speed = state.linear_velocity.length()
 	
@@ -190,16 +239,25 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		var target_rotation := state.linear_velocity.angle() - PI / 2.0
 		raindrop_sprite.rotation = lerp_angle(raindrop_sprite.rotation, target_rotation, 0.075)
 
-func get_effective_maximum_speed() -> float:
+func get_weight_multiplier() -> float:
 	var weight_multiplier := remap(
 		clampf(weightStat, 1, 10),
+		1.0,
+		10.0,
+		1.0,
+		2.0
+	)
+
+	return weight_multiplier
+
+func get_friendliness_multiplier() -> float:
+	return remap(
+		clampf(friendlinessStat, 1, 10),
 		1.0,
 		10.0,
 		0.8,
 		1.7
 	)
-
-	return maximum_speed * weight_multiplier
 
 func get_acceleration_multiplier() -> float:
 	return remap(
@@ -243,6 +301,223 @@ func create_streak() -> void:
 func add_streak_point() -> void: 
 	streak.add_point(streak.to_local(global_position))
 	last_streak_position = global_position
+
+func try_find_streak() -> void:
+	if is_riding_streak:
+		return
+
+	for possible_streak in streak_container.get_children():
+		if possible_streak is not Line2D:
+			continue
+
+		var line := possible_streak as Line2D
+
+		if line == streak:
+			continue
+
+		if line == last_ridden_streak and reentry_cooldown_timer > 0.0:
+			continue
+
+		if line.get_point_count() < 2:
+			continue
+
+		if try_attach_to_streak(line):
+			return
+
+
+func try_attach_to_streak(line: Line2D) -> bool:
+	var closest_distance := INF
+	var closest_segment := -1
+	var closest_segment_distance := 0.0
+
+	for point_index in range(line.get_point_count() - 1):
+		var segment_start := line.to_global(line.get_point_position(point_index))
+		var segment_end := line.to_global(line.get_point_position(point_index + 1))
+
+		var closest_point := Geometry2D.get_closest_point_to_segment(
+			global_position,
+			segment_start,
+			segment_end
+		)
+
+		var distance_to_streak := global_position.distance_to(closest_point)
+
+		if distance_to_streak >= closest_distance:
+			continue
+
+		closest_distance = distance_to_streak
+		closest_segment = point_index
+		closest_segment_distance = segment_start.distance_to(closest_point)
+
+	var required_distance := streak_detection_distance + radius
+
+	if closest_segment == -1 or closest_distance > required_distance:
+		return false
+
+	begin_streak_riding(
+		line,
+		closest_segment,
+		closest_segment_distance
+	)
+
+	return true
+
+func begin_streak_riding(
+	line: Line2D,
+	segment_index: int,
+	segment_distance: float
+) -> void:
+	is_riding_streak = true
+	ridden_streak = line
+	ridden_segment_index = segment_index
+	ridden_segment_distance = segment_distance
+
+	current_escape_chance = initial_escape_chance
+	escape_attempt_timer = escape_attempt_interval
+
+	is_sliding = false
+	linear_velocity = Vector2.ZERO
+	angular_velocity = 0.0
+	sleeping = false
+
+	move_to_current_streak_position()
+
+
+func update_streak_riding(delta: float) -> void:
+	if not is_instance_valid(ridden_streak):
+		stop_streak_riding(false)
+		return
+
+	if ridden_streak.get_point_count() < 2:
+		stop_streak_riding(false)
+		return
+
+	advance_along_streak(streak_ride_speed * get_weight_multiplier() * delta)
+
+	escape_attempt_timer -= delta
+
+	if escape_attempt_timer <= 0.0:
+		escape_attempt_timer = escape_attempt_interval
+		attempt_streak_escape()
+
+
+func advance_along_streak(distance_to_move: float) -> void:
+	while distance_to_move > 0.0:
+		if ridden_segment_index >= ridden_streak.get_point_count() - 1:
+			stop_streak_riding(false)
+			return
+
+		var segment_start := get_ridden_point_global(ridden_segment_index)
+		var segment_end := get_ridden_point_global(ridden_segment_index + 1)
+		var segment_length := segment_start.distance_to(segment_end)
+
+		if segment_length <= 0.001:
+			ridden_segment_index += 1
+			ridden_segment_distance = 0.0
+			continue
+
+		var remaining_segment_distance := segment_length - ridden_segment_distance
+
+		if distance_to_move < remaining_segment_distance:
+			ridden_segment_distance += distance_to_move
+			distance_to_move = 0.0
+		else:
+			distance_to_move -= remaining_segment_distance
+			ridden_segment_index += 1
+			ridden_segment_distance = 0.0
+
+	move_to_current_streak_position()
+
+
+func move_to_current_streak_position() -> void:
+	if ridden_segment_index >= ridden_streak.get_point_count() - 1:
+		return
+
+	var segment_start := get_ridden_point_global(ridden_segment_index)
+	var segment_end := get_ridden_point_global(ridden_segment_index + 1)
+	var segment_direction := segment_start.direction_to(segment_end)
+	var segment_length := segment_start.distance_to(segment_end)
+
+	ridden_segment_distance = minf(
+		ridden_segment_distance,
+		segment_length
+	)
+
+	global_position = (
+		segment_start
+		+ segment_direction * ridden_segment_distance
+	)
+
+	if segment_direction.length_squared() > 0.0:
+		var target_rotation := segment_direction.angle() - PI / 2.0
+		raindrop_sprite.rotation = lerp_angle(
+			raindrop_sprite.rotation,
+			target_rotation,
+			0.15
+		)
+
+
+func get_ridden_point_global(point_index: int) -> Vector2:
+	return ridden_streak.to_global(
+		ridden_streak.get_point_position(point_index)
+	)
+
+func attempt_streak_escape() -> void:
+	if randf() <= current_escape_chance:
+		stop_streak_riding(true)
+		return
+
+	current_escape_chance = minf(
+		current_escape_chance + (escape_chance_increase / get_friendliness_multiplier()),
+		maximum_escape_chance
+	)
+
+func stop_streak_riding(escaped: bool) -> void:
+	if not is_riding_streak:
+		return
+
+	var exit_direction := get_current_streak_direction()
+
+	last_ridden_streak = ridden_streak
+	ridden_streak = null
+	is_riding_streak = false
+
+	reentry_cooldown_timer = streak_reentry_cooldown
+	current_escape_chance = initial_escape_chance
+	escape_attempt_timer = 0.0
+
+	is_sliding = true
+	sleeping = false
+
+	linear_velocity = exit_direction * streak_ride_speed
+
+	if escaped:
+		var perpendicular := Vector2(
+			-exit_direction.y,
+			exit_direction.x
+		)
+
+		if randf() < 0.5:
+			perpendicular = -perpendicular
+
+		linear_velocity += perpendicular * escape_push_strength
+
+
+func get_current_streak_direction() -> Vector2:
+	if not is_instance_valid(ridden_streak):
+		return Vector2.DOWN
+
+	if ridden_segment_index >= ridden_streak.get_point_count() - 1:
+		return Vector2.DOWN
+
+	var segment_start := get_ridden_point_global(ridden_segment_index)
+	var segment_end := get_ridden_point_global(ridden_segment_index + 1)
+	var direction := segment_start.direction_to(segment_end)
+
+	if direction.length_squared() <= 0.001:
+		return Vector2.DOWN
+
+	return direction
 
 # bool function that determines if the raindrop should slide
 func should_start_sliding() -> bool:
@@ -289,7 +564,7 @@ func try_sticking() -> void:
 func update_drop_shape(delta: float) -> void:
 	
 	var size_scale := radius / starting_radius
-	var speed_ratio := clampf(linear_velocity.length() / get_effective_maximum_speed(), 0.0, 1.0) # 0 = stationary, 1 = max speed
+	var speed_ratio := clampf(linear_velocity.length() / (get_weight_multiplier() * maximum_speed), 0.0, 1.0) # 0 = stationary, 1 = max speed
 	
 	# Stretching faster drops downwards
 	var stretch_amount := speed_ratio * maximum_stretch
@@ -376,7 +651,19 @@ func absorb_drop(other_drop: Raindrop) -> void:
 func combine_stat(stat_a: int, stat_b: int) -> int:
 	return max(stat_a, stat_b) + roundi(min(stat_a, stat_b) * 0.5)
 
-func fade_drop() -> void:
+func fade_in_drop() -> void:
+	
+	raindrop_sprite.modulate.a = 0.0
+	
+	var tween := create_tween()
+	
+	tween.set_trans(Tween.TRANS_LINEAR)
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.tween_property(raindrop_sprite, "modulate:a", 1.0, 1.0)
+	
+	await tween.finished
+
+func fade_out_drop() -> void:
 	var tween := create_tween()
 	
 	tween.set_trans(Tween.TRANS_LINEAR)
@@ -392,8 +679,7 @@ func remove_drop() -> void:
 
 
 func _on_area_2d_mouse_entered() -> void:
-	if not race_active:
-		raindrop_ui.show()
+	raindrop_ui.show()
 
 
 func _on_area_2d_mouse_exited() -> void:
