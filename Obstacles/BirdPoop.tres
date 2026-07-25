@@ -1,7 +1,0 @@
-[gd_resource type="Resource" script_class="ObstacleData" format=3 uid="uid://b0lm3b3e86v4n"]
-
-[ext_resource type="Script" uid="uid://bmmar3hmsfu28" path="res://Obstacles/ObstacleData.gd" id="1_pu41x"]
-
-[resource]
-script = ExtResource("1_pu41x")
-metadata/_custom_type_script = "uid://bmmar3hmsfu28"
