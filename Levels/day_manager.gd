@@ -4,6 +4,8 @@ extends Node
 
 var currentDay := 1
 
+signal day_started
+
 #Getters
 func get_day() -> DayData:
 	return days[currentDay-1] #This compensates for the array mismatch
@@ -12,3 +14,4 @@ func get_day() -> DayData:
 #Setters
 func set_tomorrow() -> void:
 	currentDay += 1
+	day_started.emit()

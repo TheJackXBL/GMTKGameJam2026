@@ -8,18 +8,22 @@
 [ext_resource type="Script" uid="uid://dejsowogmp6xh" path="res://Scenes/Car/window.gd" id="6_aeylb"]
 [ext_resource type="Script" uid="uid://dgpqbj8xfd8c" path="res://Scenes/Jack/race_camera.gd" id="7_7cuaw"]
 [ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/Car/glass.gdshader" id="7_886ha"]
+[ext_resource type="PackedScene" uid="uid://bxa4mer4csxsa" path="res://Obstacles/birdpoop_drippy.tscn" id="7_xoyte"]
 [ext_resource type="Script" uid="uid://by5k02ir86jqg" path="res://Raindrops/raindrop_manager.gd" id="8_1fxgr"]
 [ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="8_g7d0j"]
+[ext_resource type="PackedScene" uid="uid://c1pd6m0efkesg" path="res://Obstacles/birdpoop_large.tscn" id="8_jgecq"]
+[ext_resource type="PackedScene" uid="uid://cba474l5lta8j" path="res://Obstacles/birdpoop_small.tscn" id="9_c8ju1"]
 [ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="9_rc6o0"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="9_xyy1j"]
 [ext_resource type="PackedScene" uid="uid://6i116tt3dbjy" path="res://Raindrops/raindrop_jack_2.tscn" id="10_ljb83"]
-[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Scenes/Jack/leaf.tscn" id="10_ta2aw"]
+[ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Obstacles/leaf.tscn" id="10_ta2aw"]
 [ext_resource type="PackedScene" uid="uid://cnjtuhwi045yg" path="res://Raindrops/raindrop_jack_3.tscn" id="11_j57gt"]
 [ext_resource type="Script" uid="uid://q8vvl4mnc617" path="res://UI/canvas_layer.gd" id="12_1fxgr"]
 [ext_resource type="Texture2D" uid="uid://btwiyw5ro2rim" path="res://Scenes/Arowyn/gobutton2.png" id="12_1qswb"]
 [ext_resource type="Texture2D" uid="uid://bwlg8ejuv6nj0" path="res://Scenes/Arowyn/gobutton1.png" id="12_rc6o0"]
 [ext_resource type="Texture2D" uid="uid://bmsji34huvcer" path="res://Scenes/Arowyn/gobuttonhover.png" id="13_1qswb"]
 [ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
+[ext_resource type="Script" uid="uid://dbi8ec4kqscir" path="res://Obstacles/obstacle_manager.gd" id="16_1qswb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("7_886ha")
@@ -27,6 +31,9 @@ shader_parameter/frostAmount = 1.0
 shader_parameter/distortion = 0.01
 shader_parameter/blur = 0.002
 shader_parameter/whiteTint = 0.25
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ef17l"]
+size = Vector2(810, 298)
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_1fxgr"]
 frames = 2
@@ -121,6 +128,14 @@ dayLength = 60.0
 script = ExtResource("3_ksskx")
 pause_menu_packed = ExtResource("4_w2kc5")
 
+[node name="ObstacleManager" type="Node" parent="." unique_id=193738657 node_paths=PackedStringArray("obstacle_container", "day_manager", "obstacle_spawnarea")]
+script = ExtResource("16_1qswb")
+leaf_scene = ExtResource("10_ta2aw")
+bird_poop_scenes = Array[PackedScene]([ExtResource("7_xoyte"), ExtResource("8_jgecq"), ExtResource("9_c8ju1")])
+obstacle_container = NodePath("../Window/ObstacleContainer")
+day_manager = NodePath("../DayManager")
+obstacle_spawnarea = NodePath("../Window/ObstacleSpawnArea")
+
 [node name="World" parent="." unique_id=823103243 instance=ExtResource("5_7cuaw")]
 scale = Vector2(0.6, 0.6)
 
@@ -135,6 +150,14 @@ offset_top = -366.0
 offset_right = 609.0
 offset_bottom = 359.0
 mouse_filter = 2
+
+[node name="ObstacleContainer" type="Node2D" parent="Window" unique_id=997110913]
+
+[node name="ObstacleSpawnArea" type="Area2D" parent="Window" unique_id=1766365409]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Window/ObstacleSpawnArea" unique_id=1663712292]
+position = Vector2(81, -15)
+shape = SubResource("RectangleShape2D_ef17l")
 
 [node name="RaindropManager" type="Node2D" parent="Window" unique_id=1434854034]
 script = ExtResource("8_1fxgr")
@@ -273,25 +296,12 @@ script = ExtResource("9_xyy1j")
 RaindropManager = NodePath("../Window/RaindropManager")
 race_camera = NodePath("../Camera2D")
 
-[node name="CanadaLeaf" parent="." unique_id=89227851 instance=ExtResource("10_ta2aw")]
-position = Vector2(-154, 7)
-rotation = -1.8622663
-
-[node name="CanadaLeaf2" parent="." unique_id=460690787 instance=ExtResource("10_ta2aw")]
-position = Vector2(233, 127)
-rotation = -0.43633232
-
-[node name="CanadaLeaf3" parent="." unique_id=442531293 instance=ExtResource("10_ta2aw")]
-position = Vector2(209, -89)
-rotation = 2.1293018
-
 [node name="Windowpngblue" type="Sprite2D" parent="." unique_id=952002940]
 visible = false
 z_index = 5
 scale = Vector2(0.447, 0.45)
 texture = ExtResource("15_886ha")
 
-[connection signal="dayChanging" from="." to="World" method="_on_new_main_day_changing"]
 [connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="FinishLine" method="_on_start_race_button_pressed"]

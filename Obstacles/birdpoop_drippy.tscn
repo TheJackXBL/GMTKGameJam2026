@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bxa4mer4csxsa"]
+
+[ext_resource type="Texture2D" uid="uid://bx3apa4dxdv5l" path="res://Scenes/Arowyn/birdpoo_3.png" id="1_lb4fq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rdmgo"]
+friction = 0.1
+bounce = 0.25
+
+[node name="Birdpoop_drippy" type="StaticBody2D" unique_id=413162864]
+scale = Vector2(0.2, 0.2)
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_rdmgo")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1111067593]
+scale = Vector2(0.99999976, 0.99999976)
+polygon = PackedVector2Array(20.000004, -130.00003, -5.000001, -135.00003, -35.000008, -115.00002, -50.000008, -80.000015, -50.000008, -45.000008, -10.000002, -10.000002, 0, 30.000006, 0, 80.000015, -5.000001, 105.00002, 10.000002, 120.00002, 20.000004, 95.000015, 15.000003, -10.000002, 30.000006, -15.000003, 30.000006, 25.000004, 45.000008, 25.000004, 45.000008, -35.000008, 50.000008, -75.000015, 35.000008, -110.00002)
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=336716590]
+z_index = 1
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_lb4fq")

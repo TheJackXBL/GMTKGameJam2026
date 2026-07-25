@@ -1,21 +1,23 @@
 [gd_scene format=3 uid="uid://drppqr0ebn2vu"]
 
 [ext_resource type="Texture2D" uid="uid://bj7x4codp5g5g" path="res://Scenes/Arowyn/leafpng.png" id="1_bifob"]
+[ext_resource type="Script" uid="uid://dse4uhrr8ibgf" path="res://Obstacles/window_obstacles.gd" id="1_jjhvg"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rdmgo"]
 friction = 0.1
 bounce = 0.25
 
-[node name="Leaf" type="Sprite2D" unique_id=89227851]
-z_index = 1
-scale = Vector2(0.2000007, 0.2000007)
-texture = ExtResource("1_bifob")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=413162864]
+[node name="Leaf" type="StaticBody2D" unique_id=413162864]
+scale = Vector2(0.2, 0.2)
 collision_layer = 2
 collision_mask = 3
 physics_material_override = SubResource("PhysicsMaterial_rdmgo")
+script = ExtResource("1_jjhvg")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1643303553]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1643303553]
 scale = Vector2(0.9999999, 0.9999999)
 polygon = PackedVector2Array(84.99971, -209.99928, -14.9999485, -144.9995, -34.999878, -144.9995, -44.999847, -159.99945, -49.99983, -104.99964, -39.999863, -84.99971, -54.99981, -74.99974, -59.999794, -64.99978, -89.999695, -99.99966, -89.999695, -84.99971, -174.9994, -134.99954, -164.99944, -4.999983, -139.99951, 19.999931, -139.99951, 29.999897, -149.99948, 34.999878, -234.99919, 84.99971, -119.99959, 124.99957, -124.99957, 149.99948, -29.999897, 89.999695, -29.999897, 149.99948, -19.999931, 199.99931, -9.999966, 189.99934, -24.999914, 149.99948, -19.999931, 84.99971, -4.999983, 129.99956, 0, 114.9996, 44.999847, 179.99939, 69.999756, 149.99948, 89.999695, 144.9995, 129.99956, 164.99944, 134.99954, 124.99957, 184.99936, 94.99967, 234.99919, 14.9999485, 134.99954, -9.999966, 109.99962, -14.9999485, 94.99967, -44.999847, 119.99959, -109.99962, 104.99964, -99.99966, 89.999695, -139.99951, 89.999695, -189.99934)
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=89227851]
+z_index = 1
+texture = ExtResource("1_bifob")
