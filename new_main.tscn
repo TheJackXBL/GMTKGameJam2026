@@ -10,16 +10,17 @@
 [ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/Car/glass.gdshader" id="7_886ha"]
 [ext_resource type="Script" uid="uid://by5k02ir86jqg" path="res://Raindrops/raindrop_manager.gd" id="8_1fxgr"]
 [ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="8_g7d0j"]
-[ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="9_rc6o0"]
 [ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="9_xyy1j"]
-[ext_resource type="PackedScene" uid="uid://6i116tt3dbjy" path="res://Raindrops/raindrop_jack_2.tscn" id="10_ljb83"]
 [ext_resource type="PackedScene" uid="uid://drppqr0ebn2vu" path="res://Scenes/Jack/leaf.tscn" id="10_ta2aw"]
-[ext_resource type="PackedScene" uid="uid://cnjtuhwi045yg" path="res://Raindrops/raindrop_jack_3.tscn" id="11_j57gt"]
 [ext_resource type="Script" uid="uid://q8vvl4mnc617" path="res://UI/canvas_layer.gd" id="12_1fxgr"]
 [ext_resource type="Texture2D" uid="uid://btwiyw5ro2rim" path="res://Scenes/Arowyn/gobutton2.png" id="12_1qswb"]
 [ext_resource type="Texture2D" uid="uid://bwlg8ejuv6nj0" path="res://Scenes/Arowyn/gobutton1.png" id="12_rc6o0"]
 [ext_resource type="Texture2D" uid="uid://bmsji34huvcer" path="res://Scenes/Arowyn/gobuttonhover.png" id="13_1qswb"]
 [ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
+[ext_resource type="Script" uid="uid://ca7ka58u6d367" path="res://Obstacles/obstacle_manager.gd" id="16_1qswb"]
+[ext_resource type="PackedScene" uid="uid://brf6j5m6nggae" path="res://Obstacles/window_obstacle.tscn" id="17_30auq"]
+[ext_resource type="Resource" uid="uid://bivku5ftvyb0d" path="res://Obstacles/Leaf.tres" id="18_hxk7o"]
+[ext_resource type="Resource" uid="uid://b0lm3b3e86v4n" path="res://Obstacles/BirdPoop.tres" id="19_1rny3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("7_886ha")
@@ -138,7 +139,6 @@ mouse_filter = 2
 
 [node name="RaindropManager" type="Node2D" parent="Window" unique_id=1434854034]
 script = ExtResource("8_1fxgr")
-raindrop_scenes = Array[PackedScene]([ExtResource("9_rc6o0"), ExtResource("10_ljb83"), ExtResource("11_j57gt")])
 min_spawn_x = -200.0
 max_spawn_x = 400.0
 spawn_y = -245.0
@@ -273,6 +273,14 @@ script = ExtResource("9_xyy1j")
 RaindropManager = NodePath("../Window/RaindropManager")
 race_camera = NodePath("../Camera2D")
 
+[node name="ObstacleManager" type="Node" parent="." unique_id=625398194 node_paths=PackedStringArray("obstacle_container", "day_manager")]
+script = ExtResource("16_1qswb")
+obstacle_scene = ExtResource("17_30auq")
+obstacle_container = NodePath("../ObstacleContainer")
+day_manager = NodePath("../DayManager")
+leaf_data = ExtResource("18_hxk7o")
+bird_poop_data = ExtResource("19_1rny3")
+
 [node name="CanadaLeaf" parent="." unique_id=89227851 instance=ExtResource("10_ta2aw")]
 position = Vector2(-154, 7)
 rotation = -1.8622663
@@ -291,7 +299,8 @@ z_index = 5
 scale = Vector2(0.447, 0.45)
 texture = ExtResource("15_886ha")
 
-[connection signal="dayChanging" from="." to="World" method="_on_new_main_day_changing"]
+[node name="ObstacleContainer" type="Node2D" parent="." unique_id=424675568]
+
 [connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/UI/Start Race Button" to="FinishLine" method="_on_start_race_button_pressed"]

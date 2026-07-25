@@ -21,7 +21,7 @@ class_name DayData
 @export var max_slipperiness := 5.0
 
 #Obstacles
-@export_range(0,100)
+@export_range(0, 100)
 var obstacle_chance := 25
 
 func get_texture(type: String) -> Texture2D:

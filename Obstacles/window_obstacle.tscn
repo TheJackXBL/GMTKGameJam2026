@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://brf6j5m6nggae"]
+
+[ext_resource type="Script" uid="uid://drsp5tg1l7si2" path="res://Obstacles/window_obstacle.gd" id="1_wyua0"]
+
+[node name="WindowObstacle" type="StaticBody2D" unique_id=1771677767]
+script = ExtResource("1_wyua0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1708770567]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1676404393]
