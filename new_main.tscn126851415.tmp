@@ -1,0 +1,484 @@
+[gd_scene format=3 uid="uid://26c2xl41ut5j"]
+
+[ext_resource type="Script" uid="uid://dbfiaagkajqqp" path="res://Scenes/game.gd" id="1_qcw2d"]
+[ext_resource type="PackedScene" uid="uid://ctignvopkp1dv" path="res://Levels/day_manager.tscn" id="2_7qgpo"]
+[ext_resource type="Script" uid="uid://cyh0d64pfygbl" path="res://addons/maaacks_menus_template/base/nodes/utilities/pause_menu_controller.gd" id="3_ksskx"]
+[ext_resource type="PackedScene" uid="uid://cpys1g6iajixl" path="res://Scenes/Menus/scenes/windows/pause_menu_layer.tscn" id="4_w2kc5"]
+[ext_resource type="PackedScene" uid="uid://dox0hbbak5fjo" path="res://finish_particles.tscn" id="5_1rny3"]
+[ext_resource type="PackedScene" uid="uid://dx05kji413l8i" path="res://Scenes/Background/world.tscn" id="5_7cuaw"]
+[ext_resource type="Script" uid="uid://dejsowogmp6xh" path="res://Scenes/Car/window.gd" id="6_aeylb"]
+[ext_resource type="Script" uid="uid://dgpqbj8xfd8c" path="res://Scenes/Jack/race_camera.gd" id="7_7cuaw"]
+[ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/Car/glass.gdshader" id="7_886ha"]
+[ext_resource type="PackedScene" uid="uid://bxa4mer4csxsa" path="res://Obstacles/birdpoop_drippy.tscn" id="7_xoyte"]
+[ext_resource type="Script" uid="uid://by5k02ir86jqg" path="res://Raindrops/raindrop_manager.gd" id="8_1fxgr"]
+[ext_resource type="Script" uid="uid://c5enfrsnjgtwg" path="res://Scenes/Jack/finish_line.gd" id="8_g7d0j"]
+[ext_resource type="PackedScene" uid="uid://c1pd6m0efkesg" path="res://Obstacles/birdpoop_large.tscn" id="8_jgecq"]
+[ext_resource type="PackedScene" uid="uid://cba474l5lta8j" path="res://Obstacles/birdpoop_small.tscn" id="9_c8ju1"]
+[ext_resource type="PackedScene" uid="uid://dlvjb8j4ss4nj" path="res://Raindrops/raindrop_jack.tscn" id="9_rc6o0"]
+[ext_resource type="Script" uid="uid://dr8eqn3j4vb70" path="res://Scenes/Jack/race_manager.gd" id="9_xyy1j"]
+[ext_resource type="PackedScene" uid="uid://6i116tt3dbjy" path="res://Raindrops/raindrop_jack_2.tscn" id="10_ljb83"]
+[ext_resource type="PackedScene" uid="uid://davoenfv0d3oy" path="res://Obstacles/leaf.tscn" id="10_ta2aw"]
+[ext_resource type="PackedScene" uid="uid://cnjtuhwi045yg" path="res://Raindrops/raindrop_jack_3.tscn" id="11_j57gt"]
+[ext_resource type="Script" uid="uid://q8vvl4mnc617" path="res://UI/canvas_layer.gd" id="12_1fxgr"]
+[ext_resource type="Texture2D" uid="uid://btwiyw5ro2rim" path="res://Scenes/Arowyn/gobutton2.png" id="12_1qswb"]
+[ext_resource type="Texture2D" uid="uid://bwlg8ejuv6nj0" path="res://Scenes/Arowyn/gobutton1.png" id="12_rc6o0"]
+[ext_resource type="Texture2D" uid="uid://bmsji34huvcer" path="res://Scenes/Arowyn/gobuttonhover.png" id="13_1qswb"]
+[ext_resource type="LabelSettings" uid="uid://bc27bdwegdama" path="res://Countdown Font.tres" id="14_30auq"]
+[ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
+[ext_resource type="Script" uid="uid://dbi8ec4kqscir" path="res://Obstacles/obstacle_manager.gd" id="16_1qswb"]
+[ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="19_jgecq"]
+[ext_resource type="PackedScene" uid="uid://b1e0s7hmitroo" path="res://finish_position_label.tscn" id="21_c8ju1"]
+[ext_resource type="AudioStream" uid="uid://c0ltomrwdmxq1" path="res://Audio/Music/AreWeThereYet_MainTheme.mp3" id="22_hxk7o"]
+[ext_resource type="AudioStream" uid="uid://c5dsbas3uekvi" path="res://Audio/SoundEffect/Goal.mp3" id="22_onh5e"]
+[ext_resource type="AudioStream" uid="uid://c2foefrlukdu0" path="res://Audio/SoundEffect/WaterDropletHitGoal.mp3" id="24_3bujr"]
+[ext_resource type="Texture2D" uid="uid://dltelc3nwthrc" path="res://Scenes/Jack/Car Window Stickers.png" id="24_xoyte"]
+[ext_resource type="AudioStream" uid="uid://clu3hggp58qsq" path="res://Audio/SoundEffect/StartWhistle.mp3" id="25_go5yj"]
+[ext_resource type="Texture2D" uid="uid://dc0pl0mr5gf4s" path="res://Scenes/Jack/clock.png" id="30_opftb"]
+[ext_resource type="PackedScene" uid="uid://dl6layg7vd6ml" path="res://Raindrops/droplet.tscn" id="31_a0ntl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
+shader = ExtResource("7_886ha")
+shader_parameter/frostAmount = 1.0
+shader_parameter/distortion = 0.01
+shader_parameter/blur = 0.002
+shader_parameter/whiteTint = 0.25
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ef17l"]
+size = Vector2(810, 298)
+
+[sub_resource type="LabelSettings" id="LabelSettings_a0ntl"]
+font = ExtResource("19_jgecq")
+font_size = 40
+font_color = Color(0.41960785, 0.47058824, 0.53333336, 1)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_1fxgr"]
+frames = 2
+frame_0/texture = ExtResource("12_rc6o0")
+frame_0/duration = 0.3
+frame_1/texture = ExtResource("12_1qswb")
+frame_1/duration = 0.3
+
+[sub_resource type="Animation" id="Animation_1fxgr"]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_1qswb"]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rc6o0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1qswb"]
+_data = {
+&"FadeIn": SubResource("Animation_1fxgr"),
+&"FadeOut": SubResource("Animation_1qswb"),
+&"RESET": SubResource("Animation_rc6o0")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_c8ju1"]
+font = ExtResource("19_jgecq")
+font_size = 37
+font_color = Color(0.26666668, 0.24313726, 0.38039216, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aeylb"]
+size = Vector2(1200, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_886ha"]
+size = Vector2(1200, 20)
+
+[sub_resource type="Gradient" id="Gradient_iincw"]
+colors = PackedColorArray(0.7176471, 0.13725491, 0.25490198, 1, 0.7176471, 0.13725491, 0.25490198, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1fxgr"]
+gradient = SubResource("Gradient_iincw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rc6o0"]
+size = Vector2(1500, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_1qswb"]
+size = Vector2(1500, 20)
+
+[sub_resource type="Gradient" id="Gradient_7irk2"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ljb83"]
+gradient = SubResource("Gradient_7irk2")
+
+[node name="NewMain" type="Node2D" unique_id=872055236]
+script = ExtResource("1_qcw2d")
+dayLength = 120.0
+
+[node name="DayManager" parent="." unique_id=560427950 instance=ExtResource("2_7qgpo")]
+
+[node name="PauseMenuController" type="Node" parent="." unique_id=440375164]
+script = ExtResource("3_ksskx")
+pause_menu_packed = ExtResource("4_w2kc5")
+
+[node name="ObstacleManager" type="Node" parent="." unique_id=193738657 node_paths=PackedStringArray("obstacle_container", "day_manager", "obstacle_spawnarea")]
+script = ExtResource("16_1qswb")
+leaf_scene = ExtResource("10_ta2aw")
+bird_poop_scenes = Array[PackedScene]([ExtResource("7_xoyte"), ExtResource("8_jgecq"), ExtResource("9_c8ju1")])
+obstacle_container = NodePath("../Window/ObstacleContainer")
+day_manager = NodePath("../DayManager")
+obstacle_spawnarea = NodePath("../Window/ObstacleSpawnArea")
+
+[node name="World" parent="." unique_id=823103243 instance=ExtResource("5_7cuaw")]
+scale = Vector2(0.6, 0.6)
+
+[node name="Window" type="Node2D" parent="." unique_id=157260114]
+script = ExtResource("6_aeylb")
+maxFrost = 1.0
+
+[node name="Glass" type="ColorRect" parent="Window" unique_id=972784941]
+material = SubResource("ShaderMaterial_gi6rw")
+offset_left = -604.0
+offset_top = -366.0
+offset_right = 609.0
+offset_bottom = 359.0
+mouse_filter = 2
+
+[node name="ObstacleContainer" type="Node2D" parent="Window" unique_id=997110913]
+
+[node name="ObstacleSpawnArea" type="Area2D" parent="Window" unique_id=1766365409]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Window/ObstacleSpawnArea" unique_id=1663712292]
+position = Vector2(81, -15)
+shape = SubResource("RectangleShape2D_ef17l")
+
+[node name="RaindropManager" type="Node2D" parent="Window" unique_id=1434854034]
+script = ExtResource("8_1fxgr")
+raindrop_scenes = Array[PackedScene]([ExtResource("9_rc6o0"), ExtResource("10_ljb83"), ExtResource("11_j57gt")])
+min_spawn_x = -175.0
+max_spawn_x = 400.0
+spawn_y = -245.0
+raindrop_count = 6
+spawn_on_ready = false
+
+[node name="StreakContainer" type="Node2D" parent="Window/RaindropManager" unique_id=1921861915]
+
+[node name="DropletContainer" type="Node2D" parent="Window" unique_id=1500344339]
+
+[node name="Droplet" parent="Window/DropletContainer" unique_id=210999127 instance=ExtResource("31_a0ntl")]
+position = Vector2(50, 152)
+
+[node name="Droplet2" parent="Window/DropletContainer" unique_id=1692288175 instance=ExtResource("31_a0ntl")]
+position = Vector2(-112, 223)
+
+[node name="Droplet3" parent="Window/DropletContainer" unique_id=713478469 instance=ExtResource("31_a0ntl")]
+position = Vector2(-98, 138)
+
+[node name="Droplet4" parent="Window/DropletContainer" unique_id=1943797448 instance=ExtResource("31_a0ntl")]
+position = Vector2(103, 221)
+
+[node name="Droplet5" parent="Window/DropletContainer" unique_id=1699651 instance=ExtResource("31_a0ntl")]
+position = Vector2(-19, 226)
+
+[node name="Droplet6" parent="Window/DropletContainer" unique_id=1145264606 instance=ExtResource("31_a0ntl")]
+position = Vector2(-17, 100)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=747220960]
+limit_left = -576
+limit_top = -324
+limit_right = 576
+limit_bottom = 324
+script = ExtResource("7_7cuaw")
+winner_zoom = Vector2(2, 2)
+focus_duration = 0.75
+zoom_out_duration = 0.5
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448734060]
+offset = Vector2(-576, -324)
+transform = Transform2D(1, 0, 0, 1, -576, -324)
+follow_viewport_enabled = true
+script = ExtResource("12_1fxgr")
+number_duration = 0.4
+go_duration = 0.6
+
+[node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=2122965579]
+offset_left = 70.0
+offset_top = 47.0
+offset_right = 133.0
+offset_bottom = 106.0
+text = "123"
+label_settings = SubResource("LabelSettings_a0ntl")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="DayTimer" type="Timer" parent="CanvasLayer" unique_id=346766057]
+unique_name_in_owner = true
+wait_time = 26.251
+one_shot = true
+
+[node name="CountdownContainer" type="Control" parent="CanvasLayer" unique_id=1186208756]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label3" type="Label" parent="CanvasLayer/CountdownContainer" unique_id=1177798517]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -27.0
+offset_right = 20.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "3"
+label_settings = ExtResource("14_30auq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CanvasLayer/CountdownContainer" unique_id=31652852]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -27.0
+offset_right = 20.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "2"
+label_settings = ExtResource("14_30auq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label1" type="Label" parent="CanvasLayer/CountdownContainer" unique_id=360387055]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -27.0
+offset_right = 20.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1"
+label_settings = ExtResource("14_30auq")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GoLabel" type="Label" parent="CanvasLayer/CountdownContainer" unique_id=931856053]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.5
+offset_top = -27.0
+offset_right = 28.5
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "GO!"
+label_settings = ExtResource("14_30auq")
+
+[node name="Go Button Container" type="Control" parent="CanvasLayer" unique_id=1783523636]
+z_index = 5
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Spawn Raindrops Button" type="Button" parent="CanvasLayer/Go Button Container" unique_id=1985699318]
+visible = false
+layout_mode = 0
+offset_left = -138.0
+offset_top = -207.0
+offset_right = 23.0
+offset_bottom = -176.0
+text = "SPAWN RAINDROPS"
+
+[node name="Start Race Button" type="TextureButton" parent="CanvasLayer/Go Button Container" unique_id=221550615]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -263.0
+offset_top = -177.0
+offset_right = 438.0
+offset_bottom = 242.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.28000003, 0.28000003)
+texture_normal = SubResource("AnimatedTexture_1fxgr")
+texture_hover = ExtResource("13_1qswb")
+texture_disabled = ExtResource("13_1qswb")
+
+[node name="Fade" type="ColorRect" parent="CanvasLayer" unique_id=1480607471]
+z_index = 20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1423.0
+offset_top = -804.0
+offset_right = 670.0
+offset_bottom = 533.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=1046672367]
+libraries/ = SubResource("AnimationLibrary_1qswb")
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1320369274]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -526.0
+offset_top = 139.0
+offset_right = -439.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "0"
+label_settings = SubResource("LabelSettings_c8ju1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FinishLine" type="Area2D" parent="." unique_id=127231439]
+position = Vector2(0, 289)
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("8_g7d0j")
+celebration_particles = ExtResource("5_1rny3")
+finish_position_label = ExtResource("21_c8ju1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine" unique_id=1312411475]
+shape = SubResource("RectangleShape2D_aeylb")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="FinishLine" unique_id=148505732]
+visible = false
+z_index = 5
+mesh = SubResource("QuadMesh_886ha")
+texture = SubResource("GradientTexture1D_1fxgr")
+
+[node name="FinishPositionLabel" parent="FinishLine" unique_id=263866171 instance=ExtResource("21_c8ju1")]
+offset_left = -18.025
+offset_right = 17.975
+
+[node name="FinishLineSFX" type="AudioStreamPlayer" parent="FinishLine" unique_id=1144721812]
+process_mode = 3
+stream = ExtResource("24_3bujr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1383709578 groups=["death_zone"]]
+position = Vector2(0, 416)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=376249509]
+shape = SubResource("RectangleShape2D_rc6o0")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="StaticBody2D" unique_id=2130684215]
+mesh = SubResource("QuadMesh_1qswb")
+texture = SubResource("GradientTexture1D_ljb83")
+
+[node name="RaceManager" type="Node2D" parent="." unique_id=189466672 node_paths=PackedStringArray("RaindropManager", "GameManager", "race_camera")]
+unique_name_in_owner = true
+script = ExtResource("9_xyy1j")
+RaindropManager = NodePath("../Window/RaindropManager")
+GameManager = NodePath("..")
+race_camera = NodePath("../Camera2D")
+selected_raindrop_done_stream = ExtResource("22_onh5e")
+start_race_stream = ExtResource("25_go5yj")
+
+[node name="RaceManagerSFX" type="AudioStreamPlayer" parent="RaceManager" unique_id=47460573]
+process_mode = 3
+stream = ExtResource("22_onh5e")
+
+[node name="Windowpngblue" type="Sprite2D" parent="." unique_id=952002940]
+visible = false
+z_index = 5
+scale = Vector2(0.447, 0.45)
+texture = ExtResource("15_886ha")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=738621849]
+process_mode = 3
+stream = ExtResource("22_hxk7o")
+bus = &"Music"
+
+[node name="CarWindowStickers" type="Sprite2D" parent="." unique_id=1194570719]
+position = Vector2(-484.00003, 159)
+scale = Vector2(0.34942156, 0.34942156)
+texture = ExtResource("24_xoyte")
+
+[node name="ClockDecal" type="Sprite2D" parent="." unique_id=1585967934]
+z_index = 10
+position = Vector2(-397, -242.00002)
+scale = Vector2(0.424, 0.424)
+texture = ExtResource("30_opftb")
+
+[connection signal="dayChanging" from="." to="World" method="_on_new_main_day_changing"]
+[connection signal="countdown_finished" from="CanvasLayer" to="RaceManager" method="_on_canvas_layer_countdown_finished"]
+[connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
+[connection signal="pressed" from="CanvasLayer/Go Button Container/Spawn Raindrops Button" to="Window/RaindropManager" method="_on_spawn_raindrops_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Go Button Container/Start Race Button" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Go Button Container/Start Race Button" to="RaceManager" method="_on_start_race_button_pressed"]
+[connection signal="body_entered" from="FinishLine" to="FinishLine" method="_on_body_entered"]
+[connection signal="raindrop_finished" from="FinishLine" to="RaceManager" method="_on_finish_line_raindrop_finished"]
+[connection signal="winner_determined" from="FinishLine" to="RaceManager" method="_on_finish_line_winner_determined"]
+[connection signal="score_changed" from="RaceManager" to="CanvasLayer" method="_on_race_manager_score_changed"]
+[connection signal="startCountdown" from="RaceManager" to="CanvasLayer" method="_on_race_manager_start_countdown"]
