@@ -28,6 +28,10 @@ func _on_body_entered(body: Node2D) -> void:
 	winner_determined.emit(winning_raindrop)
 
 
-func _on_start_race_button_pressed() -> void:
+#func _on_start_race_button_pressed() -> void:
+	#race_finished = false
+	#winning_raindrop = null
+
+func reset_race() -> void:
 	race_finished = false
 	winning_raindrop = null
