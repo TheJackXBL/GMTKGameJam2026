@@ -12,6 +12,10 @@ signal countdown_finished
 @onready var label_1: Label = $CountdownContainer/Label1
 @onready var go_label: Label = $CountdownContainer/GoLabel
 
+@onready var score_label: Label = $ScoreLabel
+
+var displayed_score: int = 0
+
 var countdown_running: bool = false
 
 func _ready() -> void:
@@ -62,3 +66,24 @@ func fadeIn():
 
 func _on_race_manager_start_countdown() -> void:
 	start_countdown()
+
+
+func _on_race_manager_score_changed(new_score: Variant) -> void:
+	
+	update_score(new_score)
+
+func update_score(new_score: int) -> void:
+	score_label.pivot_offset = score_label.size / 2.0
+	
+	var tween := create_tween()
+	tween.set_parallel(true)
+	
+	tween.tween_method(_set_displayed_score, displayed_score, new_score, 0.6).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+
+	tween.tween_property(score_label, "scale", Vector2(1.2, 1.2), 0.15).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+	tween.chain().tween_property(score_label, "scale", Vector2.ONE, 0.2).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	
+func _set_displayed_score(value: int) -> void:
+	displayed_score = value
+	score_label.text = str(displayed_score)

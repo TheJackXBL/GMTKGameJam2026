@@ -22,7 +22,10 @@
 [ext_resource type="Texture2D" uid="uid://bmsji34huvcer" path="res://Scenes/Arowyn/gobuttonhover.png" id="13_1qswb"]
 [ext_resource type="LabelSettings" uid="uid://bc27bdwegdama" path="res://Countdown Font.tres" id="14_30auq"]
 [ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
+[ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="19_jgecq"]
+[ext_resource type="PackedScene" uid="uid://b1e0s7hmitroo" path="res://finish_position_label.tscn" id="21_c8ju1"]
 [ext_resource type="AudioStream" uid="uid://c0ltomrwdmxq1" path="res://Audio/Music/AreWeThereYet_MainTheme.mp3" id="22_hxk7o"]
+[ext_resource type="Texture2D" uid="uid://dltelc3nwthrc" path="res://Scenes/Jack/Car Window Stickers.png" id="24_xoyte"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("7_886ha")
@@ -90,6 +93,11 @@ _data = {
 &"RESET": SubResource("Animation_rc6o0")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_c8ju1"]
+font = ExtResource("19_jgecq")
+font_size = 37
+font_color = Color(0.26666668, 0.24313726, 0.38039216, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_aeylb"]
 size = Vector2(1200, 20)
 
@@ -146,7 +154,7 @@ mouse_filter = 2
 [node name="RaindropManager" type="Node2D" parent="Window" unique_id=1434854034]
 script = ExtResource("8_1fxgr")
 raindrop_scenes = Array[PackedScene]([ExtResource("9_rc6o0"), ExtResource("10_ljb83"), ExtResource("11_j57gt")])
-min_spawn_x = -200.0
+min_spawn_x = -175.0
 max_spawn_x = 400.0
 spawn_y = -245.0
 raindrop_count = 6
@@ -317,12 +325,30 @@ color = Color(0, 0, 0, 0)
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer" unique_id=1046672367]
 libraries/ = SubResource("AnimationLibrary_1qswb")
 
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1320369274]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -526.0
+offset_top = 139.0
+offset_right = -439.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "1234"
+label_settings = SubResource("LabelSettings_c8ju1")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="FinishLine" type="Area2D" parent="." unique_id=127231439]
 position = Vector2(0, 289)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("8_g7d0j")
 celebration_particles = ExtResource("5_1rny3")
+finish_position_label = ExtResource("21_c8ju1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinishLine" unique_id=1312411475]
 shape = SubResource("RectangleShape2D_aeylb")
@@ -332,6 +358,10 @@ visible = false
 z_index = 5
 mesh = SubResource("QuadMesh_886ha")
 texture = SubResource("GradientTexture1D_1fxgr")
+
+[node name="FinishPositionLabel" parent="FinishLine" unique_id=263866171 instance=ExtResource("21_c8ju1")]
+offset_left = -18.025
+offset_right = 17.975
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1383709578 groups=["death_zone"]]
 position = Vector2(0, 416)
@@ -374,6 +404,11 @@ process_mode = 3
 stream = ExtResource("22_hxk7o")
 bus = &"Music"
 
+[node name="CarWindowStickers" type="Sprite2D" parent="." unique_id=1194570719]
+position = Vector2(-484.00003, 159)
+scale = Vector2(0.34942156, 0.34942156)
+texture = ExtResource("24_xoyte")
+
 [connection signal="dayChanging" from="." to="World" method="_on_new_main_day_changing"]
 [connection signal="countdown_finished" from="CanvasLayer" to="RaceManager" method="_on_canvas_layer_countdown_finished"]
 [connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
@@ -381,5 +416,7 @@ bus = &"Music"
 [connection signal="pressed" from="CanvasLayer/Go Button Container/Start Race Button" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Go Button Container/Start Race Button" to="RaceManager" method="_on_start_race_button_pressed"]
 [connection signal="body_entered" from="FinishLine" to="FinishLine" method="_on_body_entered"]
+[connection signal="raindrop_finished" from="FinishLine" to="RaceManager" method="_on_finish_line_raindrop_finished"]
 [connection signal="winner_determined" from="FinishLine" to="RaceManager" method="_on_finish_line_winner_determined"]
+[connection signal="score_changed" from="RaceManager" to="CanvasLayer" method="_on_race_manager_score_changed"]
 [connection signal="startCountdown" from="RaceManager" to="CanvasLayer" method="_on_race_manager_start_countdown"]

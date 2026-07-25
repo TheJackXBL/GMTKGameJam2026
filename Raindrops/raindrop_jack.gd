@@ -96,7 +96,6 @@ func _ready() -> void:
 	
 	raindrop_ui.hide()
 	
-	original_sprite_scale = raindrop_sprite.scale
 	last_streak_position = global_position
 	
 	#adhesion_multiplier = STAT OF RAINDROP
@@ -133,6 +132,11 @@ func setup_race_data(new_name: String, new_speed: int, new_angle: float, weight:
 
 # Freezes raindrops in place
 func prepare_for_race() -> void:
+	
+	resize_sprite_based_on_weight()
+	
+	original_sprite_scale = raindrop_sprite.scale
+	
 	race_active = false
 
 	linear_velocity = Vector2.ZERO
@@ -354,19 +358,11 @@ func try_attach_to_streak(line: Line2D) -> bool:
 	if closest_segment == -1 or closest_distance > required_distance:
 		return false
 
-	begin_streak_riding(
-		line,
-		closest_segment,
-		closest_segment_distance
-	)
+	begin_streak_riding(line, closest_segment, closest_segment_distance)
 
 	return true
 
-func begin_streak_riding(
-	line: Line2D,
-	segment_index: int,
-	segment_distance: float
-) -> void:
+func begin_streak_riding(line: Line2D, segment_index: int, segment_distance: float) -> void:
 	is_riding_streak = true
 	ridden_streak = line
 	ridden_segment_index = segment_index
@@ -559,6 +555,9 @@ func try_sticking() -> void:
 		stop_sliding()
 	else:
 		time_below_minimum_speed = 0.0
+
+func resize_sprite_based_on_weight() -> void:
+	raindrop_sprite.scale = raindrop_sprite.scale * (get_weight_multiplier() - 0.2)
 
 # Stretches the raindrop sprite (does not stretch collision to save on processing)
 func update_drop_shape(delta: float) -> void:

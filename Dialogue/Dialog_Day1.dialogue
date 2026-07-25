@@ -1,7 +1,11 @@
 ~ day_start
-Coco: This is the opening cutscene for Day 1.
-Mom: Wow wow.
-Mom: I'm saying something tutorial-y.
+Kid: Mum...are we there yet?
+Mom: What?! We've only just started!
+Kid: Long car rides are so [shake]borrring[/shake].
+Mom: This is going to be a long [b]3 Day road trip[/b], and it looks like this weather's going to be with us for a while. Hmm.
+Kid: Ooh, I could pass the time by [color=gold]racing raindrops[/color]!
+Mom: That sounds fun!
+
 
 do game.begin_game()
 
