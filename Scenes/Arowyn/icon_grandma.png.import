@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://h81n41w00m67"
-path="res://.godot/imported/hand_fist_hit2.png-a5eede198ef40d51ac0d8144b513e104.ctex"
+uid="uid://bfcnd3kuyrixj"
+path="res://.godot/imported/icon_grandma.png-1515b8967e6371875f021315bef9c9ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Arowyn/hand_fist_hit2.png"
-dest_files=["res://.godot/imported/hand_fist_hit2.png-a5eede198ef40d51ac0d8144b513e104.ctex"]
+source_file="res://Scenes/Arowyn/icon_grandma.png"
+dest_files=["res://.godot/imported/icon_grandma.png-1515b8967e6371875f021315bef9c9ff.ctex"]
 
 [params]
 
