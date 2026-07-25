@@ -1,5 +1,5 @@
 ~ day_start
-Coco: This is the opening cutscene.
+Coco: This is the opening cutscene for Day 1.
 Mom: Wow wow.
 Mom: I'm saying something tutorial-y.
 
@@ -9,7 +9,7 @@ do game.begin_game()
 
 
 ~ day_end
-Mom: The sun is out!
+Mom: The sun is out on Day 1!
 Coco: Are we there yet?
 Mom: Not even close.
 

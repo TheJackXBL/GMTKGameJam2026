@@ -49,7 +49,6 @@ gradient = SubResource("Gradient_7irk2")
 
 [node name="NewMain" type="Node2D" unique_id=872055236]
 script = ExtResource("1_qcw2d")
-dayLength = 60.0
 
 [node name="DayManager" parent="." unique_id=560427950 instance=ExtResource("2_7qgpo")]
 

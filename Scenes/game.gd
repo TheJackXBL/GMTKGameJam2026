@@ -7,29 +7,70 @@ extends Node2D
 @onready var timer = $CanvasLayer/DayTimer
 @onready var timerLabel = $CanvasLayer/TimerLabel
 @onready var window =$Window
+
+var dayStarted := false
+var dayFinished := false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	world.set_Day(dayManager.get_day())
-	timer.start(dayLength)
+	start_day(dayManager.get_day())
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	var timerProgress = 1.0 - (timer.time_left / dayLength)
+	var timerProgress := 0.0
+	timerProgress = set_timerProgress() 
+
 	world.set_dayProgress(timerProgress)
 	window.set_dayProgress(timerProgress)
 	
 	timerLabel.text = "Day Timer: " + str(ceil(timer.time_left))
 
+func set_timerProgress() -> float:
+	if dayFinished:
+		return 1.0
+	elif dayStarted:
+		return 1.0 - (timer.time_left / dayLength)
+	else:
+		return 0.0
 
 func _on_day_timer_timeout() -> void:
-	if dayManager.currentDay + 1 >= dayManager.days.size():
+	dayFinished = true
+	play_cutscene(dayManager.currentDay, "day_end")
+
+func start_day(day: DayData) -> void:
+	dayStarted = false
+	dayFinished = false
+	
+	world.set_Day(day)
+	play_cutscene(dayManager.currentDay, "day_start")
+
+func begin_game() -> void:
+	dayStarted = true
+	timer.start(dayLength)
+
+
+func end_day():
+	if dayManager.currentDay >= dayManager.days.size():
 		print("Game Complete!")
 		return
-#		TODO:Obviously will need to do an actual ending call here
 	
 	dayManager.set_tomorrow()
+	start_day(dayManager.get_day())
 
-	world.set_Day(dayManager.get_day())
-
-	timer.start()
+func play_cutscene(day: int, tag: String):
+	var dialogue_path = "res://Dialogue/Dialog_Day%d.dialogue" % day
+	
+	var dialogue = load(dialogue_path)
+	
+	if dialogue == null:
+		push_error("Could not load dialogue: " + dialogue_path)
+		return
+		
+	DialogueManager.show_example_dialogue_balloon(
+		dialogue,
+		tag,
+		[
+			{ "game": self }
+		]
+	)
