@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7apmow1mj66x"
-path="res://.godot/imported/hand_fist.png-19fb76ef06d4ebf81baa8028c8860d67.ctex"
+uid="uid://dif1jcsnbuerg"
+path="res://.godot/imported/handflash_2.png-46a15947bd3c647c9e4b84e532154e66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Arowyn/hand_fist.png"
-dest_files=["res://.godot/imported/hand_fist.png-19fb76ef06d4ebf81baa8028c8860d67.ctex"]
+source_file="res://Scenes/Arowyn/handflash_2.png"
+dest_files=["res://.godot/imported/handflash_2.png-46a15947bd3c647c9e4b84e532154e66.ctex"]
 
 [params]
 

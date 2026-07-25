@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7apmow1mj66x"
-path="res://.godot/imported/hand_fist.png-19fb76ef06d4ebf81baa8028c8860d67.ctex"
+uid="uid://d3ly770ogebwy"
+path="res://.godot/imported/tut_countdown.png-ea62a6fc0ee2375940860dd3ecece2b5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Arowyn/hand_fist.png"
-dest_files=["res://.godot/imported/hand_fist.png-19fb76ef06d4ebf81baa8028c8860d67.ctex"]
+source_file="res://Scenes/Arowyn/tut_countdown.png"
+dest_files=["res://.godot/imported/tut_countdown.png-ea62a6fc0ee2375940860dd3ecece2b5.ctex"]
 
 [params]
 

@@ -5,4 +5,5 @@
 [resource]
 script = ExtResource("1_vwcpm")
 dayNum = 1
+obstacle_chance = 100
 metadata/_custom_type_script = "uid://dh0b2it0wdtmy"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5uoslb3g2vnk"
-path="res://.godot/imported/hand_fist_hit1.png-e60f9ef7471f01ee6ef1c007d0a6a209.ctex"
+uid="uid://cu2hcqlk6v18m"
+path="res://.godot/imported/tut_raindrops.png-fae47b2106d363c496e3ab9ff25c4378.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Arowyn/hand_fist_hit1.png"
-dest_files=["res://.godot/imported/hand_fist_hit1.png-e60f9ef7471f01ee6ef1c007d0a6a209.ctex"]
+source_file="res://Scenes/Arowyn/tut_raindrops.png"
+dest_files=["res://.godot/imported/tut_raindrops.png-fae47b2106d363c496e3ab9ff25c4378.ctex"]
 
 [params]
 

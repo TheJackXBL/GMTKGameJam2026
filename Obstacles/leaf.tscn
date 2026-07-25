@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://davoenfv0d3oy"]
+
+[ext_resource type="Texture2D" uid="uid://bj7x4codp5g5g" path="res://Scenes/Arowyn/leafpng.png" id="1_bifob"]
+[ext_resource type="PackedScene" uid="uid://bmak77bjnvhu" path="res://Obstacles/window_obstacle.tscn" id="1_jjhvg"]
+
+[node name="WindowObstacle" unique_id=1771677767 instance=ExtResource("1_jjhvg")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1708770567]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_bifob")
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1676404393]
+scale = Vector2(2, 2)
+polygon = PackedVector2Array(17, -42, -7, -28, -10, -33, -11, -12, -18, -19, -34, -27, -33, -1, -28, 5, -47, 18, -25, 24, -24, 30, -6, 17, -2, 24, 9, 36, 14, 30, 26, 33, 28, 25, 40, 17, 47, 3, 21, -4, 20, -10, 24, -21, 19, -26)

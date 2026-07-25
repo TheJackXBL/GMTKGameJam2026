@@ -12,6 +12,7 @@ signal dayChanging
 @onready var window = $Window
 @onready var RaindropManager: Node2D = $Window/RaindropManager
 @onready var music_player = $MusicPlayer
+@onready var obstacleManager = $ObstacleManager
 
 var dayStarted := false
 var dayFinished := false
@@ -31,6 +32,7 @@ func _process(delta: float) -> void:
 
 	world.set_dayProgress(timerProgress)
 	window.set_dayProgress(timerProgress)
+	obstacleManager.set_dayProgress(timerProgress)
 	
 	timerLabel.text = str(int(timer.time_left))
 
@@ -39,6 +41,7 @@ func change_day():
 	
 	await canvas.fadeIn()
 	print("Fade complete")
+	obstacleManager.clear_obstacles()
 	
 	dayManager.set_tomorrow()
 	start_day(dayManager.get_day())
