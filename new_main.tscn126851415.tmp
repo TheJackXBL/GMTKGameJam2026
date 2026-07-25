@@ -25,6 +25,7 @@
 [ext_resource type="Texture2D" uid="uid://bmsji34huvcer" path="res://Scenes/Arowyn/gobuttonhover.png" id="13_1qswb"]
 [ext_resource type="LabelSettings" uid="uid://bc27bdwegdama" path="res://Countdown Font.tres" id="14_30auq"]
 [ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
+[ext_resource type="Script" uid="uid://dbi8ec4kqscir" path="res://Obstacles/obstacle_manager.gd" id="16_1qswb"]
 [ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="19_jgecq"]
 [ext_resource type="PackedScene" uid="uid://b1e0s7hmitroo" path="res://finish_position_label.tscn" id="21_c8ju1"]
 [ext_resource type="AudioStream" uid="uid://c0ltomrwdmxq1" path="res://Audio/Music/AreWeThereYet_MainTheme.mp3" id="22_hxk7o"]
@@ -34,7 +35,6 @@
 [ext_resource type="AudioStream" uid="uid://clu3hggp58qsq" path="res://Audio/SoundEffect/StartWhistle.mp3" id="25_go5yj"]
 [ext_resource type="Texture2D" uid="uid://dc0pl0mr5gf4s" path="res://Scenes/Jack/clock.png" id="30_opftb"]
 [ext_resource type="PackedScene" uid="uid://dl6layg7vd6ml" path="res://Raindrops/droplet.tscn" id="31_a0ntl"]
-[ext_resource type="Script" uid="uid://dbi8ec4kqscir" path="res://Obstacles/obstacle_manager.gd" id="16_1qswb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("7_886ha")
@@ -43,12 +43,13 @@ shader_parameter/distortion = 0.01
 shader_parameter/blur = 0.002
 shader_parameter/whiteTint = 0.25
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ef17l"]
+size = Vector2(810, 298)
+
 [sub_resource type="LabelSettings" id="LabelSettings_a0ntl"]
 font = ExtResource("19_jgecq")
 font_size = 40
 font_color = Color(0.41960785, 0.47058824, 0.53333336, 1)
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ef17l"]
-size = Vector2(810, 298)
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_1fxgr"]
 frames = 2

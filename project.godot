@@ -27,6 +27,10 @@ ProjectMusicController="*uid://r5t485lr3p7t"
 ProjectUISoundController="*uid://cc37235kj4384"
 DialogueManager="*uid://c3rodes2l3gxb"
 
+[dialogue_manager]
+
+runtime/balloon_path="res://Dialogue/Dialogue Balloon Custom/balloon.tscn"
+
 [display]
 
 window/stretch/mode="canvas_items"

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3cwd0nncxlee"
-path="res://.godot/imported/icon_mom.png-5ce391e140ee5d9f73f17692c36e2311.ctex"
+uid="uid://wnspsx0ju5s6"
+path="res://.godot/imported/obdrop_2.png-41837066449d5048daff59a0e6c9e4d4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Scenes/Arowyn/icon_mom.png"
-dest_files=["res://.godot/imported/icon_mom.png-5ce391e140ee5d9f73f17692c36e2311.ctex"]
+source_file="res://Scenes/Jack/obdrop_2.png"
+dest_files=["res://.godot/imported/obdrop_2.png-41837066449d5048daff59a0e6c9e4d4.ctex"]
 
 [params]
 

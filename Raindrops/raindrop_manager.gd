@@ -43,15 +43,29 @@ func _ready() -> void:
 		prepare_and_spawn_raindrops()
 
 func generate_stats() -> Array[int]:
+	var minimum_stat: int = 2
+	var point_pool: int = 10
+	var remaining_points: int = point_pool - (minimum_stat * 3)
 	
-	var stats: Array[int] = [1, 1, 1]
-	var point_pool: int = 7
+	var possible_cuts: Array[int] = []
 	
-	for i in range(point_pool):
-		var random_stat: int = randi_range(0, stats.size() - 1)
-		stats[random_stat] += 1
+	for i in range(remaining_points + 2):
+		possible_cuts.append(i)
 	
-	return stats
+	possible_cuts.shuffle()
+	
+	var cuts: Array[int] = [
+		possible_cuts[0],
+		possible_cuts[1]
+	]
+	
+	cuts.sort()
+	
+	return [
+		minimum_stat + cuts[0],
+		minimum_stat + cuts[1] - cuts[0] - 1,
+		minimum_stat + remaining_points - cuts[1] + 1
+	]
 
 
 func determine_raindrop_spawnpoints(amount: int) -> void:
@@ -134,7 +148,7 @@ func begin_race() -> void:
 func fade_remaining_raindrops() -> void:
 	for raindrop in spawned_raindrops:
 		if is_instance_valid(raindrop):
-			raindrop.fade_drop()
+			raindrop.fade_out_drop()
 
 func clear_spawned_raindrops() -> void:
 	for raindrop in spawned_raindrops:
@@ -166,6 +180,5 @@ func _on_spawn_raindrops_button_pressed() -> void:
 	prepare_and_spawn_raindrops()
 
 
-func _on_start_race_button_pressed() -> void:
-	if selected_raindrop != null:
-		begin_race()
+func start_race() -> void:
+	begin_race()
