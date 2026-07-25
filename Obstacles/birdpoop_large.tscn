@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c1pd6m0efkesg"]
+
+[ext_resource type="Texture2D" uid="uid://bnrktvmq2tgs8" path="res://Scenes/Arowyn/birdpoo_1.png" id="1_580o8"]
+[ext_resource type="PackedScene" uid="uid://bmak77bjnvhu" path="res://Obstacles/window_obstacle.tscn" id="1_cetpn"]
+
+[node name="WindowObstacle" unique_id=1771677767 instance=ExtResource("1_cetpn")]
+
+[node name="Sprite2D" parent="." index="0" unique_id=1708770567]
+texture = ExtResource("1_580o8")
+
+[node name="CollisionPolygon2D" parent="." index="1" unique_id=1676404393]
+polygon = PackedVector2Array(69, -159, -17, -96, -145, 27, -94, 20, -148, 85, -100, 77, -98, 98, -65, 68, -53, 83, -86, 140, -54, 156, -8, 65, -13, 129, 94, -36, 127, -117, 111, -150)

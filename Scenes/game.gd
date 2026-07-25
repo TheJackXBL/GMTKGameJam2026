@@ -10,6 +10,7 @@ signal dayChanging
 @onready var timerLabel = $CanvasLayer/TimerLabel
 @onready var canvas = $CanvasLayer
 @onready var window = $Window
+@onready var obstacleManager = $ObstacleManager
 
 var dayStarted := false
 var dayFinished := false
@@ -26,6 +27,7 @@ func _process(delta: float) -> void:
 
 	world.set_dayProgress(timerProgress)
 	window.set_dayProgress(timerProgress)
+	obstacleManager.set_dayProgress(timerProgress)
 	
 	timerLabel.text = "Day Timer: " + str(ceil(timer.time_left))
 
@@ -34,6 +36,7 @@ func change_day():
 	
 	await canvas.fadeIn()
 	print("Fade complete")
+	obstacleManager.clear_obstacles()
 	
 	dayManager.set_tomorrow()
 	start_day(dayManager.get_day())

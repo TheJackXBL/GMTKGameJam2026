@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://bmak77bjnvhu"]
+
+[ext_resource type="Shader" uid="uid://s45pblwypftt" path="res://Obstacles/obstacle.gdshader" id="1_bod3k"]
+[ext_resource type="Script" uid="uid://dse4uhrr8ibgf" path="res://Obstacles/window_obstacles.gd" id="1_wyua0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bod3k"]
+shader = ExtResource("1_bod3k")
+shader_parameter/frostAmount = 1.0
+shader_parameter/maxTint = 0.25
+shader_parameter/tintColor = Color(1, 1, 1, 1)
+
+[node name="WindowObstacle" type="StaticBody2D" unique_id=1771677767]
+script = ExtResource("1_wyua0")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1708770567]
+material = SubResource("ShaderMaterial_bod3k")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1676404393]
