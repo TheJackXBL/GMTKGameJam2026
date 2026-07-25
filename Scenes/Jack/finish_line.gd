@@ -7,6 +7,8 @@ var finished_raindrops: Array[Node2D] = []
 
 @onready var race_manager: Node2D = %RaceManager
 
+@onready var finish_sfx: AudioStreamPlayer = $FinishLineSFX
+
 var winning_raindrop: RigidBody2D
 var race_finished := false
 
@@ -30,6 +32,8 @@ func _on_body_entered(body: Node2D) -> void:
 	race_finished = true
 		
 	var finishing_position: int = finished_raindrops.size()
+	
+	finish_sfx.play()
 	
 	create_position_label(body.global_position, finishing_position)
 	

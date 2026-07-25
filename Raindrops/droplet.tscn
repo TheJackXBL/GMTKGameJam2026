@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dl6layg7vd6ml"]
+
+[ext_resource type="Script" uid="uid://bh24r1dabu5ab" path="res://Raindrops/droplet.gd" id="1_vcf58"]
+[ext_resource type="Texture2D" uid="uid://pxx83i4rjabb" path="res://Scenes/Jack/obdrop_1.png" id="2_e3ng8"]
+[ext_resource type="Texture2D" uid="uid://wnspsx0ju5s6" path="res://Scenes/Jack/obdrop_2.png" id="3_vs4dx"]
+[ext_resource type="Texture2D" uid="uid://bn5ur5pysh6ok" path="res://Scenes/Jack/obdrop_3.png" id="4_48dka"]
+[ext_resource type="Texture2D" uid="uid://dquremqgc2k7v" path="res://Scenes/Jack/obdrop_4.png" id="5_ad8ug"]
+[ext_resource type="Texture2D" uid="uid://c2w1eslsph1nh" path="res://Scenes/Jack/obdrop_6.png" id="6_jqb0h"]
+[ext_resource type="Texture2D" uid="uid://dhpj1t1xsceqw" path="res://Scenes/Jack/obdrop_7.png" id="7_shtg6"]
+[ext_resource type="Texture2D" uid="uid://6krxutelaeqp" path="res://Scenes/Jack/obdrop_8.png" id="8_nisle"]
+[ext_resource type="Texture2D" uid="uid://cegsbre3bn1wi" path="res://Scenes/Jack/obdrop_10.png" id="9_eaud2"]
+[ext_resource type="Texture2D" uid="uid://bg41rb80xrsb8" path="res://Scenes/Jack/obdrop_12.png" id="10_flkx6"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0dcnb"]
+radius = 9.0
+
+[node name="Droplet" type="Area2D" unique_id=210999127]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_vcf58")
+radius = 1.0
+droplet_sprites = Array[Texture2D]([ExtResource("2_e3ng8"), ExtResource("3_vs4dx"), ExtResource("4_48dka"), ExtResource("5_ad8ug"), ExtResource("6_jqb0h"), ExtResource("7_shtg6"), ExtResource("8_nisle"), ExtResource("9_eaud2"), ExtResource("10_flkx6")])
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1574343666]
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("10_flkx6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=648355227]
+shape = SubResource("CircleShape2D_0dcnb")

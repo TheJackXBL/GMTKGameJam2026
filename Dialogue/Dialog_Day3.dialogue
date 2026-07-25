@@ -1,7 +1,9 @@
 ~ day_start
-Coco: This is the opening cutscene for Day 3.
-Mom: Wow wow.
-Mom: I'm saying something tutorial-y.
+Mum: We're nearly there! Just one more day of travel.
+Kid: Yay! This has been fun, but I'm excited to see Grandma.
+Mum: Me too. How's your racing game going?
+Kid: Pretty good, but it's harder to play by the ocean! Bird poo keeps getting on the window—YUCK!
+
 
 do game.begin_game()
 
@@ -9,9 +11,8 @@ do game.begin_game()
 
 
 ~ day_end
-Mom: The sun is out on Day 3!
-Coco: Are we there yet?
-Mom: Not even close.
+Mom: We're here!
+Kid: Yay, finally!
 
 do game.end_day()
 

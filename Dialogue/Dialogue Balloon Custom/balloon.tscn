@@ -4,6 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Texture2D" uid="uid://cvsei4fm7e7jt" path="res://Scenes/Jack/Bosco Dialogue Box.png" id="2_ugaau"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="Texture2D" uid="uid://c3cwd0nncxlee" path="res://Dialogue/Character Icons/icon_mum.png" id="3_ctqog"]
+[ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="3_p13al"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -138,16 +140,32 @@ layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer" unique_id=1428277592]
 layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Portrait" type="TextureRect" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=903927139]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(143.3, 126.75)
+layout_mode = 2
+size_flags_vertical = 4
+offset_transform_enabled = true
+offset_transform_position = Vector2(-7.49, -8)
+texture = ExtResource("3_ctqog")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1624289611]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = -4
 
 [node name="CharacterLabel" type="RichTextLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=507199029]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 mouse_filter = 1
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_p13al")
+theme_override_font_sizes/normal_font_size = 30
 bbcode_enabled = true
 text = "Character"
 fit_content = true
@@ -157,15 +175,21 @@ scroll_active = false
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_constants/line_separation = -6
+theme_override_fonts/normal_font = ExtResource("3_p13al")
+theme_override_font_sizes/normal_font_size = 25
 text = "Dialogue..."
 
 [node name="Control" type="Control" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer" unique_id=1162966119]
-custom_minimum_size = Vector2(20, 10)
+custom_minimum_size = Vector2(30, 35)
 layout_mode = 2
 size_flags_vertical = 8
 
 [node name="Progress" type="Polygon2D" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control" unique_id=821575988]
 unique_name_in_owner = true
+position = Vector2(-15, 0)
+color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, 10, 10, 20, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control" unique_id=452325722]

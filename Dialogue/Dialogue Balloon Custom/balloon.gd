@@ -64,6 +64,8 @@ var mutation_cooldown: Timer = Timer.new()
 ## The label showing the currently spoken dialogue
 @onready var dialogue_label: DialogueLabel = %DialogueLabel
 
+@onready var portrait: TextureRect = %Portrait
+
 ## The menu of responses
 @onready var responses_menu: DialogueResponsesMenu = %ResponsesMenu
 
@@ -132,6 +134,12 @@ func apply_dialogue_line() -> void:
 
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
+	
+	var portrait_path: String = "res://Dialogue/Character Icons/icon_%s.png" % dialogue_line.character.to_lower()
+	if FileAccess.file_exists(portrait_path):
+		portrait.texture = load(portrait_path)
+	else:
+		portrait.texture = null
 
 	dialogue_label.hide()
 	dialogue_label.dialogue_line = dialogue_line

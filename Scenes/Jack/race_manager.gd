@@ -1,13 +1,21 @@
 extends Node2D
 
 signal startCountdown
+signal race_completed
 
 @export var RaindropManager: Node2D
+@export var GameManager: Node2D
 
 @export var race_camera: Camera2D
 
 @export var canvas: CanvasLayer
 @onready var finishLine = $"../FinishLine"
+
+@onready var race_manager_sfx: AudioStreamPlayer = $RaceManagerSFX
+@export var selected_raindrop_done_stream: AudioStream
+@export var start_race_stream: AudioStream
+
+
 
 var score: int = 0
 var races_won: int = 0
@@ -57,16 +65,32 @@ func _on_finish_line_winner_determined(winning_raindrop: Node2D) -> void:
 	Engine.time_scale = 1.0
 
 	update_score(true, selected_finish_position)
-
-	RaindropManager.fade_remaining_raindrops()
-	RaindropManager.prepare_and_spawn_raindrops()
-
+	
 	selected_raindrop_finished = false
 	selected_finish_position = 0
+
+	RaindropManager.fade_remaining_raindrops()
+	
+	# Tell game.gd that the current race has fully finished.
+	race_completed.emit()
+	
+	# Do not start another race when the day has ended.
+	if GameManager.dayFinished:
+		await get_tree().create_timer(1.25, true).timeout
+		GameManager.go_to_day_end_dialogue()
+		return
+	
+	RaindropManager.prepare_and_spawn_raindrops()
+
+	
 
 
 func _on_canvas_layer_countdown_finished() -> void:
 	print("GO appeared")
+	
+	race_manager_sfx.stream = start_race_stream
+	race_manager_sfx.play()
+	
 	start_race()
 
 func start_race() -> void:
@@ -112,4 +136,8 @@ func _on_finish_line_raindrop_finished(raindrop: Node2D, position: int) -> void:
 	if raindrop.get("isSelected"):
 		selected_finish_position = position
 		selected_raindrop_finished = true
+		
+		race_manager_sfx.stream = selected_raindrop_done_stream
+		
+		race_manager_sfx.play()
 		print("Selected raindrop finished in position ", position)

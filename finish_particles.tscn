@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dox0hbbak5fjo"]
 
-[ext_resource type="Texture2D" uid="uid://c8utmun3tctm5" path="res://Scenes/Jack/star.png" id="1_eiydp"]
+[ext_resource type="Texture2D" uid="uid://dbql8bmbiehc" path="res://Scenes/Jack/particle flipped.png" id="1_kgnhf"]
 [ext_resource type="Script" uid="uid://ddhpdp72fvklj" path="res://particles_cleanup.gd" id="2_kgnhf"]
 
 [sub_resource type="Gradient" id="Gradient_kgnhf"]
@@ -18,8 +18,8 @@ flatness = 1.0
 initial_velocity_min = 80.0
 initial_velocity_max = 160.0
 gravity = Vector3(0, 98, 0)
-scale_min = 0.01
-scale_max = 0.01
+scale_min = 0.03
+scale_max = 0.049999997
 color_ramp = SubResource("GradientTexture1D_kgnhf")
 
 [node name="FinishParticles" type="GPUParticles2D" unique_id=365037118]
@@ -27,7 +27,7 @@ process_mode = 3
 z_index = 5
 emitting = false
 amount = 4
-texture = ExtResource("1_eiydp")
+texture = ExtResource("1_kgnhf")
 lifetime = 1.5
 one_shot = true
 explosiveness = 1.0

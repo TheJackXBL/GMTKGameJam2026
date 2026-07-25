@@ -30,7 +30,6 @@
 [ext_resource type="Texture2D" uid="uid://dltelc3nwthrc" path="res://Scenes/Jack/Car Window Stickers.png" id="24_xoyte"]
 [ext_resource type="AudioStream" uid="uid://clu3hggp58qsq" path="res://Audio/SoundEffect/StartWhistle.mp3" id="25_go5yj"]
 [ext_resource type="Texture2D" uid="uid://dc0pl0mr5gf4s" path="res://Scenes/Jack/clock.png" id="30_opftb"]
-[ext_resource type="PackedScene" uid="uid://dl6layg7vd6ml" path="res://Raindrops/droplet.tscn" id="31_a0ntl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
 shader = ExtResource("7_886ha")
@@ -142,6 +141,10 @@ dayLength = 120.0
 script = ExtResource("3_ksskx")
 pause_menu_packed = ExtResource("4_w2kc5")
 
+[node name="GPUParticles2D" parent="." unique_id=365037118 instance=ExtResource("5_1rny3")]
+position = Vector2(102.00001, 279)
+scale = Vector2(0.6, 0.6)
+
 [node name="World" parent="." unique_id=823103243 instance=ExtResource("5_7cuaw")]
 scale = Vector2(0.6, 0.6)
 
@@ -164,29 +167,8 @@ min_spawn_x = -175.0
 max_spawn_x = 400.0
 spawn_y = -245.0
 raindrop_count = 6
-spawn_on_ready = false
 
 [node name="StreakContainer" type="Node2D" parent="Window/RaindropManager" unique_id=1921861915]
-
-[node name="DropletContainer" type="Node2D" parent="Window" unique_id=1500344339]
-
-[node name="Droplet" parent="Window/DropletContainer" unique_id=210999127 instance=ExtResource("31_a0ntl")]
-position = Vector2(50, 152)
-
-[node name="Droplet2" parent="Window/DropletContainer" unique_id=1692288175 instance=ExtResource("31_a0ntl")]
-position = Vector2(-112, 223)
-
-[node name="Droplet3" parent="Window/DropletContainer" unique_id=713478469 instance=ExtResource("31_a0ntl")]
-position = Vector2(-98, 138)
-
-[node name="Droplet4" parent="Window/DropletContainer" unique_id=1943797448 instance=ExtResource("31_a0ntl")]
-position = Vector2(103, 221)
-
-[node name="Droplet5" parent="Window/DropletContainer" unique_id=1699651 instance=ExtResource("31_a0ntl")]
-position = Vector2(-19, 226)
-
-[node name="Droplet6" parent="Window/DropletContainer" unique_id=1145264606 instance=ExtResource("31_a0ntl")]
-position = Vector2(-17, 100)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=747220960]
 limit_left = -576
@@ -371,7 +353,7 @@ offset_right = -439.0
 offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "0"
+text = "1234"
 label_settings = SubResource("LabelSettings_c8ju1")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -413,11 +395,10 @@ shape = SubResource("RectangleShape2D_rc6o0")
 mesh = SubResource("QuadMesh_1qswb")
 texture = SubResource("GradientTexture1D_ljb83")
 
-[node name="RaceManager" type="Node2D" parent="." unique_id=189466672 node_paths=PackedStringArray("RaindropManager", "GameManager", "race_camera")]
+[node name="RaceManager" type="Node2D" parent="." unique_id=189466672 node_paths=PackedStringArray("RaindropManager", "race_camera")]
 unique_name_in_owner = true
 script = ExtResource("9_xyy1j")
 RaindropManager = NodePath("../Window/RaindropManager")
-GameManager = NodePath("..")
 race_camera = NodePath("../Camera2D")
 selected_raindrop_done_stream = ExtResource("22_onh5e")
 start_race_stream = ExtResource("25_go5yj")

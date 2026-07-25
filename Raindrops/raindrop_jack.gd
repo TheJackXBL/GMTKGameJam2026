@@ -650,6 +650,24 @@ func absorb_drop(other_drop: Raindrop) -> void:
 func combine_stat(stat_a: int, stat_b: int) -> int:
 	return max(stat_a, stat_b) + roundi(min(stat_a, stat_b) * 0.5)
 
+func absorb_droplet(droplet: Droplet) -> void:
+	if not is_instance_valid(droplet):
+		return
+
+	weightStat = mini(weightStat + 1, 10)
+	friendlinessStat = mini(friendlinessStat + 1, 10)
+	slipperinessStat = mini(slipperinessStat + 1, 10)
+
+	radius = sqrt(
+		radius * radius
+		+ droplet.radius * droplet.radius
+	)
+
+	update_drop_size()
+	start_sliding()
+
+	droplet.queue_free()
+
 func fade_in_drop() -> void:
 	
 	raindrop_sprite.modulate.a = 0.0

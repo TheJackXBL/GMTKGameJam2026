@@ -1,10 +1,10 @@
 ~ day_start
 Kid: Mum...are we there yet?
-Mom: What?! We've only just started!
+Mum: What?! We've only just started!
 Kid: Long car rides are so [shake]borrring[/shake].
-Mom: This is going to be a long [b]3 Day road trip[/b], and it looks like this weather's going to be with us for a while. Hmm.
+Mum: This is going to be a long [color=red]3 Day road trip[/color], and it looks like this weather's going to be with us for a while. Hmm.
 Kid: Ooh, I could pass the time by [color=gold]racing raindrops[/color]!
-Mom: That sounds fun!
+Mum: That sounds fun!
 
 
 do game.begin_game()
@@ -13,9 +13,9 @@ do game.begin_game()
 
 
 ~ day_end
-Mom: The sun is out on Day 1!
-Coco: Are we there yet?
-Mom: Not even close.
+Mum: The sun is out on Day 1!
+Kid: Are we there yet?
+Mum: Not even close.
 
 do game.end_day()
 
