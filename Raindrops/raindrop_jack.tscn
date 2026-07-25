@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://clbs2nlm5bap8" path="res://Scenes/Jack/raindrop_info_ui.tscn" id="3_wamoy"]
 
 [sub_resource type="Curve" id="Curve_6si7m"]
-_data = [Vector2(0, 0.20224726), 0.0, 0.0, 0, 0, Vector2(0.51, 0.64044946), 0.83616424, 0.83616424, 0, 0, Vector2(0.995, 1), 0.6609383, 0.0, 0, 0]
+_data = [Vector2(0, 0.5393259), 0.0, 0.0, 0, 0, Vector2(0.525, 0.7865169), 0.70224714, 0.70224714, 0, 0, Vector2(0.995, 1), 0.39656296, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wamoy"]

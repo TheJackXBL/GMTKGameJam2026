@@ -379,7 +379,6 @@ bus = &"Music"
 [connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/Go Button Container/Spawn Raindrops Button" to="Window/RaindropManager" method="_on_spawn_raindrops_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Go Button Container/Start Race Button" to="Window/RaindropManager" method="_on_start_race_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Go Button Container/Start Race Button" to="FinishLine" method="_on_start_race_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Go Button Container/Start Race Button" to="RaceManager" method="_on_start_race_button_pressed"]
 [connection signal="body_entered" from="FinishLine" to="FinishLine" method="_on_body_entered"]
 [connection signal="winner_determined" from="FinishLine" to="RaceManager" method="_on_finish_line_winner_determined"]
