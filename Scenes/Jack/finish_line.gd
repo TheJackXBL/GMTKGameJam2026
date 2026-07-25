@@ -36,6 +36,10 @@ func create_celebration(position: Vector2) -> void:
 	get_tree().current_scene.add_child(particles)
 	particles.global_position = position
 
-func _on_start_race_button_pressed() -> void:
+#func _on_start_race_button_pressed() -> void:
+	#race_finished = false
+	#winning_raindrop = null
+
+func reset_race() -> void:
 	race_finished = false
 	winning_raindrop = null
