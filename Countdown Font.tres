@@ -6,4 +6,4 @@
 font = ExtResource("1_gslap")
 font_size = 90
 shadow_size = 10
-shadow_color = Color(0.24313726, 0.5372549, 0.627451, 0.6392157)
+shadow_color = Color(0.34117648, 0.3647059, 0.69411767, 0.6392157)

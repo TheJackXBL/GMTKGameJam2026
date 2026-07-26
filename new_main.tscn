@@ -29,7 +29,6 @@
 [ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
 [ext_resource type="Script" uid="uid://dbi8ec4kqscir" path="res://Obstacles/obstacle_manager.gd" id="16_1qswb"]
 [ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="19_jgecq"]
-[ext_resource type="Shader" uid="uid://durapdec5wo2h" path="res://Raindrops/raindrop_streak.gdshader" id="20_ms1vp"]
 [ext_resource type="PackedScene" uid="uid://b1e0s7hmitroo" path="res://finish_position_label.tscn" id="21_c8ju1"]
 [ext_resource type="AudioStream" uid="uid://c0ltomrwdmxq1" path="res://Audio/Music/AreWeThereYet_MainTheme.mp3" id="22_hxk7o"]
 [ext_resource type="AudioStream" uid="uid://c5dsbas3uekvi" path="res://Audio/SoundEffect/Goal.mp3" id="22_onh5e"]
@@ -58,9 +57,6 @@ shader_parameter/whiteTint = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef17l"]
 size = Vector2(710, 248)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_75xeh"]
-shader = ExtResource("20_ms1vp")
 
 [sub_resource type="LabelSettings" id="LabelSettings_a0ntl"]
 font = ExtResource("19_jgecq")
@@ -198,12 +194,6 @@ mouse_filter = 2
 [node name="ObstacleContainer" type="Node2D" parent="Window" unique_id=997110913]
 z_index = 1
 
-[node name="WindowObstacle" parent="Window/ObstacleContainer" unique_id=1771677767 instance=ExtResource("7_xoyte")]
-position = Vector2(-205, 139)
-
-[node name="WindowObstacle2" parent="Window/ObstacleContainer" unique_id=366297711 instance=ExtResource("8_jgecq")]
-position = Vector2(11, 172)
-
 [node name="ObstacleSpawnArea" type="Area2D" parent="Window" unique_id=1766365409]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Window/ObstacleSpawnArea" unique_id=1663712292]
@@ -218,10 +208,6 @@ max_spawn_x = 400.0
 spawn_y = -245.0
 raindrop_count = 6
 spawn_on_ready = false
-
-[node name="Line2D" type="Line2D" parent="Window/RaindropManager" unique_id=1220232467]
-material = SubResource("ShaderMaterial_75xeh")
-points = PackedVector2Array(-278, 48, 189, 211)
 
 [node name="StreakContainer" type="Node2D" parent="Window/RaindropManager" unique_id=1921861915]
 
