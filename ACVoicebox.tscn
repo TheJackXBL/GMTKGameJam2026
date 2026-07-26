@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://ddsks0bp7jij2"]
+
+[ext_resource type="Script" uid="uid://dohku14tde833" path="res://ACVoicebox.gd" id="1"]
+
+[node name="ACVoicebox" type="AudioStreamPlayer" unique_id=375461692]
+script = ExtResource("1")
