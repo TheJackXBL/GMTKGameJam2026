@@ -4,6 +4,6 @@
 
 [node name="AppConfig" type="Node" unique_id=1177605314]
 script = ExtResource("1_o0k5w")
-main_menu_scene_path = "res://Scenes/Menus/scenes/menus/main_menu/main_menu_with_animations.tscn"
-game_scene_path = "uid://dux1dltmmc5a"
+main_menu_scene_path = "uid://16aqy7uoxe5a"
+game_scene_path = "uid://26c2xl41ut5j"
 ending_scene_path = "uid://bsi3262s8nt6"

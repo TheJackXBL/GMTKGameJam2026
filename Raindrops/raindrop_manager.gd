@@ -1,7 +1,11 @@
 extends Node2D
 
+signal raindropSelected
+
 @export var raindrop_scenes: Array[PackedScene]
 @export var raindrop_ui_scene: PackedScene
+@onready var streak_container: Node2D = $StreakContainer
+
 
 @export var maximum_speed: int = 10
 
@@ -27,7 +31,28 @@ var raindrop_names: Array[String] = [
 	"Pip",
 	"Droop",
 	"Big Dewd",
-	"Drippy"
+	"Drippy",
+	"Mark",
+	"Timmy",
+	"Benedict",
+	"Fred", 
+	"Darla",
+	"Polly",
+	"Annie",
+	"Jack",
+	"Bosco",
+	"Aro",
+	"Livi",
+	"Matt",
+	"Maaacks",
+	"Nathan",
+	"Reyn",
+	"Bird",
+	"Damien",
+	"Daisy",
+	"Callum",
+	"Beatrix",
+	"Dan"
 ]
 
 var current_names: Array[String]
@@ -173,7 +198,8 @@ func select_raindrop(raindrop: Node2D) -> void:
 	selected_raindrop.isSelected = true
 
 	print("Selected: ", raindrop.raindropName)
-
+	
+	raindropSelected.emit()
 
 
 func _on_spawn_raindrops_button_pressed() -> void:
@@ -182,3 +208,7 @@ func _on_spawn_raindrops_button_pressed() -> void:
 
 func start_race() -> void:
 	begin_race()
+
+func clear_streaks() -> void:
+	for child in streak_container.get_children():
+		child.queue_free()
