@@ -19,3 +19,6 @@ func _ready():
 		if get("tab_%d/title" % iter) == "Inputs":
 			set("tab_%d/hidden" % iter, not show_input_sensitivity)
 			continue
+		if get("tab_%d/title" % iter) == "Video":
+			set("tab_%d/hidden" % iter, not show_input_sensitivity)
+			continue

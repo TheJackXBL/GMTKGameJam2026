@@ -1,11 +1,72 @@
 [gd_scene format=3 uid="uid://16aqy7uoxe5a"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_menus_template/base/nodes/menus/main_menu/main_menu.tscn" id="1_4gt40"]
-[ext_resource type="Script" path="res://Scenes/Menus/scenes/menus/main_menu/main_menu.gd" id="2_scvl1"]
-[ext_resource type="PackedScene" path="res://Scenes/Menus/scenes/windows/main_menu_options_window.tscn" id="3_urfis"]
-[ext_resource type="PackedScene" path="res://Scenes/Menus/scenes/windows/main_menu_credits_window.tscn" id="4_w848h"]
+[ext_resource type="PackedScene" uid="uid://c6k5nnpbypshi" path="res://addons/maaacks_menus_template/base/nodes/menus/main_menu/main_menu.tscn" id="1_4gt40"]
+[ext_resource type="Script" uid="uid://bqwbdw8m714s0" path="res://Scenes/Menus/scenes/menus/main_menu/main_menu.gd" id="2_scvl1"]
+[ext_resource type="PackedScene" uid="uid://dvmhi6kwdaum1" path="res://Scenes/Menus/scenes/windows/main_menu_options_window.tscn" id="3_urfis"]
+[ext_resource type="PackedScene" uid="uid://bxhc3p01vqi38" path="res://Scenes/Menus/scenes/windows/main_menu_credits_window.tscn" id="4_w848h"]
+[ext_resource type="Texture2D" uid="uid://cds4fj124r2cp" path="res://Sprite/Title/titlescreen.png" id="5_scvl1"]
+[ext_resource type="Texture2D" uid="uid://boadtfhwju7qi" path="res://Sprite/Title/Play.png" id="6_mmx3h"]
+[ext_resource type="Texture2D" uid="uid://bt73it54p7vcu" path="res://Sprite/Title/PlayHighlight.png" id="7_0l8cc"]
+[ext_resource type="Texture2D" uid="uid://dhlkxxcl4lbj3" path="res://Sprite/Title/options.png" id="8_mmx3h"]
+[ext_resource type="Texture2D" uid="uid://ru8gcg5ei5kq" path="res://Sprite/Title/options_highlight.png" id="9_mmx3h"]
 
 [node name="MainMenu" unique_id=869232425 instance=ExtResource("1_4gt40")]
 script = ExtResource("2_scvl1")
+game_scene_path = "uid://26c2xl41ut5j"
 options_packed_scene = ExtResource("3_urfis")
 credits_packed_scene = ExtResource("4_w848h")
+
+[node name="Titlescreen" type="Sprite2D" parent="." index="0" unique_id=688166406]
+position = Vector2(577.7267, 324.07996)
+scale = Vector2(0.44988883, 0.44988889)
+texture = ExtResource("5_scvl1")
+
+[node name="TitleMargin" parent="MenuContainer" parent_id_path=PackedInt32Array(396616752) index="0" unique_id=2112060331]
+visible = false
+
+[node name="TitleLabel" parent="MenuContainer/TitleMargin/TitleContainer" parent_id_path=PackedInt32Array(556427956) index="0" unique_id=359406872]
+text = "GMTK Game Jam 2026"
+
+[node name="SubTitleMargin" parent="MenuContainer" parent_id_path=PackedInt32Array(396616752) index="1" unique_id=1510335937]
+visible = false
+
+[node name="NewGameButton" type="TextureButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer" parent_id_path=PackedInt32Array(116448484) index="0" unique_id=1736222391]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(209.8, 65.82)
+layout_mode = 0
+offset_left = 369.0
+offset_top = 259.0
+offset_right = 578.8
+offset_bottom = 324.82
+texture_normal = ExtResource("6_mmx3h")
+texture_hover = ExtResource("7_0l8cc")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="OptionsButton" type="TextureButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer" parent_id_path=PackedInt32Array(116448484) index="1" unique_id=2110810198]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 611.0
+offset_top = 280.0
+offset_right = 739.0
+offset_bottom = 320.0
+texture_normal = ExtResource("8_mmx3h")
+texture_hover = ExtResource("9_mmx3h")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MenuButtonsBoxContainer" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer" parent_id_path=PackedInt32Array(116448484) index="2" unique_id=2017477786]
+visible = false
+
+[node name="NewGameButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="0" unique_id=2044537792]
+unique_name_in_owner = false
+visible = false
+
+[node name="OptionsButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="1" unique_id=1486236076]
+unique_name_in_owner = false
+
+[node name="ExitConfirmation" parent="." index="6" unique_id=912502155]
+ignore_siblings = false
+
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
+[connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/OptionsButton" to="." method="_on_options_button_pressed"]

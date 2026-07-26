@@ -13,6 +13,13 @@ signal choose_requested(raindrop: Node2D)
 @onready var friendliness_value: Label = %FriendlinessValue
 @onready var slipperiness_value: Label = %SlipperinessValue
 
+@onready var weight_bar: TextureRect = %WeightBar
+@onready var slipperiness_bar: TextureRect = %SlipperinessBar
+@onready var friendliness_bar: TextureRect = %FriendlinessBar
+
+@export var bar_textures: Array[Texture2D]
+
+
 @onready var choose_button: Button = %ChooseButton
 
 var raindrop: Node2D
@@ -35,39 +42,14 @@ func update_display(drop_name: String, speed: int, angle: float, weight: int, fr
 	
 	#TODO - Adjust bars to match stats
 
-	#create_stat_bar(weight_bar, weight)
-	#create_stat_bar(friendliness_bar, friendliness)
-	#create_stat_bar(slipperiness_bar, slipperiness)
+	update_stat_bar(weight_bar, weight)
+	update_stat_bar(friendliness_bar, friendliness)
+	update_stat_bar(slipperiness_bar, slipperiness)
 
 
-func create_stat_bar(container: HBoxContainer, value: int) -> void:
-	for child in container.get_children():
-		child.queue_free()
-
-	var clamped_value := clampi(value, 0, segment_count)
-
-	for i in range(segment_count):
-		var segment := Panel.new()
-
-		segment.custom_minimum_size = Vector2(26.0, 42.0)
-		segment.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-
-		var style_box := StyleBoxFlat.new()
-
-		if i < clamped_value:
-			style_box.bg_color = filled_colour
-		else:
-			style_box.bg_color = empty_colour
-
-		style_box.border_width_left = 2
-		style_box.border_width_top = 2
-		style_box.border_width_right = 2
-		style_box.border_width_bottom = 2
-
-		style_box.border_color = Color.BLACK
-
-		segment.add_theme_stylebox_override("panel", style_box)
-		container.add_child(segment)
+func update_stat_bar(bar: TextureRect, value: int) -> void:
+	
+	bar.texture = bar_textures[value-1]
 
 
 #func _on_dropdown_button_pressed() -> void:

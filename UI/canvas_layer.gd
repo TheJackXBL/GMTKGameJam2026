@@ -2,11 +2,14 @@ extends CanvasLayer
 
 signal countdown_finished
 
-@onready var animation_player = $AnimationPlayer
-
 @export var number_duration: float = 1.0
 @export var go_duration: float = 1.0
 
+@export var smack_effect_scene: PackedScene
+
+@onready var smack_button: TextureButton = $SmackButton
+@onready var animation_player = $AnimationPlayer
+@onready var smack_effect_container = $"../SmackEffectContainer"
 @onready var label_3: Label = $CountdownContainer/Label3
 @onready var label_2: Label = $CountdownContainer/Label2
 @onready var label_1: Label = $CountdownContainer/Label1
@@ -14,12 +17,24 @@ signal countdown_finished
 
 @onready var score_label: Label = $ScoreLabel
 
+@onready var start_race_button: TextureButton = $"Go Button Container/Start Race Button"
+
+@export var tutorial_overlay: Array[TextureRect]
+@export var current_overlay := 0
+
+
 var displayed_score: int = 0
 
 var countdown_running: bool = false
 
 func _ready() -> void:
 	hide_all_labels()
+
+func showGoButton() -> void:
+	start_race_button.show()
+
+func hideGoButton() -> void:
+	start_race_button.hide()
 
 func start_countdown() -> void:
 	if countdown_running:
@@ -65,6 +80,8 @@ func fadeIn():
 
 
 func _on_race_manager_start_countdown() -> void:
+	
+	hideGoButton()
 	start_countdown()
 
 
@@ -87,3 +104,61 @@ func update_score(new_score: int) -> void:
 func _set_displayed_score(value: int) -> void:
 	displayed_score = value
 	score_label.text = str(displayed_score)
+
+
+func _on_raindrop_manager_raindrop_selected() -> void:
+	
+	if start_race_button.visible == false:
+		showGoButton()
+	
+
+func show_next_overlay() -> void:
+	
+	tutorial_overlay[current_overlay - 1].hide()
+	
+	if current_overlay + 1 > tutorial_overlay.size():
+		return
+	
+	tutorial_overlay[current_overlay].show()
+	
+	current_overlay += 1
+	
+func play_smack_effect(position: Vector2):
+	# Reset button state immediately
+	smack_button.button_pressed = false
+	smack_button.disabled = true
+	
+	# Fade button out
+	var fade_out := create_tween()
+	fade_out.tween_property(
+		smack_button,
+		"modulate:a",
+		0.0,
+		0.2
+	)
+
+	await fade_out.finished
+
+
+	# Create smack effect
+	var effect = smack_effect_scene.instantiate()
+	effect.global_position = position
+	smack_effect_container.add_child(effect)
+
+
+	# Wait for smack animation to fully finish
+	await effect.play_smack()
+
+
+	# Fade button back in
+	var fade_in := create_tween()
+	fade_in.tween_property(
+		smack_button,
+		"modulate:a",
+		1.0,
+		0.2
+	)
+
+	await fade_in.finished
+
+	smack_button.disabled = false
