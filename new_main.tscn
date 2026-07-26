@@ -180,6 +180,7 @@ offset_bottom = 359.0
 mouse_filter = 2
 
 [node name="ObstacleContainer" type="Node2D" parent="Window" unique_id=997110913]
+z_index = 1
 
 [node name="ObstacleSpawnArea" type="Area2D" parent="Window" unique_id=1766365409]
 
