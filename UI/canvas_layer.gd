@@ -14,12 +14,24 @@ signal countdown_finished
 
 @onready var score_label: Label = $ScoreLabel
 
+@onready var start_race_button: TextureButton = $"Go Button Container/Start Race Button"
+
+@export var tutorial_overlay: Array[TextureRect]
+@export var current_overlay := 0
+
+
 var displayed_score: int = 0
 
 var countdown_running: bool = false
 
 func _ready() -> void:
 	hide_all_labels()
+
+func showGoButton() -> void:
+	start_race_button.show()
+
+func hideGoButton() -> void:
+	start_race_button.hide()
 
 func start_countdown() -> void:
 	if countdown_running:
@@ -65,6 +77,8 @@ func fadeIn():
 
 
 func _on_race_manager_start_countdown() -> void:
+	
+	hideGoButton()
 	start_countdown()
 
 
@@ -87,3 +101,22 @@ func update_score(new_score: int) -> void:
 func _set_displayed_score(value: int) -> void:
 	displayed_score = value
 	score_label.text = str(displayed_score)
+
+
+func _on_raindrop_manager_raindrop_selected() -> void:
+	
+	if start_race_button.visible == false:
+		showGoButton()
+	
+
+func show_next_overlay() -> void:
+	
+	tutorial_overlay[current_overlay - 1].hide()
+	
+	if current_overlay + 1 > tutorial_overlay.size():
+		return
+	
+	tutorial_overlay[current_overlay].show()
+	
+	current_overlay += 1
+	

@@ -1,16 +1,37 @@
 ~ day_start
-Kid: Mum...are we there yet?
+Kid: Mum... are we there yet?
 Mum: What?! We've only just started!
 Kid: Long car rides are so [shake]borrring[/shake].
-Mum: This is going to be a long [color=red]3 Day road trip[/color], and it looks like this weather's going to be with us for a while. Hmm.
-Kid: Ooh, I could pass the time by [color=gold]racing raindrops[/color]!
+Mum: This is going to be a long [color=firebrick]3 day road trip[/color], and it looks like this weather's going to be with us for a while...
+Kid: Ooh, I could pass the time by [color=dark_goldenrod]racing raindrops[/color]!
 Mum: That sounds fun!
 
+
+do game.play_cutscene(1, "tutorial")
+
+=> END
+
+
+~ tutorial
+
+do game.next_overlay()
+
+Kid: I wonder which of those raindrops will reach the bottom first...
+
+# ADD A WAY TO SHOW THE FIRST SPAWNED RAINDROP'S BUBBLE
+Kid: If I hover my mouse over them, I can see their stats! 
+Kid: Weight affects their top speed, acceleration changes how fast they pick up speed, and magnetism affects how long they stay in a water streak for!
+Kid: Once I've made my choice, I can click on the raindrop to select it, and then hit Go!
+do game.next_overlay()
+Kid: Depending on where my raindrop finishes, I can get lots of points.
+do game.next_overlay()
+Kid: And I can see how long I've got left of the day up here.
+do game.next_overlay()
+Kid: Let's get racing!
 
 do game.begin_game()
 
 => END
-
 
 ~ day_end
 Mum: The sun is out on Day 1!
