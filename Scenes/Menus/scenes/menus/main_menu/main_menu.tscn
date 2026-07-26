@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dvmhi6kwdaum1" path="res://Scenes/Menus/scenes/windows/main_menu_options_window.tscn" id="3_urfis"]
 [ext_resource type="PackedScene" uid="uid://bxhc3p01vqi38" path="res://Scenes/Menus/scenes/windows/main_menu_credits_window.tscn" id="4_w848h"]
 [ext_resource type="Texture2D" uid="uid://cds4fj124r2cp" path="res://Sprite/Title/titlescreen.png" id="5_scvl1"]
+[ext_resource type="AudioStream" uid="uid://cti14wqyy4tod" path="res://Audio/Music/Intro.mp3" id="6_0l8cc"]
 [ext_resource type="Texture2D" uid="uid://boadtfhwju7qi" path="res://Sprite/Title/Play.png" id="6_mmx3h"]
 [ext_resource type="Texture2D" uid="uid://bt73it54p7vcu" path="res://Sprite/Title/PlayHighlight.png" id="7_0l8cc"]
 [ext_resource type="Texture2D" uid="uid://dhlkxxcl4lbj3" path="res://Sprite/Title/options.png" id="8_mmx3h"]
@@ -21,17 +22,16 @@ position = Vector2(577.7267, 324.07996)
 scale = Vector2(0.44988883, 0.44988889)
 texture = ExtResource("5_scvl1")
 
+[node name="BackgroundMusicPlayer" parent="." index="2" unique_id=1141822549]
+stream = ExtResource("6_0l8cc")
+
 [node name="TitleMargin" parent="MenuContainer" parent_id_path=PackedInt32Array(396616752) index="0" unique_id=2112060331]
 visible = false
-
-[node name="TitleLabel" parent="MenuContainer/TitleMargin/TitleContainer" parent_id_path=PackedInt32Array(556427956) index="0" unique_id=359406872]
-text = "GMTK Game Jam 2026"
 
 [node name="SubTitleMargin" parent="MenuContainer" parent_id_path=PackedInt32Array(396616752) index="1" unique_id=1510335937]
 visible = false
 
 [node name="NewGameButton" type="TextureButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer" parent_id_path=PackedInt32Array(116448484) index="0" unique_id=1736222391]
-unique_name_in_owner = true
 custom_minimum_size = Vector2(209.8, 65.82)
 layout_mode = 0
 offset_left = 369.0
@@ -44,7 +44,6 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="OptionsButton" type="TextureButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer" parent_id_path=PackedInt32Array(116448484) index="1" unique_id=2110810198]
-unique_name_in_owner = true
 layout_mode = 0
 offset_left = 611.0
 offset_top = 280.0
@@ -65,8 +64,6 @@ visible = false
 [node name="OptionsButton" parent="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/MenuButtonsBoxContainer" index="1" unique_id=1486236076]
 unique_name_in_owner = false
 
-[node name="ExitConfirmation" parent="." index="6" unique_id=912502155]
-ignore_siblings = false
-
+[connection signal="game_started" from="." to="." method="_on_game_started"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/NewGameButton" to="." method="_on_new_game_button_pressed"]
 [connection signal="pressed" from="MenuContainer/MenuButtonsMargin/MenuButtonsContainer/OptionsButton" to="." method="_on_options_button_pressed"]

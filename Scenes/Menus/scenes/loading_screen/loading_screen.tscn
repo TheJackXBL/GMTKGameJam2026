@@ -1,7 +1,15 @@
 [gd_scene format=3 uid="uid://crtay0q7fs80v"]
 
-[ext_resource type="PackedScene" path="res://addons/maaacks_menus_template/base/nodes/loading_screen/loading_screen.tscn" id="1_phi83"]
-[ext_resource type="Script" path="res://Scenes/Menus/scenes/loading_screen/loading_screen.gd" id="2_44otg"]
+[ext_resource type="PackedScene" uid="uid://cd0jbh4metflb" path="res://addons/maaacks_menus_template/base/nodes/loading_screen/loading_screen.tscn" id="1_phi83"]
+[ext_resource type="Script" uid="uid://bmewtj0d8psxi" path="res://Scenes/Menus/scenes/loading_screen/loading_screen.gd" id="2_44otg"]
+[ext_resource type="LabelSettings" uid="uid://6efxa5jhumx7" path="res://Hover UI Font.tres" id="3_3xhoh"]
+[ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="4_81kv3"]
 
 [node name="LoadingScreen" unique_id=179842335 instance=ExtResource("1_phi83")]
 script = ExtResource("2_44otg")
+
+[node name="ProgressLabel" parent="Control/VBoxContainer" parent_id_path=PackedInt32Array(10456653) index="0" unique_id=1503629466]
+label_settings = ExtResource("3_3xhoh")
+
+[node name="ProgressBar" parent="Control/VBoxContainer" parent_id_path=PackedInt32Array(10456653) index="1" unique_id=1483901811]
+theme_override_fonts/font = ExtResource("4_81kv3")

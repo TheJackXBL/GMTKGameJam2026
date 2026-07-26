@@ -168,8 +168,12 @@ func play_smack_effect(position: Vector2):
 
 func show_placement_ribbon(placement: int) -> void:
 	
+	var texture_index = 0
 	
-	var texture_index = clamp(placement - 1, 0, ribbon_textures.size() - 1)
+	if placement > 0:
+		texture_index = clamp(placement - 1, 0, ribbon_textures.size() - 1)
+	else:
+		texture_index = ribbon_textures.size() - 1
 	
 	ribbon.texture = ribbon_textures[texture_index]
 	ribbon.modulate.a = 0

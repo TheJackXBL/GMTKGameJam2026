@@ -108,7 +108,9 @@ func begin_game() -> void:
 	dayStarted = true
 	timer.paused = false
 	timer.start(dayLength)
-	music_player.play()
+	
+	if !music_player.playing:
+		music_player.play()
 
 
 func end_day():
@@ -189,7 +191,7 @@ func smack_obstacle(position: Vector2):
 	if spend_score(smackCost):
 		smack_performed.emit(position)
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void:
 	if not smackArmed:
 		return
 	

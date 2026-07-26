@@ -7,7 +7,7 @@
 font = ExtResource("1_dijp2")
 font_size = 30
 shadow_size = 5
-shadow_color = Color(0.24313726, 0.5372549, 0.627451, 0.6392157)
+shadow_color = Color(0.34117648, 0.3647059, 0.69411767, 0.6392157)
 
 [node name="FinishPositionLabel" type="Label" unique_id=263866171]
 z_index = 3

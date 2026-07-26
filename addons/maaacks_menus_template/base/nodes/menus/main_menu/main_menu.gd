@@ -30,6 +30,8 @@ var sub_menu : Control
 @onready var credits_button = %CreditsButton
 @onready var exit_button = %ExitButton
 @onready var exit_confirmation = %ExitConfirmation
+@onready var background_music_player: AudioStreamPlayer = $BackgroundMusicPlayer
+
 
 func get_game_scene_path() -> String:
 	if game_scene_path.is_empty():
@@ -37,8 +39,10 @@ func get_game_scene_path() -> String:
 	return game_scene_path
 
 func load_game_scene() -> void:
+	
 	if signal_game_start:
 		SceneLoader.load_scene(get_game_scene_path(), true)
+		
 		game_started.emit()
 	else:
 		SceneLoader.load_scene(get_game_scene_path())
@@ -110,8 +114,10 @@ func _ready() -> void:
 	_hide_options_if_unset()
 	_hide_credits_if_unset()
 	_hide_new_game_if_unset()
+	background_music_player.play()
 
 func _on_new_game_button_pressed() -> void:
+	background_music_player.stop()
 	new_game()
 
 func _on_options_button_pressed() -> void:

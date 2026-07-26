@@ -52,7 +52,11 @@ var raindrop_names: Array[String] = [
 	"Daisy",
 	"Callum",
 	"Beatrix",
-	"Dan"
+	"Dan",
+	"Tom",
+	"Angus",
+	"Joe",
+	"Jasmin"
 ]
 
 var current_names: Array[String]

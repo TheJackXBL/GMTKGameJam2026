@@ -109,5 +109,7 @@ func smack_closest(mouse_position: Vector2) -> Vector2:
 	closest.clear()
 	
 	return obstacle_position
+
+
 func roll_obstacle_chance(chance: int) -> bool:
 	return randi_range(1, 100) <= chance
