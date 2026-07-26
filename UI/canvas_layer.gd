@@ -2,11 +2,14 @@ extends CanvasLayer
 
 signal countdown_finished
 
-@onready var animation_player = $AnimationPlayer
-
 @export var number_duration: float = 1.0
 @export var go_duration: float = 1.0
 
+@export var smack_effect_scene: PackedScene
+
+@onready var smack_button: TextureButton = $SmackButton
+@onready var animation_player = $AnimationPlayer
+@onready var smack_effect_container = $"../SmackEffectContainer"
 @onready var label_3: Label = $CountdownContainer/Label3
 @onready var label_2: Label = $CountdownContainer/Label2
 @onready var label_1: Label = $CountdownContainer/Label1
@@ -120,3 +123,42 @@ func show_next_overlay() -> void:
 	
 	current_overlay += 1
 	
+func play_smack_effect(position: Vector2):
+	# Reset button state immediately
+	smack_button.button_pressed = false
+	smack_button.disabled = true
+	
+	# Fade button out
+	var fade_out := create_tween()
+	fade_out.tween_property(
+		smack_button,
+		"modulate:a",
+		0.0,
+		0.2
+	)
+
+	await fade_out.finished
+
+
+	# Create smack effect
+	var effect = smack_effect_scene.instantiate()
+	effect.global_position = position
+	smack_effect_container.add_child(effect)
+
+
+	# Wait for smack animation to fully finish
+	await effect.play_smack()
+
+
+	# Fade button back in
+	var fade_in := create_tween()
+	fade_in.tween_property(
+		smack_button,
+		"modulate:a",
+		1.0,
+		0.2
+	)
+
+	await fade_in.finished
+
+	smack_button.disabled = false

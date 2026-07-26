@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://c1uugtwdp01f8"]
+
+[ext_resource type="Script" uid="uid://bcde4blhkiq4" path="res://Obstacles/smack_effect.gd" id="1_mchxj"]
+[ext_resource type="Texture2D" uid="uid://curaii33i3yud" path="res://Scenes/Arowyn/smack_frames/1.png" id="2_x6wud"]
+[ext_resource type="Texture2D" uid="uid://bmikc1c752lfq" path="res://Scenes/Arowyn/smack_frames/2.png" id="3_470yo"]
+[ext_resource type="Texture2D" uid="uid://b7jya8efb76px" path="res://Scenes/Arowyn/smack_frames/3.png" id="4_1achq"]
+[ext_resource type="Texture2D" uid="uid://dqf43qa0mman8" path="res://Scenes/Arowyn/smack_frames/4.png" id="5_coybj"]
+[ext_resource type="Texture2D" uid="uid://4hief12w4trn" path="res://Scenes/Arowyn/smack_frames/5.png" id="6_3hr80"]
+[ext_resource type="Texture2D" uid="uid://5uf6ipxvoiiy" path="res://Scenes/Arowyn/smack_frames/6.png" id="7_dy20s"]
+[ext_resource type="Texture2D" uid="uid://d3tddfgpq4g8a" path="res://Scenes/Arowyn/smack_frames/7.png" id="8_6tteq"]
+[ext_resource type="Texture2D" uid="uid://ceasj7ybpwm13" path="res://Scenes/Arowyn/smack_frames/8.png" id="9_85haj"]
+[ext_resource type="Texture2D" uid="uid://goewnqvue1we" path="res://Scenes/Arowyn/smack_frames/9.png" id="10_gpj6g"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3foiw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_x6wud")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.3,
+"texture": ExtResource("2_x6wud")
+}, {
+"duration": 0.1,
+"texture": ExtResource("3_470yo")
+}, {
+"duration": 0.5,
+"texture": ExtResource("4_1achq")
+}, {
+"duration": 0.5,
+"texture": ExtResource("5_coybj")
+}, {
+"duration": 0.5,
+"texture": ExtResource("6_3hr80")
+}, {
+"duration": 0.5,
+"texture": ExtResource("7_dy20s")
+}, {
+"duration": 0.5,
+"texture": ExtResource("8_6tteq")
+}, {
+"duration": 0.5,
+"texture": ExtResource("9_85haj")
+}, {
+"duration": 0.5,
+"texture": ExtResource("10_gpj6g")
+}],
+"loop": 0,
+"name": &"smack",
+"speed": 5.0
+}]
+
+[node name="SmackEffect" type="Node2D" unique_id=786978006]
+script = ExtResource("1_mchxj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=117428959]
+position = Vector2(-16.999996, 101.00001)
+rotation = 0.17453292
+scale = Vector2(0.2, 0.2)
+sprite_frames = SubResource("SpriteFrames_3foiw")
+flip_h = true
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_smack_sprite_animation_finished"]

@@ -96,7 +96,7 @@ func _on_canvas_layer_countdown_finished() -> void:
 func start_race() -> void:
 	RaindropManager.start_race()
 
-
+#more of an awarding score function
 func update_score(playedRace: bool, finishing_position: int) -> void:
 	
 	if playedRace:
@@ -130,6 +130,15 @@ func update_score(playedRace: bool, finishing_position: int) -> void:
 	else:
 		pass #TODO: Shop logic
 
+func spend_score(amount: int) -> bool:
+	if score < amount:
+		return false
+	
+	score -= amount
+	score_changed.emit(score)
+	
+	print("Spent ", amount, " points. Remaining score: ", score)
+	return true
 
 func _on_finish_line_raindrop_finished(raindrop: Node2D, position: int) -> void:
 	
