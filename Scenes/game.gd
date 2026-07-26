@@ -35,6 +35,8 @@ func _ready() -> void:
 	score_changed.connect(canvas.update_score)
 	smack_performed.connect(canvas.play_smack_effect)
 	start_day(dayManager.get_day())
+	
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -93,6 +95,10 @@ func start_day(day: DayData) -> void:
 	timer.start(dayLength)
 	timer.paused = true
 	
+	canvas.hideGoButton()
+	
+	RaindropManager.clear_streaks()
+	
 	world.set_Day(day)
 	play_cutscene(dayManager.currentDay, "day_start")
 	
@@ -120,14 +126,26 @@ func play_cutscene(day: int, tag: String):
 	if dialogue == null:
 		push_error("Could not load dialogue: " + dialogue_path)
 		return
-		
-	DialogueManager.show_dialogue_balloon(
+	
+	if tag != "tutorial":
+		DialogueManager.show_dialogue_balloon(
 		dialogue,
 		tag,
 		[
 			{ "game": self }
 		]
 	)
+	else:
+		DialogueManager.show_dialogue_balloon(
+		dialogue,
+		tag,
+		[
+			{ "game": self }
+		]
+	)
+
+func next_overlay() -> void:
+	canvas.show_next_overlay()
 
 func play_smack_effect(position: Vector2):
 	var effect = smack_effect_scene.instantiate()

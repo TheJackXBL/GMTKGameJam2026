@@ -34,11 +34,14 @@
 [ext_resource type="AudioStream" uid="uid://c5dsbas3uekvi" path="res://Audio/SoundEffect/Goal.mp3" id="22_onh5e"]
 [ext_resource type="AudioStream" uid="uid://c2foefrlukdu0" path="res://Audio/SoundEffect/WaterDropletHitGoal.mp3" id="24_3bujr"]
 [ext_resource type="Texture2D" uid="uid://dltelc3nwthrc" path="res://Scenes/Jack/Car Window Stickers.png" id="24_xoyte"]
+[ext_resource type="Texture2D" uid="uid://cu2hcqlk6v18m" path="res://Scenes/Arowyn/tut_raindrops.png" id="25_76mko"]
 [ext_resource type="AudioStream" uid="uid://clu3hggp58qsq" path="res://Audio/SoundEffect/StartWhistle.mp3" id="25_go5yj"]
-[ext_resource type="Texture2D" uid="uid://bd23macxkbxvr" path="res://Scenes/Arowyn/hand_cropped.png" id="26_6jedc"]
+[ext_resource type="Texture2D" uid="uid://bo0rriwm4ckmd" path="res://Scenes/Arowyn/tut_score.png" id="26_6jedc"]
 [ext_resource type="Texture2D" uid="uid://c31vy48dg7lhs" path="res://Scenes/Arowyn/hand_rest_hover.png" id="26_jr4bh"]
+[ext_resource type="Texture2D" uid="uid://d3ly770ogebwy" path="res://Scenes/Arowyn/tut_countdown.png" id="27_vp80t"]
 [ext_resource type="Texture2D" uid="uid://dc0pl0mr5gf4s" path="res://Scenes/Jack/clock.png" id="30_opftb"]
 [ext_resource type="PackedScene" uid="uid://dl6layg7vd6ml" path="res://Raindrops/droplet.tscn" id="31_a0ntl"]
+[ext_resource type="Texture2D" uid="uid://bd23macxkbxvr" path="res://Scenes/Arowyn/hand_cropped.png" id="31_fs61t"]
 [ext_resource type="Texture2D" uid="uid://co8luyssc01g2" path="res://Scenes/Arowyn/hand_rest.png" id="36_76mko"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
@@ -49,7 +52,7 @@ shader_parameter/blur = 0.002
 shader_parameter/whiteTint = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef17l"]
-size = Vector2(810, 248)
+size = Vector2(710, 248)
 
 [sub_resource type="LabelSettings" id="LabelSettings_a0ntl"]
 font = ExtResource("19_jgecq")
@@ -190,7 +193,7 @@ z_index = 1
 [node name="ObstacleSpawnArea" type="Area2D" parent="Window" unique_id=1766365409]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Window/ObstacleSpawnArea" unique_id=1663712292]
-position = Vector2(81, 10)
+position = Vector2(131, 10)
 shape = SubResource("RectangleShape2D_ef17l")
 
 [node name="RaindropManager" type="Node2D" parent="Window" unique_id=1434854034]
@@ -204,12 +207,6 @@ spawn_on_ready = false
 
 [node name="StreakContainer" type="Node2D" parent="Window/RaindropManager" unique_id=1921861915]
 
-[node name="ObstacleSpawnArea" type="Area2D" parent="Window" unique_id=1766365409]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Window/ObstacleSpawnArea" unique_id=1663712292]
-position = Vector2(81, -15)
-shape = SubResource("RectangleShape2D_ef17l")
-
 [node name="DropletContainer" type="Node2D" parent="Window" unique_id=1500344339]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=747220960]
@@ -222,7 +219,7 @@ winner_zoom = Vector2(2, 2)
 focus_duration = 0.75
 zoom_out_duration = 0.5
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448734060]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448734060 node_paths=PackedStringArray("tutorial_overlay")]
 offset = Vector2(-576, -324)
 transform = Transform2D(1, 0, 0, 1, -576, -324)
 follow_viewport_enabled = true
@@ -230,6 +227,7 @@ script = ExtResource("12_1fxgr")
 number_duration = 0.4
 go_duration = 0.6
 smack_effect_scene = ExtResource("2_vp80t")
+tutorial_overlay = [NodePath("TutorialOverlay/RaindropOverlay"), NodePath("TutorialOverlay/RaindropOverlay2"), NodePath("TutorialOverlay/RaindropOverlay3")]
 
 [node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=2122965579]
 offset_left = 70.0
@@ -401,6 +399,42 @@ label_settings = SubResource("LabelSettings_c8ju1")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="TutorialOverlay" type="Control" parent="CanvasLayer" unique_id=579461639]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RaindropOverlay" type="TextureRect" parent="CanvasLayer/TutorialOverlay" unique_id=715955067]
+visible = false
+layout_mode = 0
+offset_right = 1155.625
+offset_bottom = 671.0
+mouse_filter = 2
+texture = ExtResource("25_76mko")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RaindropOverlay2" type="TextureRect" parent="CanvasLayer/TutorialOverlay" unique_id=45403031]
+visible = false
+layout_mode = 0
+offset_right = 1155.625
+offset_bottom = 671.0
+mouse_filter = 2
+texture = ExtResource("26_6jedc")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="RaindropOverlay3" type="TextureRect" parent="CanvasLayer/TutorialOverlay" unique_id=1469335666]
+visible = false
+layout_mode = 0
+offset_right = 1155.625
+offset_bottom = 671.0
+mouse_filter = 2
+texture = ExtResource("27_vp80t")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="SmackButton" type="TextureButton" parent="CanvasLayer" unique_id=19148758]
 offset_left = 399.0
 offset_top = 554.0
@@ -410,7 +444,7 @@ scale = Vector2(0.5, 0.5)
 toggle_mode = true
 action_mode = 0
 texture_normal = ExtResource("36_76mko")
-texture_pressed = ExtResource("26_6jedc")
+texture_pressed = ExtResource("31_fs61t")
 texture_hover = ExtResource("26_jr4bh")
 
 [node name="ExplainLabel" type="Label" parent="CanvasLayer/SmackButton" unique_id=1374826179]
@@ -442,6 +476,7 @@ offset_right = 17.975
 [node name="FinishLineSFX" type="AudioStreamPlayer" parent="FinishLine" unique_id=1144721812]
 process_mode = 3
 stream = ExtResource("24_3bujr")
+bus = &"SFX"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1383709578 groups=["death_zone"]]
 position = Vector2(0, 416)
@@ -467,6 +502,7 @@ start_race_stream = ExtResource("25_go5yj")
 [node name="RaceManagerSFX" type="AudioStreamPlayer" parent="RaceManager" unique_id=47460573]
 process_mode = 3
 stream = ExtResource("22_onh5e")
+bus = &"SFX"
 
 [node name="Windowpngblue" type="Sprite2D" parent="." unique_id=952002940]
 visible = false
@@ -491,6 +527,7 @@ scale = Vector2(0.424, 0.424)
 texture = ExtResource("30_opftb")
 
 [connection signal="dayChanging" from="." to="World" method="_on_new_main_day_changing"]
+[connection signal="raindropSelected" from="Window/RaindropManager" to="CanvasLayer" method="_on_raindrop_manager_raindrop_selected"]
 [connection signal="countdown_finished" from="CanvasLayer" to="RaceManager" method="_on_canvas_layer_countdown_finished"]
 [connection signal="timeout" from="CanvasLayer/DayTimer" to="." method="_on_day_timer_timeout"]
 [connection signal="pressed" from="CanvasLayer/Go Button Container/Spawn Raindrops Button" to="Window/RaindropManager" method="_on_spawn_raindrops_button_pressed"]
