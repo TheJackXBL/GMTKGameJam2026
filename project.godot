@@ -26,6 +26,7 @@ SceneLoader="*uid://cbwmrnp0af35y"
 ProjectMusicController="*uid://r5t485lr3p7t"
 ProjectUISoundController="*uid://cc37235kj4384"
 DialogueManager="*uid://c3rodes2l3gxb"
+GameData="*uid://cgbh45dqv5ggr"
 
 [dialogue_manager]
 

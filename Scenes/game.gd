@@ -113,7 +113,10 @@ func begin_game() -> void:
 
 func end_day():
 	if dayManager.currentDay >= dayManager.days.size():
-		print("Game Complete!")
+		GameData.final_score = race_manager.score
+
+		await canvas.fadeIn()
+		get_tree().change_scene_to_file("res://end_scene.tscn")
 		return
 	
 	change_day()
