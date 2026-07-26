@@ -25,9 +25,6 @@ func _ready() -> void:
 	streak.joint_mode = Line2D.LINE_JOINT_ROUND
 	
 	streak.default_color = Color.WHITE
-	#TODO: Replace above line with texture below
-#	streak.texture = preload("res://Textures/waterStreak.png")
-#	streak.texture_mode = Line2D.LINE_TEXTURE_TILE
 	
 	streak.modulate.a = 0.5
 	

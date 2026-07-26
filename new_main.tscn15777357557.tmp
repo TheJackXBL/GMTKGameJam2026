@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://cpys1g6iajixl" path="res://Scenes/Menus/scenes/windows/pause_menu_layer.tscn" id="4_w2kc5"]
 [ext_resource type="PackedScene" uid="uid://dox0hbbak5fjo" path="res://finish_particles.tscn" id="5_1rny3"]
 [ext_resource type="PackedScene" uid="uid://dx05kji413l8i" path="res://Scenes/Background/world.tscn" id="5_7cuaw"]
-[ext_resource type="Script" uid="uid://bcvn05hvaor5r" path="res://Raindrops/boost_manager.gd" id="6_a0ntl"]
 [ext_resource type="Script" uid="uid://dejsowogmp6xh" path="res://Scenes/Car/window.gd" id="6_aeylb"]
 [ext_resource type="Script" uid="uid://dgpqbj8xfd8c" path="res://Scenes/Jack/race_camera.gd" id="7_7cuaw"]
 [ext_resource type="Shader" uid="uid://c2qwml6px5ifv" path="res://Scenes/Car/glass.gdshader" id="7_886ha"]
@@ -49,7 +48,7 @@ shader_parameter/blur = 0.002
 shader_parameter/whiteTint = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef17l"]
-size = Vector2(810, 248)
+size = Vector2(810, 298)
 
 [sub_resource type="LabelSettings" id="LabelSettings_a0ntl"]
 font = ExtResource("19_jgecq")
@@ -163,12 +162,6 @@ obstacle_container = NodePath("../Window/ObstacleContainer")
 day_manager = NodePath("../DayManager")
 obstacle_spawnarea = NodePath("../Window/ObstacleSpawnArea")
 
-[node name="BoostManager" type="Node" parent="." unique_id=1330263498 node_paths=PackedStringArray("boost_container", "spawn_area")]
-script = ExtResource("6_a0ntl")
-rain_drop_scene = ExtResource("31_a0ntl")
-boost_container = NodePath("../Window/DropletContainer")
-spawn_area = NodePath("../Window/ObstacleSpawnArea")
-
 [node name="World" parent="." unique_id=823103243 instance=ExtResource("5_7cuaw")]
 scale = Vector2(0.6, 0.6)
 
@@ -185,13 +178,6 @@ offset_bottom = 359.0
 mouse_filter = 2
 
 [node name="ObstacleContainer" type="Node2D" parent="Window" unique_id=997110913]
-z_index = 1
-
-[node name="ObstacleSpawnArea" type="Area2D" parent="Window" unique_id=1766365409]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Window/ObstacleSpawnArea" unique_id=1663712292]
-position = Vector2(81, 10)
-shape = SubResource("RectangleShape2D_ef17l")
 
 [node name="RaindropManager" type="Node2D" parent="Window" unique_id=1434854034]
 script = ExtResource("8_1fxgr")
@@ -211,6 +197,27 @@ position = Vector2(81, -15)
 shape = SubResource("RectangleShape2D_ef17l")
 
 [node name="DropletContainer" type="Node2D" parent="Window" unique_id=1500344339]
+
+[node name="Droplet" parent="Window/DropletContainer" unique_id=210999127 instance=ExtResource("31_a0ntl")]
+position = Vector2(50, 152)
+
+[node name="Droplet2" parent="Window/DropletContainer" unique_id=1692288175 instance=ExtResource("31_a0ntl")]
+position = Vector2(-112, 223)
+
+[node name="Droplet3" parent="Window/DropletContainer" unique_id=713478469 instance=ExtResource("31_a0ntl")]
+position = Vector2(-98, 138)
+
+[node name="Droplet4" parent="Window/DropletContainer" unique_id=1943797448 instance=ExtResource("31_a0ntl")]
+position = Vector2(103, 221)
+
+[node name="Droplet5" parent="Window/DropletContainer" unique_id=1699651 instance=ExtResource("31_a0ntl")]
+position = Vector2(-19, 226)
+
+[node name="Droplet6" parent="Window/DropletContainer" unique_id=1145264606 instance=ExtResource("31_a0ntl")]
+position = Vector2(-17, 100)
+
+[node name="SmackEffectContainer" type="Node2D" parent="." unique_id=1647823648]
+z_index = 7
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=747220960]
 limit_left = -576

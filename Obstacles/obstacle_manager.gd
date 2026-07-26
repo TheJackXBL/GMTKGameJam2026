@@ -87,5 +87,27 @@ func clear_obstacles() -> void:
 	for obstacle in obstacle_container.get_children():
 		obstacle.clear()
 
+func smack_closest(mouse_position: Vector2) -> Vector2:
+	var closest: WindowObstacle = null
+	var closest_distance := INF
+	
+	for obstacle in obstacle_container.get_children():
+		if not obstacle is WindowObstacle:
+			continue
+		
+		var distance = obstacle.global_position.distance_to(mouse_position)
+		
+		if distance < closest_distance:
+			closest_distance = distance
+			closest = obstacle
+		
+	if closest == null:
+		return Vector2.ZERO
+	
+	var obstacle_position := closest.global_position
+	
+	closest.clear()
+	
+	return obstacle_position
 func roll_obstacle_chance(chance: int) -> bool:
 	return randi_range(1, 100) <= chance
