@@ -41,7 +41,7 @@ var raindrop_names: Array[String] = [
 	"Annie",
 	"Jack",
 	"Bosco",
-	"Aro",
+	"Arowyn",
 	"Livi",
 	"Matt",
 	"Maaacks",

@@ -22,6 +22,9 @@ signal countdown_finished
 @export var tutorial_overlay: Array[TextureRect]
 @export var current_overlay := 0
 
+@onready var ribbon: TextureRect = $RibbonContainer/Ribbon
+@export var ribbon_textures: Array[Texture2D]
+
 
 var displayed_score: int = 0
 
@@ -162,3 +165,24 @@ func play_smack_effect(position: Vector2):
 	await fade_in.finished
 
 	smack_button.disabled = false
+
+func show_placement_ribbon(placement: int) -> void:
+	
+	
+	var texture_index = clamp(placement - 1, 0, ribbon_textures.size() - 1)
+	
+	ribbon.texture = ribbon_textures[texture_index]
+	ribbon.modulate.a = 0
+	ribbon.show()
+	
+	var fade_tween := create_tween()
+	fade_tween.tween_property(ribbon, "modulate:a", 1.0, 0.3)
+	
+	await fade_tween.finished
+	await get_tree().create_timer(1.5).timeout
+	
+	var fade_out_tween := create_tween()
+	fade_out_tween.tween_property(ribbon, "modulate:a", 0.0, 0.3)
+	
+	await fade_out_tween.finished
+	ribbon.hide()

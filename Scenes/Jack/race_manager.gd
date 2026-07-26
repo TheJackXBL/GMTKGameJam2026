@@ -66,6 +66,8 @@ func _on_finish_line_winner_determined(winning_raindrop: Node2D) -> void:
 
 	update_score(true, selected_finish_position)
 	
+	canvas.show_placement_ribbon(selected_finish_position)
+	
 	selected_raindrop_finished = false
 	selected_finish_position = 0
 

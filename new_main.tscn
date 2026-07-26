@@ -29,19 +29,24 @@
 [ext_resource type="Texture2D" uid="uid://dejwmg41ookcm" path="res://Scenes/Arowyn/windowpngyellow.png" id="15_886ha"]
 [ext_resource type="Script" uid="uid://dbi8ec4kqscir" path="res://Obstacles/obstacle_manager.gd" id="16_1qswb"]
 [ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="19_jgecq"]
+[ext_resource type="Shader" uid="uid://durapdec5wo2h" path="res://Raindrops/raindrop_streak.gdshader" id="20_ms1vp"]
 [ext_resource type="PackedScene" uid="uid://b1e0s7hmitroo" path="res://finish_position_label.tscn" id="21_c8ju1"]
 [ext_resource type="AudioStream" uid="uid://c0ltomrwdmxq1" path="res://Audio/Music/AreWeThereYet_MainTheme.mp3" id="22_hxk7o"]
 [ext_resource type="AudioStream" uid="uid://c5dsbas3uekvi" path="res://Audio/SoundEffect/Goal.mp3" id="22_onh5e"]
+[ext_resource type="Texture2D" uid="uid://dchldmmscco8r" path="res://Scenes/Arowyn/place_2nd.png" id="23_udis2"]
 [ext_resource type="AudioStream" uid="uid://c2foefrlukdu0" path="res://Audio/SoundEffect/WaterDropletHitGoal.mp3" id="24_3bujr"]
+[ext_resource type="Texture2D" uid="uid://dqthiy8x6lvpr" path="res://Scenes/Arowyn/place_3rd.png" id="24_ms1vp"]
 [ext_resource type="Texture2D" uid="uid://dltelc3nwthrc" path="res://Scenes/Jack/Car Window Stickers.png" id="24_xoyte"]
 [ext_resource type="Texture2D" uid="uid://cu2hcqlk6v18m" path="res://Scenes/Arowyn/tut_raindrops.png" id="25_76mko"]
 [ext_resource type="AudioStream" uid="uid://clu3hggp58qsq" path="res://Audio/SoundEffect/StartWhistle.mp3" id="25_go5yj"]
+[ext_resource type="Texture2D" uid="uid://cxnkmoomd1vj" path="res://Scenes/Arowyn/place_participation.png" id="25_n8knj"]
 [ext_resource type="Texture2D" uid="uid://bo0rriwm4ckmd" path="res://Scenes/Arowyn/tut_score.png" id="26_6jedc"]
 [ext_resource type="Texture2D" uid="uid://c31vy48dg7lhs" path="res://Scenes/Arowyn/hand_rest_hover.png" id="26_jr4bh"]
 [ext_resource type="Texture2D" uid="uid://d3ly770ogebwy" path="res://Scenes/Arowyn/tut_countdown.png" id="27_vp80t"]
 [ext_resource type="Texture2D" uid="uid://dc0pl0mr5gf4s" path="res://Scenes/Jack/clock.png" id="30_opftb"]
 [ext_resource type="PackedScene" uid="uid://dl6layg7vd6ml" path="res://Raindrops/droplet.tscn" id="31_a0ntl"]
 [ext_resource type="Texture2D" uid="uid://bd23macxkbxvr" path="res://Scenes/Arowyn/hand_cropped.png" id="31_fs61t"]
+[ext_resource type="Texture2D" uid="uid://cmeokr0wiwpjv" path="res://Scenes/Arowyn/place_1st.png" id="33_6bex7"]
 [ext_resource type="Texture2D" uid="uid://co8luyssc01g2" path="res://Scenes/Arowyn/hand_rest.png" id="36_76mko"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gi6rw"]
@@ -53,6 +58,9 @@ shader_parameter/whiteTint = 0.25
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ef17l"]
 size = Vector2(710, 248)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_75xeh"]
+shader = ExtResource("20_ms1vp")
 
 [sub_resource type="LabelSettings" id="LabelSettings_a0ntl"]
 font = ExtResource("19_jgecq")
@@ -190,6 +198,12 @@ mouse_filter = 2
 [node name="ObstacleContainer" type="Node2D" parent="Window" unique_id=997110913]
 z_index = 1
 
+[node name="WindowObstacle" parent="Window/ObstacleContainer" unique_id=1771677767 instance=ExtResource("7_xoyte")]
+position = Vector2(-205, 139)
+
+[node name="WindowObstacle2" parent="Window/ObstacleContainer" unique_id=366297711 instance=ExtResource("8_jgecq")]
+position = Vector2(11, 172)
+
 [node name="ObstacleSpawnArea" type="Area2D" parent="Window" unique_id=1766365409]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Window/ObstacleSpawnArea" unique_id=1663712292]
@@ -204,6 +218,10 @@ max_spawn_x = 400.0
 spawn_y = -245.0
 raindrop_count = 6
 spawn_on_ready = false
+
+[node name="Line2D" type="Line2D" parent="Window/RaindropManager" unique_id=1220232467]
+material = SubResource("ShaderMaterial_75xeh")
+points = PackedVector2Array(-278, 48, 189, 211)
 
 [node name="StreakContainer" type="Node2D" parent="Window/RaindropManager" unique_id=1921861915]
 
@@ -228,6 +246,7 @@ number_duration = 0.4
 go_duration = 0.6
 smack_effect_scene = ExtResource("2_vp80t")
 tutorial_overlay = [NodePath("TutorialOverlay/RaindropOverlay"), NodePath("TutorialOverlay/RaindropOverlay2"), NodePath("TutorialOverlay/RaindropOverlay3")]
+ribbon_textures = Array[Texture2D]([ExtResource("33_6bex7"), ExtResource("23_udis2"), ExtResource("24_ms1vp"), ExtResource("25_n8knj")])
 
 [node name="TimerLabel" type="Label" parent="CanvasLayer" unique_id=2122965579]
 offset_left = 70.0
@@ -453,15 +472,31 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="RibbonContainer" type="Control" parent="CanvasLayer" unique_id=1452767626]
+custom_minimum_size = Vector2(200, 350)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Ribbon" type="TextureRect" parent="CanvasLayer/RibbonContainer" unique_id=27268280]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("33_6bex7")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="FinishLine" type="Area2D" parent="." unique_id=127231439]
 position = Vector2(0, 289)
@@ -501,12 +536,13 @@ shape = SubResource("RectangleShape2D_rc6o0")
 mesh = SubResource("QuadMesh_1qswb")
 texture = SubResource("GradientTexture1D_ljb83")
 
-[node name="RaceManager" type="Node2D" parent="." unique_id=189466672 node_paths=PackedStringArray("RaindropManager", "GameManager", "race_camera")]
+[node name="RaceManager" type="Node2D" parent="." unique_id=189466672 node_paths=PackedStringArray("RaindropManager", "GameManager", "race_camera", "canvas")]
 unique_name_in_owner = true
 script = ExtResource("9_xyy1j")
 RaindropManager = NodePath("../Window/RaindropManager")
 GameManager = NodePath("..")
 race_camera = NodePath("../Camera2D")
+canvas = NodePath("../CanvasLayer")
 selected_raindrop_done_stream = ExtResource("22_onh5e")
 start_race_stream = ExtResource("25_go5yj")
 
