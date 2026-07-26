@@ -237,6 +237,9 @@ winner_zoom = Vector2(2, 2)
 focus_duration = 0.75
 zoom_out_duration = 0.5
 
+[node name="SmackEffectContainer" type="Node2D" parent="." unique_id=427176495]
+z_index = 2
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=448734060 node_paths=PackedStringArray("tutorial_overlay")]
 offset = Vector2(-576, -324)
 transform = Transform2D(1, 0, 0, 1, -576, -324)
