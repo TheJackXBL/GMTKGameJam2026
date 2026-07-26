@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://byb4e24yu5pic"]
 
-[ext_resource type="Script" path="res://Scenes/Menus/scenes/credits/scrolling_credits.gd" id="1_x0rs7"]
-[ext_resource type="PackedScene" path="res://Scenes/Menus/scenes/credits/credits_label.tscn" id="2_6xyxy"]
+[ext_resource type="Script" uid="uid://c4dv76ba2cdj2" path="res://Scenes/Menus/scenes/credits/scrolling_credits.gd" id="1_x0rs7"]
+[ext_resource type="PackedScene" uid="uid://bluv6kfaiddsa" path="res://Scenes/Menus/scenes/credits/credits_label.tscn" id="2_6xyxy"]
 
 [node name="ScrollingCredits" type="Control" unique_id=1162279489]
 layout_mode = 3
@@ -17,6 +17,7 @@ unique_name_in_owner = true
 layout_mode = 0
 anchor_right = 1.0
 anchor_bottom = 1.0
+scroll_vertical = 1562
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 3
 
@@ -26,14 +27,21 @@ size_flags_horizontal = 3
 
 [node name="HeaderSpace" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1552560353]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 720)
+custom_minimum_size = Vector2(0, 648)
 layout_mode = 2
 
 [node name="CreditsLabel" parent="ScrollContainer/VBoxContainer" unique_id=1486745388 instance=ExtResource("2_6xyxy")]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(1152, 0)
 layout_mode = 2
+
+[node name="BackButton" type="Button" parent="ScrollContainer/VBoxContainer" unique_id=1137307620]
+layout_mode = 2
+text = "Main Menu"
 
 [node name="FooterSpace" type="Control" parent="ScrollContainer/VBoxContainer" unique_id=1703782196]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 720)
+custom_minimum_size = Vector2(0, 300)
 layout_mode = 2
+
+[connection signal="pressed" from="ScrollContainer/VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

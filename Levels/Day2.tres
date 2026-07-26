@@ -5,6 +5,5 @@
 [resource]
 script = ExtResource("1_s4ph1")
 dayNum = 2
-BG_tag = "Sea"
 obstacle_chance = 50
 metadata/_custom_type_script = "uid://dh0b2it0wdtmy"
