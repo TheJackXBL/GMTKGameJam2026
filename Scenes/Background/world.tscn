@@ -64,12 +64,12 @@ z_index = 5
 [node name="Windowpngblue" type="Sprite2D" parent="WindowParent" unique_id=1303341061]
 process_mode = 3
 z_index = 5
-scale = Vector2(0.744, 0.748)
+scale = Vector2(0.744, 0.75)
 texture = ExtResource("7_dov5x")
 
 [node name="Windowpngyellow" type="Sprite2D" parent="WindowParent" unique_id=353782287]
 z_index = 5
-scale = Vector2(0.744, 0.748)
+scale = Vector2(0.744, 0.75)
 texture = ExtResource("8_q6oi7")
 
 [node name="WorldBGNoises" type="AudioStreamPlayer" parent="." unique_id=1612449943]

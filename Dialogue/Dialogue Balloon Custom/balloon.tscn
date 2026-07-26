@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dndafyh166t5c" path="res://Dialogue/Dialogue Balloon Custom/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
-[ext_resource type="Texture2D" uid="uid://cvsei4fm7e7jt" path="res://Scenes/Jack/Bosco Dialogue Box.png" id="2_ugaau"]
+[ext_resource type="Texture2D" uid="uid://duwb4o6xkgusy" path="res://Sprite/Containers/NewDialogueBox.png" id="2_ctqog"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
-[ext_resource type="Texture2D" uid="uid://c3cwd0nncxlee" path="res://Dialogue/Character Icons/icon_mum.png" id="3_ctqog"]
+[ext_resource type="Texture2D" uid="uid://c3cwd0nncxlee" path="res://Dialogue/CharacterIcons/icon_mum.png" id="3_ctqog"]
 [ext_resource type="FontFile" uid="uid://b3mjifgvo6uhn" path="res://UI/DarumaDropOne-Regular.ttf" id="3_p13al"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
@@ -67,7 +67,7 @@ MarginContainer/constants/margin_top = 15
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_qkmqt")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_juyhc"]
-texture = ExtResource("2_ugaau")
+texture = ExtResource("2_ctqog")
 
 [sub_resource type="Animation" id="Animation_nlsx6"]
 length = 0.001
@@ -112,7 +112,6 @@ script = ExtResource("1_36de5")
 [node name="Balloon" type="Control" parent="." unique_id=359403728]
 unique_name_in_owner = true
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2

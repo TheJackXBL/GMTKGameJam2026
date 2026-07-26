@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b86mg22ylalm8"
-path="res://.godot/imported/icon_kid.png-4c0b4fa3817ee6bfed10f5086e15ee3d.ctex"
+uid="uid://c3cwd0nncxlee"
+path="res://.godot/imported/icon_mum.png-732f51974de8313f9d040b043913ee80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dialogue/Character Icons/icon_kid.png"
-dest_files=["res://.godot/imported/icon_kid.png-4c0b4fa3817ee6bfed10f5086e15ee3d.ctex"]
+source_file="res://Dialogue/CharacterIcons/icon_mum.png"
+dest_files=["res://.godot/imported/icon_mum.png-732f51974de8313f9d040b043913ee80.ctex"]
 
 [params]
 

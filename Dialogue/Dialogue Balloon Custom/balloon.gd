@@ -135,8 +135,8 @@ func apply_dialogue_line() -> void:
 	character_label.visible = not dialogue_line.character.is_empty()
 	character_label.text = tr(dialogue_line.character, "dialogue")
 	
-	var portrait_path: String = "res://Dialogue/Character Icons/icon_%s.png" % dialogue_line.character.to_lower()
-	if FileAccess.file_exists(portrait_path):
+	var portrait_path: String = "res://Dialogue/CharacterIcons/icon_%s.png" % dialogue_line.character.to_lower()
+	if ResourceLoader.exists(portrait_path):
 		portrait.texture = load(portrait_path)
 	else:
 		portrait.texture = null
@@ -221,5 +221,10 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 	next(response.next_id)
 
+func raise_dialogue_box():
+	balloon.anchor_bottom = 0.7
+
+func lower_dialogue_box():
+	balloon.anchor_bottom = 1
 
 #endregion

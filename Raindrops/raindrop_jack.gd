@@ -706,8 +706,9 @@ func _on_area_2d_mouse_exited() -> void:
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			raindropSelected.emit(self)
-			set_selected(true)
+			if !race_active:
+				raindropSelected.emit(self)
+				set_selected(true)
 
 func set_selected(value: bool) -> void:
 	isSelected = value

@@ -452,6 +452,17 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
+[node name="RibbonContainer" type="Control" parent="CanvasLayer" unique_id=1452767626]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Ribbon" type="TextureRect" parent="CanvasLayer/RibbonContainer" unique_id=27268280]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="FinishLine" type="Area2D" parent="." unique_id=127231439]
 position = Vector2(0, 289)
 collision_layer = 2

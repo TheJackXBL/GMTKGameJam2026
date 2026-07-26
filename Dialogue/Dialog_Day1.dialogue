@@ -23,8 +23,10 @@ Kid: If I hover my mouse over them, I can see their stats!
 Kid: Weight affects their top speed, acceleration changes how fast they pick up speed, and magnetism affects how long they stay in a water streak for!
 Kid: Once I've made my choice, I can click on the raindrop to select it, and then hit Go!
 do game.next_overlay()
+do raise_dialogue_box()
 Kid: Depending on where my raindrop finishes, I can get lots of points.
 do game.next_overlay()
+do lower_dialogue_box()
 Kid: And I can see how long I've got left of the day up here.
 do game.next_overlay()
 Kid: Let's get racing!
@@ -34,7 +36,7 @@ do game.begin_game()
 => END
 
 ~ day_end
-Mum: The sun is out on Day 1!
+Mum: Oh look, the sun is out!
 Kid: Are we there yet?
 Mum: Not even close.
 
