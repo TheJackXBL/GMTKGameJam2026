@@ -1,8 +1,8 @@
 ~ day_start
-Mum: One day down, two to go! Honey, how are you holding up?
-Kid: Just fine, Mom! I think I figured out how to knock leaves off the window! My raindrops have a better chance of winning now.
+Mum: One day down, [color=firebrick]two[/color] to go! Honey, how are you holding up?
+Kid: Just fine, Mom! I think I figured out how to [color=goldenrod]knock leaves[/color] off the window! My raindrops have a better chance of winning now.
 Mum: That's... great. Just don't hurt yourself!
-Kid: Now, if I click on my hand, I can use it to knock obstacles off the window!
+Kid: Now, if I [color=goldenrod]click on my hand,[/color] I can use it to knock obstacles off the window!
 
 do game.begin_game()
 
@@ -10,9 +10,9 @@ do game.begin_game()
 
 
 ~ day_end
-Mum: Oh look, the sun is out!
+Mum: Oh look, the [color=goldenrod]sun[/color] is out!
 Kid: Are we there yet?
-Mum: Almost!
+Mum: [color=goldenrod]Almost![/color]
 
 do game.end_day()
 

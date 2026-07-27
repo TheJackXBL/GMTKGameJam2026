@@ -4,8 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://bmak77bjnvhu" path="res://Obstacles/window_obstacle.tscn" id="1_jjhvg"]
 
 [node name="WindowObstacle" unique_id=1771677767 instance=ExtResource("1_jjhvg")]
-collision_layer = 2
-collision_mask = 2
 
 [node name="Sprite2D" parent="." index="0" unique_id=1708770567]
 scale = Vector2(0.4, 0.4)

@@ -1,7 +1,7 @@
 ~ day_start
-Grandma: "What took you so long?! I was [color=dark_goldenrod][wave]counting down[/wave][/color] the days until you were here!"
-Kid: "We were driving for ages, and there was a lot of rain."
-Grandma: "My goodness! Well, I'm glad you both got here safely. Come give me a hug!"
+Grandma: What took you so long?! I was [color=dark_goldenrod][wave]counting down[/wave][/color] the days until you were here!
+Kid: We were driving for [shake]aaaaaaages[/shake], and there was a lot of [color=steel_blue]rain.[/color]
+Grandma: [color=purple]My goodness![/color] Well, I'm glad you both got here safely. [color=goldenrod]Come give me a hug![/color]
 
 do game.show_the_end()
 

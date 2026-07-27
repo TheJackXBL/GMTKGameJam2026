@@ -3,7 +3,7 @@ Kid: Mum... are we there yet?
 Mum: [color=firebrick]What?![/color] We've only just started!
 Kid: Long car rides are so [shake]borrring[/shake].
 Mum: This is going to be a long [color=firebrick]3 day road trip[/color], and it looks like this weather's going to be with us for a while...
-Kid: Ooh, I could pass the time by [color=goldenrod]racing raindrops[/color]!
+Kid: Ooh, I could pass the time by [wave][color=steel_blue]racing raindrops[/color][/wave]!
 Mum: That sounds fun!
 
 
@@ -16,7 +16,7 @@ do game.play_cutscene(1, "tutorial")
 
 do game.next_overlay()
 
-Kid: I wonder which of those [wave][color=steel_blue]raindrops[/color][/wave] will reach the bottom first...
+Kid: I wonder which of those [color=steel_blue]raindrops[/color] will reach the bottom first...
 
 # ADD A WAY TO SHOW THE FIRST SPAWNED RAINDROP'S BUBBLE
 Kid: If I hover my mouse over them, I can see their [color=steel_blue]stats[/color]! 
@@ -24,10 +24,10 @@ Kid: [color=goldenrod]Weight[/color] affects their top speed, [color=goldenrod]a
 Kid: Once I've made my choice, I can [color=steel_blue]click[/color] on the raindrop to select it, and then hit [color=forest_green]Go![/color]
 do game.next_overlay()
 do raise_dialogue_box()
-Kid: Depending on where my raindrop finishes, I can get lots of [color=goldenrod]points.[/color]
+Kid: Depending on where my raindrop finishes, I can get lots of [color=dark_slate_blue]points![/color]
 do game.next_overlay()
 do lower_dialogue_box()
-Kid: And I can see how much [color=goldenrod]time[/color] I've got left of the day up here.
+Kid: And I can see how much [color=slate_gray]time[/color] is left in the [color=goldenrod]day[/color] up here.
 do game.next_overlay()
 Kid: Let's get [color=forest_green]racing![/color]
 

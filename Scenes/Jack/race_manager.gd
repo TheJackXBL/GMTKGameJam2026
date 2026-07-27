@@ -34,6 +34,8 @@ func _on_start_race_button_pressed() -> void:
 
 	if RaindropManager.selected_raindrop != null:
 		startCountdown.emit()
+		selected_raindrop_finished = false
+		selected_finish_position = 0
 	
 	races_played += 1
 	finishLine.reset_race()

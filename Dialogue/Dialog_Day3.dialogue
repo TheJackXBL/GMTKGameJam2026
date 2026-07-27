@@ -1,8 +1,8 @@
 ~ day_start
-Mum: We're nearly there! Just one more day to go.
-Kid: Yay! This has been fun, but I'm excited to see Grandma.
+Mum: We're nearly there! Just [color=firebrick]one[/color] more day to go.
+Kid: Yay! This has been fun, but I'm excited to see [color=purple]Grandma.[/color]
 Mum: Me too. How's your racing game going?
-Kid: Pretty good, but it's harder to play by the ocean! Bird poo keeps getting on the window — YUCK!
+Kid: Pretty good, but it's harder to play by the ocean! Bird poo keeps getting on the window — [color=firebrick]YUCK![/color]
 
 
 do game.begin_game()
@@ -11,10 +11,10 @@ do game.begin_game()
 
 
 ~ day_end
-Mum: Oh look, the sun is out!
+Mum: Oh look, the [color=goldenrod]sun[/color] is out!
 Kid: ... are we there yet?
-Mum: Yes we are!
-Kid: Yay! Finally!
+Mum: [color=goldenrod]Yes we are![/color]
+Kid: [wave]Yay! Finally![/wave]
 
 do game.end_day()
 

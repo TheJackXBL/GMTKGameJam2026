@@ -113,6 +113,7 @@ script = ExtResource("1_36de5")
 [node name="Balloon" type="Control" parent="." unique_id=359403728]
 unique_name_in_owner = true
 layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -224,6 +225,7 @@ text = "Response example"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1641160204]
 
 [node name="ACVoiceBox" type="AudioStreamPlayer" parent="." unique_id=1694111043]
+volume_db = -14.0
 script = ExtResource("8_e3wjn")
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
